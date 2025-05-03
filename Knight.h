@@ -2,6 +2,15 @@
 
 class Knight: public Piece{
     public:
+     /*
+        Knight constructor
+        Brief: Calls the Piece class' constructor for row, column, and isWhite;
+
+        r: The row to set the Rook to
+        c: the column to set the Rook to
+        isW: true if Knight IS white    
+    */
+    Knight(unsigned char r, unsigned char c, bool isW);
     /*
         Virtual override from Piece class;
         brief: Checks if a particular Knight move is legal
@@ -14,7 +23,6 @@ class Knight: public Piece{
 
 
     private:
-    bool hasMoved;
 
 
 

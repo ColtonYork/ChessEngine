@@ -2,6 +2,17 @@
 
 class Pawn: public Piece{
     public:
+     /*
+        Pawn constructor
+        Brief: Calls the Piece class' constructor for row, column, and isWhite;
+
+        r: The row to set the Rook to
+        c: the column to set the Rook to
+        isW: true if Pawn IS white
+
+        Personal Member hasMoved: set to false
+    */
+    Pawn(unsigned char r, unsigned char c, bool isW);
     /*
         Virtual override from Piece class;
         brief: Checks if a particular Pawn move is legal

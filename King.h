@@ -2,6 +2,20 @@
 
 class King: public Piece{
     public:
+     /*
+        King constructor
+        Brief: Calls the Piece class' constructor for row, column, and isWhite;
+
+        r: The row to set the Rook to
+        c: the column to set the Rook to
+        isW: true if King IS white
+
+        Personal Member hasMoved: set to false
+        personal Member inCheck: set to false
+
+    */
+    King(unsigned char r, unsigned char c, bool isW);
+
     /*
         Virtual override from Piece class;
         brief: Checks if a particular King move is legal
