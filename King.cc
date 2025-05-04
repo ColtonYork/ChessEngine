@@ -14,6 +14,10 @@ Piece* King::clone() const{
     return k;
 }
 
+pieceType King::getPieceType() const{
+    return KING;
+}
+
 
 
 

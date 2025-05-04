@@ -1,3 +1,4 @@
+#pragma once
 #include "Piece.h"
 
 class Rook: public Piece{
@@ -13,6 +14,12 @@ class Rook: public Piece{
         Personal Member hasMoved: set to false
     */
     Rook(unsigned char r, unsigned char c, bool isW);
+
+
+    /*
+        Brief: Purely Virtual Overridereturns piece type ROOK
+    */
+    pieceType getPieceType() const;
 
 
     /*

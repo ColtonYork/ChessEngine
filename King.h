@@ -1,3 +1,4 @@
+#pragma once
 #include "Piece.h"
 
 class King: public Piece{
@@ -15,6 +16,12 @@ class King: public Piece{
 
     */
     King(unsigned char r, unsigned char c, bool isW);
+
+
+    /*
+        Brief: Purely Virtual Overridereturns piece type KING
+    */
+    pieceType getPieceType() const;
 
 
     /*

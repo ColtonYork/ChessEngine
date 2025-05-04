@@ -6,3 +6,7 @@ Piece::Piece(unsigned char r, unsigned char c, bool isW){
     col = c;
     isWhite = isW;
 }
+
+bool Piece::getIsWhite(){
+    return isWhite;
+}

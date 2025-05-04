@@ -6,3 +6,8 @@ Bishop::Bishop(unsigned char r, unsigned char c, bool isW)
 Piece* Bishop::clone() const{
     return new Bishop(row, col, isWhite);
 }
+
+pieceType Bishop::getPieceType() const{
+    return BISHOP;
+}
+

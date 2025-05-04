@@ -13,3 +13,7 @@ Piece* Pawn::clone() const{
     return p;
 }
 
+pieceType Pawn::getPieceType() const{
+    return PAWN;
+}
+

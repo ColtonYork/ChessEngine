@@ -6,3 +6,7 @@ Knight::Knight(unsigned char r, unsigned char c, bool isW)
 Piece* Knight::clone() const{
     return new Knight(row, col, isWhite);
 }
+
+pieceType Knight::getPieceType() const{
+    return KNIGHT;
+}

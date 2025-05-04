@@ -17,8 +17,11 @@ Board::Board(){
     board[0][3] = new Queen(0, 3, true);
     board[0][4] = new King(0, 4, true);
     board[0][5] = new Bishop(0, 5, true);
-    board[0][6] = new King(0, 6, true);
-    board[0][7] - new Rook(0, 7, true);
+    board[0][6] = new Knight(0, 6, true);
+    board[0][7] = new Rook(0, 7, true);
+
+    
+
 
     //set white pawns
     for(int i = 0; i < 8; i++){
@@ -100,6 +103,45 @@ Board& Board::operator=(const Board& other){
 
 void Board::displayBoard() const{
     //line 1
-    std::cout << "8 | ";
+    for (int i = 7; i >= 0; i--){
+        std::cout << i+1 << " | ";
+        for(int j = 0; j < 8; j++){
+            Piece* p = board[i][j];
+
+            //checks for empty spot
+            if (p == nullptr){std::cout << ". ";}
+
+            //checks for white pieces
+            else if (p->getIsWhite() == 1){
+                if (p->getPieceType() == PAWN){std::cout << "P ";}
+                else if (p->getPieceType() == BISHOP){std::cout << "B ";}
+                else if (p->getPieceType() == KNIGHT){std::cout << "N ";}
+                else if (p->getPieceType() == ROOK){std::cout << "R ";}
+                else if (p->getPieceType() == QUEEN){std::cout << "Q ";}
+                else if (p->getPieceType() == KING){std::cout << "K ";}
+            }
+            
+            //checks for black pieces
+            else{
+                if (p->getPieceType() == PAWN){std::cout << "P ";}
+                else if (p->getPieceType() == BISHOP){std::cout << "b ";}
+                else if (p->getPieceType() == KNIGHT){std::cout << "n ";}
+                else if (p->getPieceType() == ROOK){std::cout << "r ";}
+                else if (p->getPieceType() == QUEEN){std::cout << "q ";}
+                else if (p->getPieceType() == KING){std::cout << "k ";}
+            }
+
+            if(j == 7){std::cout << '\n';}
+            
+
+        }
+
+    }
+
+    std::cout << "  ------------------" << '\n';
+    std::cout << "    A B C D E F G H" << '\n';
+
+
+
 }
 

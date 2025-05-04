@@ -1,3 +1,4 @@
+#pragma once
 #include "Piece.h"
 
 class Queen: public Piece{
@@ -11,6 +12,12 @@ class Queen: public Piece{
         isW: true if Queen IS white
     */
     Queen(unsigned char r, unsigned char c, bool isW);
+
+
+    /*
+        Brief: Purely Virtual Overridereturns piece type QUEEN
+    */
+    pieceType getPieceType() const;
 
 
     /*

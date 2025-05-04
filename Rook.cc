@@ -12,3 +12,7 @@ Piece* Rook::clone() const{
     return r;
 }
 
+pieceType Rook::getPieceType() const{
+    return ROOK;
+}
+

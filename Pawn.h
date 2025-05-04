@@ -1,3 +1,4 @@
+#pragma once
 #include "Piece.h"
 
 class Pawn: public Piece{
@@ -13,6 +14,13 @@ class Pawn: public Piece{
         Personal Member hasMoved: set to false
     */
     Pawn(unsigned char r, unsigned char c, bool isW);
+
+
+    /*
+        Brief: Purely Virtual Overridereturns piece type PAWN
+    */
+    pieceType getPieceType() const;
+
 
      /*
         Purely Virtual override from Piece Class
