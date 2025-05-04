@@ -34,7 +34,7 @@ class Queen: public Piece{
         toRow: The row that the Bishhop wants to move to
         toCol: The column that the Bishop wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
 
 
 

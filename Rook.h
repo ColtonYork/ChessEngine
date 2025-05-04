@@ -31,12 +31,24 @@ class Rook: public Piece{
 
     /*
         Purely Virtual override from Piece Class
-        brief: Checks if a particular Rook move is legal
+        Brief: Returns TRUE if a specified Rook move is legal
 
-        toRow: The row that the Rook wants to move to
-        toCol: The column that the Rook wnats to move to
+        toRow: The row that the Rook want to move to
+        toCol: The column that the Rook wants to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Checks the spaces between current position and end position. Returns TRUE if all spaces in between are nullptr
+
+        rowMove: True is the current move is only changing rows
+        from: the row/col that the Rook starts at
+        to: the row/col that the Rook ends at
+        Board: current board to check, passed by reference
+    */
+    bool isLegalBetween(bool rowMove, unsigned char from, unsigned char to, Board& b) const;
+
 
 
 

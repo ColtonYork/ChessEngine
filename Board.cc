@@ -145,3 +145,7 @@ void Board::displayBoard() const{
 
 }
 
+Piece* Board::getBoard(unsigned char row, unsigned char col) const{
+    return board[row][col];
+}
+

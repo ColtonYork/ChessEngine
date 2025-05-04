@@ -36,7 +36,7 @@ class Pawn: public Piece{
         toRow: The row that the Pawn wants to move to
         toCol: The column that the Pawn wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
 
 
 

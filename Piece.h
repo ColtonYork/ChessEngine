@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Board.h"
 
 enum pieceType {PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING, NONE};
 class Piece {
@@ -40,13 +40,30 @@ class Piece {
         toRow: The row that the piece wants to move to
         toCol: The column that the piece wants to move to
     */
-    //virtual bool isLegalMove(unsigned char toRow, unsigned char toCol) const = 0;
+    virtual bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const = 0;
 
 
     /*
         Brief: Returns isWhite member variable
     */
     bool getIsWhite();
+
+
+    /*
+        Brief: returns True if a move is inbounds
+    */
+    bool moveIsInbounds(unsigned char toRow, unsigned char toCol) const;
+
+
+    /*
+        Brief: Checks if the space a piece is moving to is allowed to move there. Returns FALSE if piece is occupied by same color. 
+        Returns TRUE if space is an opponent piece or space is empty
+
+        checkRow: end spot row to check
+        checkColumn: end spot column to check
+        b: the Board to check
+    */
+    bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, Board& b) const;
 
 
     protected:

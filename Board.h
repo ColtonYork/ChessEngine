@@ -31,6 +31,11 @@ class Board {
     */
     void displayBoard() const;
 
+    /*
+        Brief: Returns a Piece pointer of a specified board index
+    */
+    Piece* getBoard(unsigned char row, unsigned char col) const;
+
 
     private:
     Piece* board[8][8]; // Row | Column
