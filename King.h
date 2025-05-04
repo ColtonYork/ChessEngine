@@ -16,8 +16,16 @@ class King: public Piece{
     */
     King(unsigned char r, unsigned char c, bool isW);
 
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned King
+    */
+    Piece* clone() const;
+
+
+    /*
+        Purely Virtual override from Piece class
         brief: Checks if a particular King move is legal
 
         toRow: The row that the King wants to move to

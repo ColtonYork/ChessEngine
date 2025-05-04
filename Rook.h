@@ -14,8 +14,16 @@ class Rook: public Piece{
     */
     Rook(unsigned char r, unsigned char c, bool isW);
 
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned Rook
+    */
+    Piece* clone() const;
+
+
+    /*
+        Purely Virtual override from Piece Class
         brief: Checks if a particular Rook move is legal
 
         toRow: The row that the Rook wants to move to

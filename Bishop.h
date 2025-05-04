@@ -12,8 +12,16 @@ class Bishop: public Piece{
     */
     Bishop(unsigned char r, unsigned char c, bool isW);
 
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece class
+        Brief: Returns a cloned bishop
+    */
+    Piece* clone() const;
+
+
+    /*
+        Purely Virtual override from Piece class
         brief: Checks if a particular Bishop move is legal
 
         toRow: The row that the Bishhop wants to move to

@@ -13,8 +13,16 @@ class Pawn: public Piece{
         Personal Member hasMoved: set to false
     */
     Pawn(unsigned char r, unsigned char c, bool isW);
+
+     /*
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned Pawn
+    */
+    Piece* clone() const;
+
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece Class
         brief: Checks if a particular Pawn move is legal
 
         toRow: The row that the Pawn wants to move to

@@ -12,8 +12,16 @@ class Queen: public Piece{
     */
     Queen(unsigned char r, unsigned char c, bool isW);
 
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned Queen
+    */
+    Piece* clone() const;
+    
+
+    /*
+        Purely Virtual override from Piece Class
         brief: Checks if a particular Bishop move is legal
 
         toRow: The row that the Bishhop wants to move to

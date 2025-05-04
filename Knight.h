@@ -11,8 +11,17 @@ class Knight: public Piece{
         isW: true if Knight IS white    
     */
     Knight(unsigned char r, unsigned char c, bool isW);
+
+
     /*
-        Virtual override from Piece class;
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned Knight
+    */
+    Piece* clone() const;
+
+
+    /*
+        Purely Virtual override from Piece class
         brief: Checks if a particular Knight move is legal
 
         toRow: The row that the Knight wants to move to

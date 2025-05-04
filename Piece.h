@@ -22,6 +22,12 @@ class Piece {
 
 
     /*
+        Brief: Returns a clone of itself
+    */
+    virtual Piece* clone() const = 0;
+
+
+    /*
         Brief: Checks if a particular move is legal to make
 
         toRow: The row that the piece wants to move to
