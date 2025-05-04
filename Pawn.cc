@@ -17,3 +17,6 @@ pieceType Pawn::getPieceType() const{
     return PAWN;
 }
 
+bool Pawn::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{}
+
+

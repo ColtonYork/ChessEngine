@@ -10,3 +10,6 @@ Piece* Knight::clone() const{
 pieceType Knight::getPieceType() const{
     return KNIGHT;
 }
+
+bool Knight::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{}
+

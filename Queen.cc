@@ -10,3 +10,7 @@ Piece* Queen::clone() const{
 pieceType Queen::getPieceType() const{
     return QUEEN;
 }
+
+bool Queen::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+    
+}

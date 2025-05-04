@@ -1,4 +1,5 @@
 #include "Rook.h"
+#include "Board.h"
 
 Rook::Rook(unsigned char r, unsigned char c, bool isW)
     : Piece(r, c, isW)
@@ -71,17 +72,17 @@ bool Rook::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const
 
     if (rowMove)
         {
-            if(isLegalBetween(true, row, toRow, b) == false) {return false;}
+            if(!isLegalBetween(true, row, toRow, b)) {return false;}
         }
     else 
         {
-            if(isLegalBetween(false, col, toCol, b) == false) {return false;}
+            if(!isLegalBetween(false, col, toCol, b)) {return false;}
         }   
 
-        //check end spot
-        if (!endSpotLegal(toRow, toCol, b)){return false;}
+    //check end spot
+    if (!endSpotLegal(toRow, toCol, b)){return false;}
 
-        return true;    
+    return true;    
 }
 
 

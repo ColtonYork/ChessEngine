@@ -11,3 +11,6 @@ pieceType Bishop::getPieceType() const{
     return BISHOP;
 }
 
+bool Bishop::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{}
+
+

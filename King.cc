@@ -18,6 +18,9 @@ pieceType King::getPieceType() const{
     return KING;
 }
 
+bool King::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{}
+
+
 
 
 
