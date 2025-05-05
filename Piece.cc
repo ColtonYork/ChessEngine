@@ -24,3 +24,15 @@ bool Piece::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, Boar
     
     return true;
 }
+
+bool Piece::spotIsOpponent(unsigned char checkRow, unsigned char checkCol, Board& b) const{
+    Piece* p = b.getBoard(checkRow, checkCol);
+    if ((p == nullptr) || (isWhite == p->getIsWhite())) {return false;}
+
+    return true;
+}
+
+
+
+
+

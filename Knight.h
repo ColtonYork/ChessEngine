@@ -15,7 +15,7 @@ class Knight: public Piece{
 
 
     /*
-        Brief: Purely Virtual Overridereturns piece type KNIGHT
+        Brief: Purely Virtual Override returns piece type KNIGHT
     */
     pieceType getPieceType() const;
 
@@ -35,7 +35,6 @@ class Knight: public Piece{
         toCol: The column that the Knight wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
-
 
 
     private:

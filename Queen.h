@@ -15,7 +15,7 @@ class Queen: public Piece{
 
 
     /*
-        Brief: Purely Virtual Overridereturns piece type QUEEN
+        Brief: Purely Virtual Override returns piece type QUEEN
     */
     pieceType getPieceType() const;
 

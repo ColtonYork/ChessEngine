@@ -19,7 +19,7 @@ class King: public Piece{
 
 
     /*
-        Brief: Purely Virtual Overridereturns piece type KING
+        Brief: Purely Virtual Override returns piece type KING
     */
     pieceType getPieceType() const;
 

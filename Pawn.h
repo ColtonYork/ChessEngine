@@ -39,6 +39,26 @@ class Pawn: public Piece{
     bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
 
 
+    /*
+        Brief: determines if the simple up-one-move is valid
+
+        toRow: The row that the piece is moving to
+        toCol: The column that the piece is moving to
+        b: The current board to asess
+    */
+    bool isLegalUpOneMove(unsigned char toRow, unsigned, char toCol, Board& b) const;
+
+
+    /*
+        Brief: Determines if the take piece movement is valid
+
+        toRow: The row that the piece is moving to
+        toCol: The column that the piece is moving to
+        b: The current board to asess
+    */
+    bool takePieceLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
 
     private:
     bool hasMoved;

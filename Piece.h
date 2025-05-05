@@ -67,6 +67,17 @@ class Piece {
     bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, Board& b) const;
 
 
+    /*
+        Brief: returns TRUE when the specified spot has an opponents piece
+
+        checkRow: The row being checked
+        checkCol: the column being checked
+        b: the board beeing asessed
+    */
+    bool spotIsOpponent(unsigned char checkRow, unsigned char checkCol, Board& b) const;
+
+
+
     protected:
     unsigned char row;
     unsigned char col;

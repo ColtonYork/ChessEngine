@@ -15,7 +15,7 @@ class Bishop: public Piece{
 
 
     /*
-        Brief: Purely Virtual Overridereturns piece type BISHOP
+        Brief: Purely Virtual Override returns piece type BISHOP
     */
     pieceType getPieceType() const;
 
@@ -35,6 +35,18 @@ class Bishop: public Piece{
         toCol: The column that the Bishop wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: checks if spaces between a specified bishop move are empty
+
+        Booleans: gets the direction of the bishop move
+        toRow: The row that the bishop is moving to 
+        toCol: The column the bishop is moving to
+        b: Current board to asess
+    */
+    bool isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const;
+
 
 
 
