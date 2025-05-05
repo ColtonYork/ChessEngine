@@ -31,10 +31,50 @@ class Queen: public Piece{
         Purely Virtual override from Piece Class
         brief: Checks if a particular Bishop move is legal
 
-        toRow: The row that the Bishhop wants to move to
-        toCol: The column that the Bishop wnats to move to
+        toRow: The row that the Queen wants to move to
+        toCol: The column that the Queen wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Determines if Queen movement is Rook-based and if it is valid
+
+        toRow: The row that the Queen wants to move to
+        toCol: The column that the Queen wnats to move to
+    */
+    bool isLegalRookMovement(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Determines if Queen movement is Bishop-based and if it is valid
+
+        toRow: The row that the Queen wants to move to
+        toCol: The column that the Queen wnats to move to
+        b: the board being asessed 
+    */
+    bool isLegalBishopMovement(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Checks if the Queens' Rook movement path is clear
+
+        toRow: The row that the Queen wants to move to
+        toCol: The column that the Queen wnats to move to
+        b: the board being asessed 
+    */
+    bool isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigned char to, Board& b) const;
+
+
+    /*
+        Brief: Checks if the Queens' Bishop movement path is clear
+
+        toRow: The row that the Queen wants to move to
+        toCol: The column that the Queen wnats to move to
+        b: the board being asessed 
+    */
+    bool isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const;
+
 
 
 

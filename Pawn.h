@@ -46,7 +46,7 @@ class Pawn: public Piece{
         toCol: The column that the piece is moving to
         b: The current board to asess
     */
-    bool isLegalUpOneMove(unsigned char toRow, unsigned, char toCol, Board& b) const;
+    bool isLegalUpOneMove(unsigned char toRow, unsigned char toCol, Board& b) const;
 
 
     /*
@@ -56,7 +56,25 @@ class Pawn: public Piece{
         toCol: The column that the piece is moving to
         b: The current board to asess
     */
-    bool takePieceLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalTakePieceMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Determines if the two-up move is valid
+
+        toRow: The row that the piece is moving to
+        toCol: The column that the piece is moving to
+        b: The current board to asess
+    */
+    bool isLegalTwoUpMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+
+    /*
+        Brief: Determines if a pawn move awards promotion. Will return TRUE if the pawn reaches the opposite side of the board.
+
+        toRow: The row that the piece is moving to
+    */
+    bool promotionMove(unsigned char toRow) const;
 
 
 
