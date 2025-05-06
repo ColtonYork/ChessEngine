@@ -69,6 +69,9 @@ bool Pawn::promotionMove(unsigned char toRow) const{
     return false;
 }
 
+bool Pawn::getHasMoved() const{
+    return hasMoved;
+}
 
 
 

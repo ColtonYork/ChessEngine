@@ -77,6 +77,13 @@ class Pawn: public Piece{
     bool promotionMove(unsigned char toRow) const;
 
 
+    /*
+        Virtual Override from Piece class
+        Brief: returns hasMoved private member variable
+    */
+    bool getHasMoved() const;
+
+
 
     private:
     bool hasMoved;

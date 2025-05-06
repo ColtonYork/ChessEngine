@@ -53,7 +53,7 @@ class Board {
     /*
         Brief: Returns true if the specified king is in check
     */
-    bool Board::kingInCheck(bool whiteKing) const;
+    bool kingInCheck(bool whiteKing) const;
 
 
     /*

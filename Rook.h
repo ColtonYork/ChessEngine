@@ -50,6 +50,14 @@ class Rook: public Piece{
     bool isLegalBetween(bool rowMove, unsigned char from, unsigned char to, const Board& b) const;
 
 
+    /*
+        Virtual Override from Piece class
+        Brief: returns hasMoved private member variable
+    */
+    bool getHasMoved() const;
+
+
+
 
 
     private:

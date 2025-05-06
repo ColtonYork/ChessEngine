@@ -51,6 +51,14 @@ class King: public Piece{
     bool isLegalCastleMove(bool kingSide, const Board& b) const;
 
 
+    /*
+        Virtual Override from Piece class
+        Brief: returns hasMoved private member variable
+    */
+    bool getHasMoved() const;
+
+
+
 
     private:
     bool hasMoved;

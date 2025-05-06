@@ -85,4 +85,8 @@ bool Rook::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b)
     return true;    
 }
 
+bool Rook::getHasMoved() const{
+    return hasMoved;
+}
+
 

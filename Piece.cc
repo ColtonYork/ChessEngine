@@ -40,6 +40,10 @@ unsigned char Piece::getCol() const{
     return col;
 }
 
+bool Piece::getHasMoved() const{
+    return false;
+}
+
 
 
 

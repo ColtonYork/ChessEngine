@@ -88,6 +88,12 @@ class Piece {
     */
     unsigned char getCol() const;
 
+    /*
+        Brief: Implemneted by PAWN, KING, and ROOK. 
+        Just returns false for default parent class definition
+    */
+    virtual bool getHasMoved() const;
+
 
 
 
