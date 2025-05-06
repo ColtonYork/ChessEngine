@@ -1,4 +1,5 @@
 #include "King.h"
+#include <cmath>
 
 King::King(unsigned char r, unsigned char c, bool isW)
     : Piece(r, c, isW)
@@ -18,7 +19,26 @@ pieceType King::getPieceType() const{
     return KING;
 }
 
-bool King::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{}
+bool King::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+    //Check if move is inbounds
+    if(!moveIsInbounds(toRow, toCol)) {return false;}
+
+    //get change in rows/cols
+    int rowChange = abs(row - toRow);
+    int colChange = abs(col - toCol);
+
+    if (!((rowChange == 1 && colChange == 1) || (rowChange == 0 && colChange == 1) || (rowChange == 1 && colChange == 0))) {return false;}
+
+    //check legal end spot
+    if (!endSpotLegal(toRow, toCol, b)) {return false;}
+
+    return true;
+}
+
+bool King::isLegalCastleMove(bool kingSide, Board& b) const{
+
+}
+
 
 
 

@@ -78,6 +78,9 @@ class Piece {
 
 
 
+
+
+
     protected:
     unsigned char row;
     unsigned char col;

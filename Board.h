@@ -39,6 +39,17 @@ class Board {
     Piece* getBoard(unsigned char row, unsigned char col) const;
 
 
+     /*
+        Brief: Determines if a square is being attacked by opponent
+
+        checkRow: The row of the square that needs checked
+        checkCol: The column of the square that needs checked
+        byWhite: TRUE when wanting to see if WHITE is attacking a square
+        b: The board being asessed
+    */
+    bool squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bool byWhite, Board& b) const;
+
+
     private:
     Piece* board[8][8]; // Row | Column
 

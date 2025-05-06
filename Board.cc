@@ -149,3 +149,37 @@ Piece* Board::getBoard(unsigned char row, unsigned char col) const{
     return board[row][col];
 }
 
+bool Board::squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bool byWhite, Board& b) const{
+    //check if square is being attacked by one of whites pieces
+    if (byWhite)
+    {
+        for (int i = 0; i < 8; i ++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Piece* piece = b.getBoard(i, j);
+                if (piece == nullptr) {continue;}
+                if (!piece->getIsWhite()) {continue;}
+
+                if (piece->isLegalMove(checkRow, checkCol, b)) {return true;}
+            }
+        }
+        return false;
+    }
+    
+    //checks if square is being attacked by one of blacks pieces
+    for (int i = 0; i < 8; i ++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Piece* piece = b.getBoard(i, j);
+                if (piece == nullptr) {continue;}
+                if (piece->getIsWhite()) {continue;}
+
+                if (piece->isLegalMove(checkRow, checkCol, b)) {return true;}
+            }
+        }
+        return false;
+   
+}
+

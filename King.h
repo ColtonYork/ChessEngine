@@ -35,10 +35,20 @@ class King: public Piece{
         Purely Virtual override from Piece class
         brief: Checks if a particular King move is legal
 
+        castle: runs the isLegalCastleMove function if move is a castle move
         toRow: The row that the King wants to move to
         toCol: The column that the King wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+
+    
+    /*
+        Brief: checks if a castle move is valid
+
+        kingSide: TRUE if the castle attmept is to the kings side 0-0 
+        b: The board being asessed
+    */
+    bool isLegalCastleMove(bool kingSide, Board& b) const;
 
 
 
