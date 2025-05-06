@@ -36,7 +36,7 @@ class Pawn: public Piece{
         toRow: The row that the Pawn wants to move to
         toCol: The column that the Pawn wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -46,7 +46,7 @@ class Pawn: public Piece{
         toCol: The column that the piece is moving to
         b: The current board to asess
     */
-    bool isLegalUpOneMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalUpOneMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -56,7 +56,7 @@ class Pawn: public Piece{
         toCol: The column that the piece is moving to
         b: The current board to asess
     */
-    bool isLegalTakePieceMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalTakePieceMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -66,7 +66,7 @@ class Pawn: public Piece{
         toCol: The column that the piece is moving to
         b: The current board to asess
     */
-    bool isLegalTwoUpMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalTwoUpMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*

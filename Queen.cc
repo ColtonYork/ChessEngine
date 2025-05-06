@@ -13,7 +13,7 @@ pieceType Queen::getPieceType() const{
     return QUEEN;
 }
 
-bool Queen::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Queen::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //check for move inbounds
     if (!moveIsInbounds(toRow, toCol)) {return false;}
 
@@ -31,7 +31,7 @@ bool Queen::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) cons
     return false;  
 }
 
-bool Queen::isLegalRookMovement(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Queen::isLegalRookMovement(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //check for pieces in between
     bool rowMove = false;
 
@@ -52,7 +52,7 @@ bool Queen::isLegalRookMovement(unsigned char toRow, unsigned char toCol, Board&
     return true;
 }
 
-bool Queen::isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigned char to, Board& b) const{
+bool Queen::isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigned char to, const Board& b) const{
     int difference = from - to;
 
     //check for move left/down
@@ -93,7 +93,7 @@ bool Queen::isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigne
     return true;
 }
 
-bool Queen::isLegalBishopMovement(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Queen::isLegalBishopMovement(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //Check which diagonal
     bool upLeft = false;
     bool upRight = false;
@@ -114,7 +114,7 @@ bool Queen::isLegalBishopMovement(unsigned char toRow, unsigned char toCol, Boar
     return true;
 }
 
-bool Queen::isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Queen::isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const{
     //checks all four path directions
     if(upleft)
     {

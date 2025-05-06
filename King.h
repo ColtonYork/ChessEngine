@@ -39,7 +39,7 @@ class King: public Piece{
         toRow: The row that the King wants to move to
         toCol: The column that the King wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
     
     /*
@@ -48,7 +48,7 @@ class King: public Piece{
         kingSide: TRUE if the castle attmept is to the kings side 0-0 
         b: The board being asessed
     */
-    bool isLegalCastleMove(bool kingSide, Board& b) const;
+    bool isLegalCastleMove(bool kingSide, const Board& b) const;
 
 
 

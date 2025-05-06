@@ -47,7 +47,19 @@ class Board {
         byWhite: TRUE when wanting to see if WHITE is attacking a square
         b: The board being asessed
     */
-    bool squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bool byWhite, Board& b) const;
+    bool squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bool byWhite) const;
+
+
+    /*
+        Brief: Returns true if the specified king is in check
+    */
+    bool Board::kingInCheck(bool whiteKing) const;
+
+
+    /*
+        Brief: Returns king piece from baord
+    */
+    Piece* findKing(bool whiteKing) const;
 
 
     private:

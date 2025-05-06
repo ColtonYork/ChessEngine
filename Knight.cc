@@ -11,7 +11,7 @@ pieceType Knight::getPieceType() const{
     return KNIGHT;
 }
 
-bool Knight::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Knight::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //checks if move is in bounds
     if (!moveIsInbounds(toRow, toCol)) {return false;}
 

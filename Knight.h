@@ -34,7 +34,7 @@ class Knight: public Piece{
         toRow: The row that the Knight wants to move to
         toCol: The column that the Knight wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     private:

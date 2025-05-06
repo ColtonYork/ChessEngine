@@ -34,7 +34,7 @@ class Bishop: public Piece{
         toRow: The row that the Bishhop wants to move to
         toCol: The column that the Bishop wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -45,7 +45,7 @@ class Bishop: public Piece{
         toCol: The column the bishop is moving to
         b: Current board to asess
     */
-    bool isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
 

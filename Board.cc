@@ -149,7 +149,7 @@ Piece* Board::getBoard(unsigned char row, unsigned char col) const{
     return board[row][col];
 }
 
-bool Board::squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bool byWhite, Board& b) const{
+bool Board::squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bool byWhite) const{
     //check if square is being attacked by one of whites pieces
     if (byWhite)
     {
@@ -157,11 +157,11 @@ bool Board::squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bo
         {
             for (int j = 0; j < 8; j++)
             {
-                Piece* piece = b.getBoard(i, j);
+                Piece* piece = getBoard(i, j);
                 if (piece == nullptr) {continue;}
                 if (!piece->getIsWhite()) {continue;}
 
-                if (piece->isLegalMove(checkRow, checkCol, b)) {return true;}
+                if (piece->isLegalMove(checkRow, checkCol, *this)) {return true;}
             }
         }
         return false;
@@ -172,14 +172,48 @@ bool Board::squareUnderAtatck(unsigned char checkRow, unsigned char checkCol, bo
         {
             for (int j = 0; j < 8; j++)
             {
-                Piece* piece = b.getBoard(i, j);
+                Piece* piece = getBoard(i, j);
                 if (piece == nullptr) {continue;}
                 if (piece->getIsWhite()) {continue;}
 
-                if (piece->isLegalMove(checkRow, checkCol, b)) {return true;}
+                if (piece->isLegalMove(checkRow, checkCol, *this)) {return true;}
             }
         }
         return false;
    
 }
+
+bool Board::kingInCheck(bool white) const{
+    Piece* king = findKing(white);
+
+    //Whites king's coordinates are found, check if any enenmy pieces can target that square
+    if (squareUnderAttack(king->getRow(), king->getCol(), !white)) {return true;}
+    return false;   
+}
+
+Piece* Board::findKing(bool whiteKing) const{
+    int kingRow = -1;
+    int kingCol = -1;
+
+    for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+                {
+                    Piece* piece = getBoard(i, j);
+                    if (piece == nullptr) {continue;}
+
+                    // A king found
+                    else if (piece->getPieceType() == KING && piece->getIsWhite() == whiteKing) {return piece;}
+
+                   
+                }
+        }
+    // This case should never happen
+    return nullptr;
+}
+
+
+
+
+
 

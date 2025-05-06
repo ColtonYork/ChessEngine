@@ -34,7 +34,7 @@ class Queen: public Piece{
         toRow: The row that the Queen wants to move to
         toCol: The column that the Queen wnats to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -43,7 +43,7 @@ class Queen: public Piece{
         toRow: The row that the Queen wants to move to
         toCol: The column that the Queen wnats to move to
     */
-    bool isLegalRookMovement(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalRookMovement(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -53,7 +53,7 @@ class Queen: public Piece{
         toCol: The column that the Queen wnats to move to
         b: the board being asessed 
     */
-    bool isLegalBishopMovement(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalBishopMovement(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -63,7 +63,7 @@ class Queen: public Piece{
         toCol: The column that the Queen wnats to move to
         b: the board being asessed 
     */
-    bool isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigned char to, Board& b) const;
+    bool isLegalBetweenRookMovement(bool rowMove, unsigned char from, unsigned char to, const Board& b) const;
 
 
     /*
@@ -73,7 +73,7 @@ class Queen: public Piece{
         toCol: The column that the Queen wnats to move to
         b: the board being asessed 
     */
-    bool isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
 

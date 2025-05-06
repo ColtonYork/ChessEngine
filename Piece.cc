@@ -16,7 +16,7 @@ bool Piece::moveIsInbounds(unsigned char toRow, unsigned char toCol) const{
     else{return true;}
 }
 
-bool Piece::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, Board& b) const{
+bool Piece::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
     Piece* piece = b.getBoard(checkRow, checkColumn);
 
     if (piece == nullptr) {return true;}
@@ -25,13 +25,20 @@ bool Piece::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, Boar
     return true;
 }
 
-bool Piece::spotIsOpponent(unsigned char checkRow, unsigned char checkCol, Board& b) const{
+bool Piece::spotIsOpponent(unsigned char checkRow, unsigned char checkCol, const Board& b) const{
     Piece* p = b.getBoard(checkRow, checkCol);
     if ((p == nullptr) || (isWhite == p->getIsWhite())) {return false;}
 
     return true;
 }
 
+unsigned char Piece::getRow() const{
+    return row;
+}
+
+unsigned char Piece::getCol() const{
+    return col;
+}
 
 
 

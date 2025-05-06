@@ -41,7 +41,7 @@ class Piece {
         toRow: The row that the piece wants to move to
         toCol: The column that the piece wants to move to
     */
-    virtual bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const = 0;
+    virtual bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const = 0;
 
 
     /*
@@ -64,7 +64,7 @@ class Piece {
         checkColumn: end spot column to check
         b: the Board to check
     */
-    bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, Board& b) const;
+    bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, const Board& b) const;
 
 
     /*
@@ -74,7 +74,19 @@ class Piece {
         checkCol: the column being checked
         b: the board beeing asessed
     */
-    bool spotIsOpponent(unsigned char checkRow, unsigned char checkCol, Board& b) const;
+    bool spotIsOpponent(unsigned char checkRow, unsigned char checkCol, const Board& b) const;
+
+
+    /*
+        Brief: Returns the row of the caller
+    */
+    unsigned char getRow() const;
+
+
+    /*
+        Brief: Returns the column of the caller
+    */
+    unsigned char getCol() const;
 
 
 

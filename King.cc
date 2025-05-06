@@ -19,7 +19,7 @@ pieceType King::getPieceType() const{
     return KING;
 }
 
-bool King::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool King::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //Check if move is inbounds
     if(!moveIsInbounds(toRow, toCol)) {return false;}
 
@@ -35,7 +35,7 @@ bool King::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const
     return true;
 }
 
-bool King::isLegalCastleMove(bool kingSide, Board& b) const{
+bool King::isLegalCastleMove(bool kingSide, const Board& b) const{
 
 }
 

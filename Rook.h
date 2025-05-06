@@ -36,7 +36,7 @@ class Rook: public Piece{
         toRow: The row that the Rook want to move to
         toCol: The column that the Rook wants to move to
     */
-    bool isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const;
+    bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
@@ -47,7 +47,7 @@ class Rook: public Piece{
         to: the row/col that the Rook ends at
         Board: current board to check, passed by reference
     */
-    bool isLegalBetween(bool rowMove, unsigned char from, unsigned char to, Board& b) const;
+    bool isLegalBetween(bool rowMove, unsigned char from, unsigned char to, const Board& b) const;
 
 
 

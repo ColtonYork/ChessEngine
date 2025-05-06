@@ -17,7 +17,7 @@ pieceType Rook::getPieceType() const{
     return ROOK;
 }
 
-bool Rook::isLegalBetween(bool rowMove, unsigned char from, unsigned char to, Board& b) const{
+bool Rook::isLegalBetween(bool rowMove, unsigned char from, unsigned char to, const Board& b) const{
     int difference = from - to;
 
     //check for move left/down
@@ -58,7 +58,7 @@ bool Rook::isLegalBetween(bool rowMove, unsigned char from, unsigned char to, Bo
     return true;
 }
 
-bool Rook::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Rook::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //check for move inbounds
     if (!moveIsInbounds(toRow, toCol)) {return false;}
 

@@ -19,7 +19,7 @@ pieceType Pawn::getPieceType() const{
     return PAWN;
 }
 
-bool Pawn::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Pawn::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //check if move is inbounds
     if(!moveIsInbounds(toRow, toCol)) {return false;}
 
@@ -36,17 +36,17 @@ bool Pawn::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const
     
 }
 
-bool Pawn::isLegalTakePieceMove(unsigned char toRow, unsigned char toCol, Board& b) const{    
+bool Pawn::isLegalTakePieceMove(unsigned char toRow, unsigned char toCol, const Board& b) const{    
     if (!spotIsOpponent(toRow, toCol, b)) {return false;}
     return true;
 }
 
-bool Pawn::isLegalUpOneMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Pawn::isLegalUpOneMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     if(b.getBoard(toRow, toCol) != nullptr){return false;}
     return true;
 }
 
-bool Pawn::isLegalTwoUpMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Pawn::isLegalTwoUpMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     if (hasMoved) {return false;}
 
     //make sure path is clear

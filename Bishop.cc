@@ -12,7 +12,7 @@ pieceType Bishop::getPieceType() const{
     return BISHOP;
 }
 
-bool Bishop::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) const{
+bool Bishop::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const{
     //checks if move is inbounds
     if (!moveIsInbounds(toRow, toCol)) {return false;}    
 
@@ -42,7 +42,7 @@ bool Bishop::isLegalMove(unsigned char toRow, unsigned char toCol, Board& b) con
     return true;
 }
 
-bool Bishop::isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, Board& b) const {
+bool Bishop::isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const {
     //checks all four path directions
     if(upleft)
     {
