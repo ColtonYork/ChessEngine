@@ -209,6 +209,11 @@ Piece* Board::findKing(bool whiteKing) const{
     return nullptr;
 }
 
+void Board::setSpace(unsigned char row, unsigned char col, Piece* piece){
+    board[row][col] = piece;
+}
+
+
 
 
 

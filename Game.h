@@ -24,9 +24,25 @@ class Game{
     */
     void makeMove(unsigned char fromRow, unsigned char fromCol, unsigned char toRow, unsigned char toCol);
 
+
+    /*
+        Brief: The main function to start and play game;    
+    */
+    void playGame();
+
+
+    /*
+        Brief: Returns the integer array-index value of a board letter
+    */
+    int letterToArrayIndex(char letter) const;
+
+    /*
+        Brief: Returns the integer array-index value of a board number
+    */
+    int numberToArrayIndex(char number) const;
+
     private:
     Board board;
     int movesPlayed;
     bool whiteTurn;
-
 };

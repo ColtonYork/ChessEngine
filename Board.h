@@ -61,6 +61,15 @@ class Board {
     */
     Piece* findKing(bool whiteKing) const;
 
+    /*
+        Brief: Sets a board space to a specified piece
+
+        row: The row to set the piece to
+        col: The column to set the piece
+        piece: The piece that is being set at the row/coulm provided
+    */
+    void setSpace(unsigned char row, unsigned char col, Piece* piece);
+
 
     private:
     Piece* board[8][8]; // Row | Column
