@@ -1,5 +1,6 @@
 #include "Piece.h"
 #include "Board.h"
+#include <iostream>
 
 Piece::Piece(unsigned char r, unsigned char c, bool isW){
     row = r;
@@ -44,6 +45,16 @@ bool Piece::getHasMoved() const{
     return false;
 }
 
+void Piece::setRow (unsigned char r){
+    if (r > 7 || r < 0) {std::cout << "invalid index" << '\n'; return;}
+    row = r;
+}
 
+
+void Piece::setCol (unsigned char c){
+    if (c > 7 || c < 0) {std::cout << "invalid index" << '\n'; return;}
+    col = c;
+
+}
 
 

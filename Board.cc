@@ -104,7 +104,7 @@ Board& Board::operator=(const Board& other){
 void Board::displayBoard() const{
     //line 1
     for (int i = 7; i >= 0; i--){
-        std::cout << i << " | ";
+        std::cout << i+1 << " | ";
         for(int j = 0; j < 8; j++){
             Piece* p = board[i][j];
 
@@ -139,7 +139,7 @@ void Board::displayBoard() const{
     }
 
     std::cout << "  ------------------" << '\n';
-    std::cout << "    0 1 2 3 4 5 6 7" << '\n';
+    std::cout << "    A B C D E F G H" << '\n';
 
 
 
@@ -210,6 +210,7 @@ Piece* Board::findKing(bool whiteKing) const{
 }
 
 void Board::setSpace(unsigned char row, unsigned char col, Piece* piece){
+    delete board[row][col];
     board[row][col] = piece;
 }
 

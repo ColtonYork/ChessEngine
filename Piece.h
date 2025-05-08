@@ -95,8 +95,16 @@ class Piece {
     virtual bool getHasMoved() const;
 
 
+    /*
+        Brief: sets row to specified value
+    */
+    void setRow (unsigned char r);
 
 
+     /*
+        Brief: sets col to specified value
+    */
+    void setCol (unsigned char c);
 
 
     protected:

@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Pawn.h"
 #include "Queen.h"
+#include "Game.h"
 
 
 
@@ -14,9 +15,11 @@
 
 
 int main(){
-    Board b;
+    Game game;
 
-    b.displayBoard();
+    game.playGame();
+
+    
 
 
     return 0;
