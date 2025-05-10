@@ -33,7 +33,7 @@ void Game::playGame(){
     board->displayBoard();
     while(true)
         {
-            //while isGameOver needs implemented
+            //while !isGameOver needs implemented
             while(true)
                 {
                     std::string move = getUserMove();
@@ -49,7 +49,7 @@ void Game::playGame(){
 
 int Game::letterToArrayIndex(char letter) const{
     char l = toupper(letter);
-    if (l < 'A' || l > 'F') {return -1;}
+    if (l < 'A' || l > 'H') {return -1;}
 
     return l - 'A';
 }
@@ -80,6 +80,7 @@ std::string Game::getUserMove() const{
 
 
 bool Game::correctUserMoveFormat(std::string move) const{
+    if (move == "0-0" || move == "0-0-0") {return true;}
     if (move.length() != 5) {return false;}
 
     std::string checkMove = lowerToUpperString(move);
@@ -126,6 +127,9 @@ bool Game::isMoversPiece(Piece* piece) const{
 }
 
 Board* Game::verifyMove(std::string move) const{
+    //check for castle moves
+    if(move == "0-0" || move == "0-0-0") {return verifyCastleMove(move);}
+
     //validate move format
     if (!correctUserMoveFormat(move)) {std::cout << "Incorrect Move Format" << '\n'; return nullptr;}
 
@@ -146,15 +150,61 @@ Board* Game::verifyMove(std::string move) const{
     Piece* copyPiece = originalPiece->clone();
 
     //make move on copy board
-    copy->setSpace(toRow, toCol, copyPiece);
     copy->setSpace(fromRow, fromCol, nullptr);
     copyPiece->setCol(toCol);
     copyPiece->setRow(toRow);
+    copy->setSpace(toRow, toCol, copyPiece);
+
 
     //check if the move puts yourself in check
-    if(!copy->kingInCheck(whiteTurn)) {delete copy; std::cout << "Self Check Illegal" << '\n'; return nullptr;}
+    if(copy->kingInCheck(whiteTurn)) {delete copy; std::cout << "Self Check Illegal" << '\n'; return nullptr;}
 
+    std::cout << "Piece move from: " << static_cast<int>(originalPiece->getRow()) <<" " << static_cast<int>(originalPiece->getCol()) << " TO: " << static_cast<int>(copyPiece->getRow()) << " " << static_cast<int>(copyPiece->getCol()) << '\n';
+ 
     return copy;
+}
+
+Board* Game::verifyCastleMove(std::string move) const{
+    //check king side castle
+    if (move == "0-0")  
+        {
+            Piece* piece = board->findKing(whiteTurn);
+            if (!piece->isLegalCastleMove(true, *board)) {std::cout << "Illegal caslt move" << '\n'; return nullptr;}
+            
+            //make board copy and piece copy
+            Board* copy = new Board(*board);
+            Piece* rook = board->getBoard(piece->getRow(), piece->getCol() + 3)->clone();
+            Piece* king = piece->clone();
+
+            copy->setSpace(piece->getRow(), 4, nullptr);
+            copy->setSpace(piece->getRow(), 7, nullptr);
+            copy->setSpace(piece->getRow(), 5, king);
+            copy->setSpace(piece->getRow(), 6, rook);
+
+            return copy;
+
+
+
+        }
+    //check queen side castle
+    else if (move == "0-0-0")    
+        {
+            Piece* piece = board->findKing(whiteTurn);
+            if (!piece->isLegalCastleMove(false, *board)) {std::cout << "Illegal caslt move" << '\n'; return nullptr;}
+
+            //make board copy and piece copy
+            Board* copy = new Board(*board);
+            Piece* rook = board->getBoard(piece->getRow(), piece->getCol() - 4)->clone();
+            Piece* king = piece->clone();
+
+            copy->setSpace(piece->getRow(), 4, nullptr);
+            copy->setSpace(piece->getRow(), 0, nullptr);
+            copy->setSpace(piece->getRow(), 3, king);
+            copy->setSpace(piece->getRow(), 2, rook);
+
+            return copy;
+        }
+        return nullptr;
 }
 
 

@@ -101,10 +101,19 @@ class Piece {
     void setRow (unsigned char r);
 
 
-     /*
+    /*
         Brief: sets col to specified value
     */
     void setCol (unsigned char c);
+
+    /*
+        Brief: Implemented only in King class. Returns fals from parent class
+
+        kingSide: TRUE when looking if kingside castle is legal
+        b: The board being asessed
+    */
+    virtual bool isLegalCastleMove(bool kingSide, const Board& b) const;
+
 
 
     protected:

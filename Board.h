@@ -35,6 +35,9 @@ class Board {
 
     /*
         Brief: Returns a Piece pointer of a specified board index
+
+        row: The row of the board to get the piece from
+        col: The column of the board to get the piece from
     */
     Piece* getBoard(unsigned char row, unsigned char col) const;
 
@@ -52,12 +55,16 @@ class Board {
 
     /*
         Brief: Returns true if the specified king is in check
+
+        whiteKing: TRUE when wanting to see if WHITE king is in check
     */
     bool kingInCheck(bool whiteKing) const;
 
 
     /*
-        Brief: Returns king piece from baord
+        Brief: Returns king piece from board
+
+        whiteKing: TRUE when wanting to find WHITE king
     */
     Piece* findKing(bool whiteKing) const;
 
@@ -69,6 +76,9 @@ class Board {
         piece: The piece that is being set at the row/coulm provided
     */
     void setSpace(unsigned char row, unsigned char col, Piece* piece);
+
+
+    
 
 
     private:

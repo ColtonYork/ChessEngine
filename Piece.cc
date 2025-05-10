@@ -56,5 +56,9 @@ void Piece::setCol (unsigned char c){
     col = c;
 
 }
+bool Piece::isLegalCastleMove(bool kingSide, const Board& b) const{
+    return false;
+}
+
 
 

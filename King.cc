@@ -28,7 +28,7 @@ bool King::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b)
     int rowChange = abs(row - toRow);
     int colChange = abs(col - toCol);
 
-    if (!((rowChange == 1 && colChange == 1) || (rowChange == 0 && colChange == 1) || (rowChange == 1 && colChange == 0))) {return false;}
+    if (!((abs(rowChange) == 1 && abs(colChange) == 1) || (abs(rowChange) == 0 && abs(colChange) == 1) || (abs(rowChange) == 1 && abs(colChange) == 0))) {return false;}
 
     //check legal end spot
     if (!endSpotLegal(toRow, toCol, b)) {return false;}

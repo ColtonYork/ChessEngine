@@ -40,7 +40,7 @@ Board::Board(){
 
     //set black pawns
     for(int i = 0; i < 8; i++){
-        board[6][i] = new Pawn(1, i, false);
+        board[6][i] = new Pawn(6, i, false);
     }
 
     //set empty spaces to nullptr
@@ -161,7 +161,7 @@ bool Board::squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bo
                 if (piece == nullptr) {continue;}
                 if (!piece->getIsWhite()) {continue;}
 
-                if (piece->isLegalMove(checkRow, checkCol, *this)) {return true;}
+                if (piece->isLegalMove(checkRow, checkCol, *this)) {std::cout << "Square is under attack by Piece:" << " at " << static_cast<int>(piece->getRow()) << " " << static_cast<int>(piece->getCol()) << '\n'; return true;}
             }
         }
         return false;
@@ -176,7 +176,7 @@ bool Board::squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bo
                 if (piece == nullptr) {continue;}
                 if (piece->getIsWhite()) {continue;}
 
-                if (piece->isLegalMove(checkRow, checkCol, *this)) {return true;}
+                if (piece->isLegalMove(checkRow, checkCol, *this)) {std::cout << "Square is under attack by Piece:" << " at " << static_cast<int>(piece->getRow()) << " " << static_cast<int>(piece->getCol()) << '\n'; return true;}
             }
         }
         return false;
@@ -185,9 +185,11 @@ bool Board::squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bo
 
 bool Board::kingInCheck(bool white) const{
     Piece* king = findKing(white);
-
+    if (king == nullptr) {std::cout << "King not found" << '\n'; return false;}
+    std::cout << "King found" << static_cast<int>(king->getRow()) << " " << static_cast<int>(king->getCol()) << '\n';
     //Whites king's coordinates are found, check if any enenmy pieces can target that square
-    if (squareUnderAttack(king->getRow(), king->getCol(), !white)) {return true;}
+    if (squareUnderAttack(king->getRow(), king->getCol(), !white)) {std::cout << "King is in check by: " << '\n'; return true;}
+    std::cout << "King is not in check" << '\n';
     return false;   
 }
 
@@ -201,7 +203,6 @@ Piece* Board::findKing(bool whiteKing) const{
 
                     // A king found
                     else if (piece->getPieceType() == KING && piece->getIsWhite() == whiteKing) {return piece;}
-
                    
                 }
         }

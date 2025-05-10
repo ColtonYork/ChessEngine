@@ -30,7 +30,7 @@ bool Pawn::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b)
     if (col == toCol && ((isWhite && row + 2 == toRow) || (!isWhite && row - 2 == toRow))) {return isLegalTwoUpMove(toRow, toCol, b);}
 
     //capture move logic
-    if ((abs(toCol - col) == 1) && ((isWhite && row - toRow < 0) || (!isWhite && row - toRow > 0))) {return isLegalTakePieceMove(toRow, toCol, b);}
+    if ((abs(toCol - col) == 1) && ((isWhite && row + 1 == toRow) || (!isWhite && row - 1 == toRow))) {return isLegalTakePieceMove(toRow, toCol, b);}
 
     return false;
     

@@ -76,6 +76,13 @@ class Game{
         Brief verifies a specified move. Retuns the new board if the move is valid. Returns nullptr if move is invalid
     */
     Board* verifyMove(std::string move) const;
+    
+
+    /*
+        Brief: Checks if castling is legal when user castles. "0-0" for kingside | "0-0-0" for queen side.
+    */
+    Board* verifyCastleMove(std::string move) const;
+
 
    
 
