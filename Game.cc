@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Piece.h"
 #include "Board.h"
+#include "Queen.h"
 #include <string>
 #include <iostream>
 
@@ -30,21 +31,18 @@ bool Game::makeMove(std::string move){
 
 void Game::playGame(){
     
-    board->displayBoard();
+    board->displayBoard();        
+    //while !isGameOver needs implemented
     while(true)
         {
-            //while !isGameOver needs implemented
-            while(true)
-                {
-                    std::string move = getUserMove();
-                    if (!makeMove(move)) {std:: cout << "Illegal move" << '\n'; continue;}
+            std::string move = getUserMove();
+            if (!makeMove(move)) {std:: cout << "Illegal move" << '\n'; continue;}
 
-                    board->displayBoard();
-
-                }
+            board->displayBoard();
+        }
 
 
-        } 
+         
 }
 
 int Game::letterToArrayIndex(char letter) const{
@@ -78,7 +76,6 @@ std::string Game::getUserMove() const{
     return move;
 }
 
-
 bool Game::correctUserMoveFormat(std::string move) const{
     if (move == "0-0" || move == "0-0-0") {return true;}
     if (move.length() != 5) {return false;}
@@ -93,8 +90,8 @@ bool Game::correctUserMoveFormat(std::string move) const{
     if (checkMove.at(3) != 'A' && checkMove.at(3) != 'B' && checkMove.at(3) != 'C' && checkMove.at(3) != 'D' && checkMove.at(3) != 'E' && checkMove.at(3) != 'F' && checkMove.at(3) != 'G' && checkMove.at(3) != 'H') {return false;}
 
     //check that numbers are valid indexes
-    if(checkMove.at(2) != '1' && checkMove.at(2) != '2' && checkMove.at(2) != '3' && checkMove.at(2) != '4' && checkMove.at(2) != '5' && checkMove.at(2) != '6' && checkMove.at(2) != '7' && checkMove.at(2) != '8') {return false;}
-    if(checkMove.at(4) != '1' && checkMove.at(4) != '2' && checkMove.at(4) != '3' && checkMove.at(4) != '4' && checkMove.at(4) != '5' && checkMove.at(4) != '6' && checkMove.at(4) != '7' && checkMove.at(4) != '8') {return false;}
+    if (checkMove.at(2) != '1' && checkMove.at(2) != '2' && checkMove.at(2) != '3' && checkMove.at(2) != '4' && checkMove.at(2) != '5' && checkMove.at(2) != '6' && checkMove.at(2) != '7' && checkMove.at(2) != '8') {return false;}
+    if (checkMove.at(4) != '1' && checkMove.at(4) != '2' && checkMove.at(4) != '3' && checkMove.at(4) != '4' && checkMove.at(4) != '5' && checkMove.at(4) != '6' && checkMove.at(4) != '7' && checkMove.at(4) != '8') {return false;}
 
     return true;
 }
@@ -144,6 +141,7 @@ Board* Game::verifyMove(std::string move) const{
     toRow = numberToArrayIndex(move.at(4));
 
     if (!originalPiece->isLegalMove(toRow, toCol, *board)) {std::cout << "isLegalMove Fail" << '\n'; return nullptr;}
+    if (originalPiece->getPieceType() == PAWN && (toRow == 7 || toRow == 0)) {return verifyPromotionMove(originalPiece);}
 
     //make board copy and piece copy if the move is legal so far
     Board* copy = new Board(*board);
@@ -207,6 +205,35 @@ Board* Game::verifyCastleMove(std::string move) const{
         return nullptr;
 }
 
+Board* Game::verifyPromotionMove(Piece* pawn) const{
+    if (pawn->getPieceType() != PAWN) {return nullptr;}
+
+    //make copy of board and pawn
+    Board* copy = new Board(*board);
+    Piece* copyPawn = pawn->clone();
+
+    //white promoting
+    if (copyPawn->getRow() == 6)    
+        {
+            Piece* promotedQueen = new Queen(7, copyPawn->getCol(), copyPawn->getIsWhite());
+
+            copy->setSpace(7, copyPawn->getCol(), promotedQueen);      
+            copy->setSpace(6, copyPawn->getCol(), nullptr);      
+        }
+    //black promoting
+    else if (copyPawn->getRow() == 1)   
+        {
+            Piece* promotedQueen = new Queen(0, copyPawn->getCol(), copyPawn->getIsWhite());
+            
+            copy->setSpace(0, copyPawn->getCol(), promotedQueen);      
+            copy->setSpace(1, copyPawn->getCol(), nullptr);
+        }
+
+        if (copy->kingInCheck(whiteTurn)) {{delete copy; std::cout << "Self Check Illegal" << '\n'; return nullptr;}}
+
+        std::cout << "Pawn promoted!" << '\n';
+        return copy;
+}
 
 
 

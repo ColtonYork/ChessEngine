@@ -106,6 +106,7 @@ class Piece {
     */
     void setCol (unsigned char c);
 
+
     /*
         Brief: Implemented only in King class. Returns fals from parent class
 

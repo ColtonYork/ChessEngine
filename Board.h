@@ -12,12 +12,16 @@ class Board {
     
     /*
         Brief: Board copy constrcutor
+
+        other: the board to be copied
     */
     Board(const Board& other);
 
 
     /*  
         Brief: Board Assignment
+
+        other: the board to be assigned
     */
     Board& operator=(const Board& other);
 
@@ -33,6 +37,7 @@ class Board {
     */
     void displayBoard() const;
 
+
     /*
         Brief: Returns a Piece pointer of a specified board index
 
@@ -42,7 +47,7 @@ class Board {
     Piece* getBoard(unsigned char row, unsigned char col) const;
 
 
-     /*
+    /*
         Brief: Determines if a square is being attacked by opponent
 
         checkRow: The row of the square that needs checked

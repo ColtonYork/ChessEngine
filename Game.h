@@ -29,11 +29,16 @@ class Game{
 
     /*
         Brief: Returns the integer array-index value of a board letter
+
+        letter: the letter to be converted
     */
     int letterToArrayIndex(char letter) const;
 
+
     /*
         Brief: Returns the integer array-index value of a board number
+
+        number: the number to be converted
     */
     int numberToArrayIndex(char number) const;
 
@@ -46,12 +51,16 @@ class Game{
 
     /*
         Brief: returns true if user move format is correct
+
+        move: the move to be checked
     */
     bool correctUserMoveFormat(std::string move) const;
 
 
     /*
         Brief: Returns the all CAPS version of input string
+
+        s: the string to be converted
     */
     std::string lowerToUpperString(std::string s) const;
 
@@ -74,14 +83,32 @@ class Game{
 
     /*
         Brief verifies a specified move. Retuns the new board if the move is valid. Returns nullptr if move is invalid
+
+        move: the move to be verified
     */
     Board* verifyMove(std::string move) const;
     
 
     /*
         Brief: Checks if castling is legal when user castles. "0-0" for kingside | "0-0-0" for queen side.
+
+        move: the move to be verified
     */
     Board* verifyCastleMove(std::string move) const;
+
+
+    /*
+        Brief: Determines if a pawn is being promoted in the move and promotes it. Return a new board pointer if the move is legal. Returns nullptr if the move is illegal.
+
+        pawn: the pawn that will be potentially promoted
+    */
+    Board* verifyPromotionMove(Piece* pawn) const;
+
+
+
+    
+    
+
 
 
    
