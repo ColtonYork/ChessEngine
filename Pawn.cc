@@ -73,6 +73,29 @@ bool Pawn::getHasMoved() const{
     return hasMoved;
 }
 
+bool Pawn::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+    //check inboubnds
+    if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return false;}
+
+    Piece* piece = b.getBoard(checkRow, checkColumn);
+
+    //check end spot legality differenelty when taking with a pawn (Must be opponent piece)
+    if (abs(col - checkColumn) == 1) 
+        {
+            if(piece == nullptr || piece->getIsWhite() == isWhite) 
+                {
+                    return false;
+                } 
+                return true;
+        }
+
+    if (piece == nullptr) {return true;}
+    else if (isWhite == piece->getIsWhite()) {return false;}
+    
+    return true;
+}
+
+
 
 
 

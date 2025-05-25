@@ -58,6 +58,18 @@ class King: public Piece{
     bool getHasMoved() const;
 
 
+    /*        
+        Purely virtual overide from piece class
+        Brief: determines if the final square of the move is legal. returns TRUE if legal
+
+        checkRow: the row of the square to be checked
+        checkCol: the Column of the square to be checked
+        b: The board being asessed
+    */
+    bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
+
+
+
 
 
     private:

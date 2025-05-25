@@ -76,6 +76,32 @@ bool Bishop::isLegalBetween(bool upleft, bool upright, bool downleft, bool downr
     return true;
 }
 
+bool Bishop::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+    //check inboubnds
+    if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return 0;}
+
+    Piece* piece = b.getBoard(checkRow, checkColumn);
+
+    if (piece == nullptr) {return true;}
+    else if (isWhite == piece->getIsWhite()) {return false;}
+    
+    return true;
+}
+
+bool Bishop::hasLegalMoveByDeletion(const Board* b) const{
+    //see if there is a legal 1-space move
+    if (!endSpotLegal(row+1, col+1, *b) && !endSpotLegal(row-1, col-1, *b) && !endSpotLegal(row+1, col-1, *b) && !endSpotLegal(row-1, col+1, *b)) {return false;}
+
+    //copy new board jun order to delete piuece and look for self check
+    Board* copy = new Board(*b);
+    
+    copy->setSpace(row, col, nullptr);
+    if(!copy->kingInCheck(isWhite)) {delete copy; return true;}
+
+    delete copy; 
+    return false;
+}
+
 
 
 

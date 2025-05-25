@@ -85,6 +85,11 @@ bool King::getHasMoved() const{
     return hasMoved;
 }
 
+bool King::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+    
+}
+
+
 
 
 

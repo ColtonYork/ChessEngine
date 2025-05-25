@@ -89,4 +89,16 @@ bool Rook::getHasMoved() const{
     return hasMoved;
 }
 
+bool Rook::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+    //check inboubnds
+    if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return false;}
+
+    Piece* piece = b.getBoard(checkRow, checkColumn);
+
+    if (piece == nullptr) {return true;}
+    else if (isWhite == piece->getIsWhite()) {return false;}
+    
+    return true;
+}
+
 

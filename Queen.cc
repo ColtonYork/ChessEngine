@@ -148,5 +148,21 @@ bool Queen::isLegalBetweenBishopMovement(bool upleft, bool upright, bool downlef
     return true;
 }
 
+bool Queen::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+    //check inboubnds
+    if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return 0;}
+
+    Piece* piece = b.getBoard(checkRow, checkColumn);
+
+    if (piece == nullptr) {return true;}
+    else if (isWhite == piece->getIsWhite()) {return false;}
+    
+    return true;
+}
+
+bool Queen::hasLegalMoveByDeletion(const Board* b) const{
+
+}
+
 
 

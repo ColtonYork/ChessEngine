@@ -19,8 +19,6 @@ bool Game::makeMove(std::string move){
     //check if move is valid
     if(copy == nullptr) {return false;}
 
-
-
     delete board;
     whiteTurn = !whiteTurn;
     movesPlayed++;
@@ -235,6 +233,11 @@ Board* Game::verifyPromotionMove(Piece* pawn) const{
         return copy;
 }
 
+bool Game::isGameOver() const{
+    //check for stalemate
+
+    //check for checkamte
+}
 
 
 

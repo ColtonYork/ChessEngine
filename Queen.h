@@ -76,6 +76,18 @@ class Queen: public Piece{
     bool isLegalBetweenBishopMovement(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
+    /*
+        Purely virtual overide from piece class
+        Brief: determines if the final square of the move is legal. returns TRUE if legal
+
+        checkRow: the row of the square to be checked
+        checkCol: the Column of the square to be checked
+        b: The board being asessed
+    */
+    bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
+
+    bool hasLegalMoveByDeletion(const Board* b) const;
+
 
 
     private:

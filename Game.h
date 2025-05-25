@@ -105,13 +105,10 @@ class Game{
     Board* verifyPromotionMove(Piece* pawn) const;
 
 
-
-    
-    
-
-
-
-   
+    /*
+        Brief: returns TRUE if game is over. Checks for stalemante and checkamte.    
+    */
+    bool isGameOver() const;
 
 
 

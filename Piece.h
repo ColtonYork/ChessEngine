@@ -64,7 +64,7 @@ class Piece {
         checkColumn: end spot column to check
         b: the Board to check
     */
-    bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, const Board& b) const;
+    virtual bool endSpotLegal(unsigned char checkRow, unsigned char checkCol, const Board& b) const = 0;
 
 
     /*
@@ -114,6 +114,16 @@ class Piece {
         b: The board being asessed
     */
     virtual bool isLegalCastleMove(bool kingSide, const Board& b) const;
+
+
+    /*
+        Brief: Implemented by all piece children to determine if the piece has a legal move available. Used for checking stalemate mainly.
+        If a piece has legal move by deletion, then it means that the piece has a 1 space move around it AND it doesn't cause check when deleted
+        ~This function is intended to make stalemate checking more efficient
+
+        b: the board being asessed
+    */
+    virtual bool hasLegalMoveByDeletion(const Board* b) const = 0;
 
 
 

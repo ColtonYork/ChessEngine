@@ -81,7 +81,15 @@ class Board {
         piece: The piece that is being set at the row/coulm provided
     */
     void setSpace(unsigned char row, unsigned char col, Piece* piece);
+   
+   
+   /*
+        Brief: returns TRUE if a specified position is stalemate for the player inserted. TRUE for white means checking if white is in stalemate.
 
+        white: TRUE when checking if white is in staemate
+        b: the board being asessed
+    */
+    bool positionIsStalemate(bool white, Board* b) const;
 
     
 
