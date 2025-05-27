@@ -88,17 +88,9 @@ bool Bishop::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, con
     return true;
 }
 
-bool Bishop::hasLegalMoveByDeletion(const Board* b) const{
+bool Bishop::hasOneSpaceLegalMove(const Board* b) const{
     //see if there is a legal 1-space move
-    if (!endSpotLegal(row+1, col+1, *b) && !endSpotLegal(row-1, col-1, *b) && !endSpotLegal(row+1, col-1, *b) && !endSpotLegal(row-1, col+1, *b)) {return false;}
-
-    //copy new board jun order to delete piuece and look for self check
-    Board* copy = new Board(*b);
-    
-    copy->setSpace(row, col, nullptr);
-    if(!copy->kingInCheck(isWhite)) {delete copy; return true;}
-
-    delete copy; 
+    if (endSpotLegal(row+1, col+1, *b) || endSpotLegal(row-1, col-1, *b) || endSpotLegal(row+1, col-1, *b) || endSpotLegal(row-1, col+1, *b)) {return true;}
     return false;
 }
 

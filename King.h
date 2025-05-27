@@ -61,12 +61,23 @@ class King: public Piece{
     /*        
         Purely virtual overide from piece class
         Brief: determines if the final square of the move is legal. returns TRUE if legal
+        THIS FUNCTION DOES NOT CHECK IF A MOVE PUTS THE PLAYER IN CHECK. IT JUST CHECKS IF THE ENDING SQUARE OF A MOVE IS AVAILABLE
 
         checkRow: the row of the square to be checked
         checkCol: the Column of the square to be checked
         b: The board being asessed
     */
     bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
+
+
+    /*
+        Purely Virtual override from Piece class
+        brief: this function returns false for king becuase you cannmot delete the king piece to check for checks
+
+        b: The board being asessed
+    */
+    bool hasOneSpaceLegalMove(const Board* b) const;
+
 
 
 

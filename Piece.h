@@ -123,7 +123,7 @@ class Piece {
 
         b: the board being asessed
     */
-    virtual bool hasLegalMoveByDeletion(const Board* b) const = 0;
+    virtual bool hasOneSpaceLegalMove(const Board* b) const = 0;
 
 
 

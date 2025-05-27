@@ -68,6 +68,14 @@ class Rook: public Piece{
     bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
 
 
+    /*
+        Purely Virtual override from Piece class
+        brief: Checks if the bishop has any legal moves on the board by deletion
+
+        b: The board being asessed
+    */
+    bool hasLegalMoveByDeletion(const Board* b) const;
+
 
 
 

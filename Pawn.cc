@@ -77,6 +77,12 @@ bool Pawn::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const
     //check inboubnds
     if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return false;}
 
+    //two up move check
+    if (abs(row - checkRow) == 2) {return isLegalMove(checkRow, checkColumn, b);}
+
+    //check direction of move
+    if ((isWhite && checkRow - row < 0) || (!isWhite && checkRow - row > 0)) {return false;}
+
     Piece* piece = b.getBoard(checkRow, checkColumn);
 
     //check end spot legality differenelty when taking with a pawn (Must be opponent piece)
@@ -93,6 +99,15 @@ bool Pawn::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const
     else if (isWhite == piece->getIsWhite()) {return false;}
     
     return true;
+}
+
+
+bool Pawn::hasOneSpaceLegalMove(const Board* b) const{
+    if (isWhite)
+        {
+            if (endSpotLegal(row + 2, col, *b) || endSpotLegal(row + 1, col, *b) || endSpotLegal(row + 1, col + 1, *b)) {return true;}
+        }
+    return false;
 }
 
 

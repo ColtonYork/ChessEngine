@@ -101,4 +101,19 @@ bool Rook::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const
     return true;
 }
 
+bool Rook::hasLegalMoveByDeletion(const Board* b) const{
+    //see if there is a legal 1-space move
+    if (!endSpotLegal(row+1, col, *b) && !endSpotLegal(row-1, col, *b) && !endSpotLegal(row, col-1, *b) && !endSpotLegal(row, col+1, *b)) {return false;}
+
+    //copy new board in order to delete piuece and look for self check
+    Board* copy = new Board(*b);
+    
+    copy->setSpace(row, col, nullptr);
+    if(!copy->kingInCheck(isWhite)) {delete copy; return true;}
+
+    delete copy; 
+    return false;
+}
+
+
 

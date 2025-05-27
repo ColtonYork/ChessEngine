@@ -86,9 +86,22 @@ bool King::getHasMoved() const{
 }
 
 bool King::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const{
+        //check inboubnds
+    if (checkRow > 7 || checkRow < 0 || checkColumn > 7 || checkColumn < 0) {return 0;}
+
+    Piece* piece = b.getBoard(checkRow, checkColumn);
+
+    if (piece == nullptr) {return true;}
+    else if (isWhite == piece->getIsWhite()) {return false;}
     
+    return true;
 }
 
+bool King::hasOneSpaceLegalMove(const Board* b) const{
+    if (endSpotLegal(row+1, col, *b) || endSpotLegal(row-1, col, *b) || endSpotLegal(row, col-1, *b) || endSpotLegal(row, col+1, *b) 
+    || endSpotLegal(row+1, col+1, *b) || endSpotLegal(row-1, col-1, *b) || endSpotLegal(row+1, col-1, *b) || endSpotLegal(row-1, col+1, *b)) {return true;}
+    return false;
+}
 
 
 

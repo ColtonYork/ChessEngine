@@ -1,2 +1,14 @@
 COMPILER
 g++ -Wall -o program *.cc
+
+
+    Piece* tmp = this->clone();
+    int tmpRow = row;
+    int tmpCol = col;
+
+    //delete piece and check for self check
+    b->setSpace(row, col, nullptr);
+    if(!b->kingInCheck(isWhite)) {b->setSpace(row, col, tmp); return true;}
+
+    b->setSpace(row, col, tmp);
+    return false;

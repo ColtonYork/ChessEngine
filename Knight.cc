@@ -28,17 +28,11 @@ bool Knight::isLegalMove(unsigned char toRow, unsigned char toCol, const Board& 
     return true;
 }
 
-bool Knight::hasLegalMoveByDeletion(const Board* b) const{
+bool Knight::hasOneSpaceLegalMove(const Board* b) const{
     //see if there is a legal 1-space move
-    if (!endSpotLegal(row+2, col+1, *b) && !endSpotLegal(row+2, col-1, *b) && !endSpotLegal(row-2, col+1, *b) && !endSpotLegal(row-2, col-1, *b) && !endSpotLegal(row+1, col+2, *b) && !endSpotLegal(row+1, col-2, *b) && !endSpotLegal(row-1, col+2, *b) && !endSpotLegal(row-1, col-2, *b)) {return false;}
+    if (endSpotLegal(row+2, col+1, *b) || endSpotLegal(row+2, col-1, *b) || endSpotLegal(row-2, col+1, *b) || endSpotLegal(row-2, col-1, *b) || endSpotLegal(row+1, col+2, *b) || 
+    endSpotLegal(row+1, col-2, *b) || endSpotLegal(row-1, col+2, *b) || endSpotLegal(row-1, col-2, *b)) {return true;}
 
-    //copy new board in order to delete piuece and look for self check
-    Board* copy = new Board(*b);
-    
-    copy->setSpace(row, col, nullptr);
-    if(!copy->kingInCheck(isWhite)) {delete copy; return true;}
-
-    delete copy; 
     return false;
 }
 

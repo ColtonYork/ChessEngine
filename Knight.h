@@ -43,7 +43,7 @@ class Knight: public Piece{
 
         b: The board being asessed
     */
-    bool hasLegalMoveByDeletion(const Board* b) const;
+    bool hasOneSpaceLegalMove(const Board* b) const;
 
 
     /*
