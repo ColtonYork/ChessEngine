@@ -84,12 +84,12 @@ class Board {
    
    
    /*
-        Brief: returns TRUE if a specified position is stalemate for the player inserted. TRUE for white means checking if white is in stalemate.
+        Brief: returns TRUE if a specified position is stalemate. If this function returns FALSE it means position is stalemate
 
-        white: TRUE when checking if white is in staemate
+        white: TRUE when checking if white has a legal move
         b: the board being asessed
     */
-    bool positionIsStalemate(bool white, Board* b) const;
+    bool playerHasLegalMove(bool white, Board* b);
 
     
 

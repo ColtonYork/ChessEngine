@@ -70,11 +70,11 @@ class Rook: public Piece{
 
     /*
         Purely Virtual override from Piece class
-        brief: Checks if the bishop has any legal moves on the board by deletion
+        brief: Checks if the Rook has a legal one-space move
 
         b: The board being asessed
     */
-    bool hasLegalMoveByDeletion(const Board* b) const;
+    bool hasOneSpaceLegalMove(const Board* b) const;
 
 
 

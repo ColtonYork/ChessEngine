@@ -160,7 +160,7 @@ bool Queen::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, cons
     return true;
 }
 
-bool Queen::hasLegalMoveByDeletion(const Board* b) const{
+bool Queen::hasOneSpaceLegalMove(const Board* b) const{
     if (endSpotLegal(row+1, col, *b) || endSpotLegal(row-1, col, *b) || endSpotLegal(row, col-1, *b) || endSpotLegal(row, col+1, *b) 
     || endSpotLegal(row+1, col+1, *b) || endSpotLegal(row-1, col-1, *b) || endSpotLegal(row+1, col-1, *b) || endSpotLegal(row-1, col+1, *b)) {return true;}
     

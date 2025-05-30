@@ -86,7 +86,14 @@ class Queen: public Piece{
     */
     bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
 
-    bool hasLegalMoveByDeletion(const Board* b) const;
+
+    /*
+        Purely Virtual override from Piece class
+        brief: Checks if the Queen has a legal one-space move
+
+        b: The board being asessed
+    */
+    bool hasOneSpaceLegalMove(const Board* b) const;
 
 
 

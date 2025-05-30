@@ -185,8 +185,10 @@ bool Board::squareUnderAttack(unsigned char checkRow, unsigned char checkCol, bo
 
 bool Board::kingInCheck(bool white) const{
     Piece* king = findKing(white);
+    
     if (king == nullptr) {std::cout << "King not found" << '\n'; return false;}
     std::cout << "King found" << static_cast<int>(king->getRow()) << " " << static_cast<int>(king->getCol()) << '\n';
+
     //Whites king's coordinates are found, check if any enenmy pieces can target that square
     if (squareUnderAttack(king->getRow(), king->getCol(), !white)) {std::cout << "King is in check by: " << '\n'; return true;}
     std::cout << "King is not in check" << '\n';
@@ -215,8 +217,15 @@ void Board::setSpace(unsigned char row, unsigned char col, Piece* piece){
     board[row][col] = piece;
 }
 
-bool Board::positionIsStalemate(bool white, Board* b) const{
-    
+bool Board::playerHasLegalMove(bool white){
+    //loop thru white pieces
+    for(int i = 0; i < 8; i ++)
+        {
+            for(int j = 0; j < 8; j++)
+                {
+                    if (getBoard())
+                }
+        }
 }
 
 
