@@ -227,7 +227,7 @@ bool Board::playerHasLegalMove(bool white){
                 }
         }
 }
-
+git commit -m "Implementing playerHasLegalMove in Board.cc class. using this for stalemate/checkmate checking."
 
 
 
