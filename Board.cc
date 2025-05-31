@@ -7,7 +7,6 @@
 #include "Pawn.h"
 #include "Bishop.h"
 #include <iostream>
-#define DARK_GREEN "\033[32;2m"  // or "\033[32;1m" for a different shade
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
 #define RESET "\033[0m"
 #define DARK_GRAY "\033[90m"
