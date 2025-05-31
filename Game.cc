@@ -235,7 +235,7 @@ Board* Game::verifyPromotionMove(Piece* pawn) const{
 
 bool Game::isGameOver() const{
     //check for stalemate
-
+return 1;
     //check for checkamte
 }
 

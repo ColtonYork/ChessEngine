@@ -84,12 +84,12 @@ class Board {
    
    
    /*
-        Brief: returns TRUE if a specified position is stalemate. If this function returns FALSE it means position is stalemate
+        Brief: returns TRUE if the specified player has a legal move by deletion optimization. The function will get to a specified colors piece, 
+        check if it has space to move around it, then delete it and check if it causes selfcheck when deleted
 
         white: TRUE when checking if white has a legal move
-        b: the board being asessed
     */
-    bool playerHasLegalMove(bool white, Board* b);
+    bool playerHasLegalMoveByDeletion(bool white);
 
     
 

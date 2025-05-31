@@ -7,6 +7,10 @@
 #include "Pawn.h"
 #include "Bishop.h"
 #include <iostream>
+#define DARK_GREEN "\033[32;2m"  // or "\033[32;1m" for a different shade
+#define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
+#define RESET "\033[0m"
+#define DARK_GRAY "\033[90m"
 
 
 Board::Board(){
@@ -109,7 +113,11 @@ void Board::displayBoard() const{
             Piece* p = board[i][j];
 
             //checks for empty spot
-            if (p == nullptr){std::cout << ". ";}
+            if (p == nullptr)
+                {
+                    if ((i + j) % 2 == 0) {std::cout << BROWN << ". " << RESET;}
+                    else{std::cout << ". " << RESET;}
+                }
 
             //checks for white pieces
             else if (p->getIsWhite() == 1){
@@ -123,12 +131,12 @@ void Board::displayBoard() const{
             
             //checks for black pieces
             else{
-                if (p->getPieceType() == PAWN){std::cout << "P ";}
-                else if (p->getPieceType() == BISHOP){std::cout << "b ";}
-                else if (p->getPieceType() == KNIGHT){std::cout << "n ";}
-                else if (p->getPieceType() == ROOK){std::cout << "r ";}
-                else if (p->getPieceType() == QUEEN){std::cout << "q ";}
-                else if (p->getPieceType() == KING){std::cout << "k ";}
+                if (p->getPieceType() == PAWN){std::cout << DARK_GRAY << "p " << RESET;}
+                else if (p->getPieceType() == BISHOP){std::cout << DARK_GRAY << "B " << RESET;}
+                else if (p->getPieceType() == KNIGHT){std::cout << DARK_GRAY << "N " << RESET;}
+                else if (p->getPieceType() == ROOK){std::cout << DARK_GRAY << "R " << RESET;}
+                else if (p->getPieceType() == QUEEN){std::cout << DARK_GRAY << "Q " << RESET;}
+                else if (p->getPieceType() == KING){std::cout << DARK_GRAY << "K " << RESET;}
             }
 
             if(j == 7){std::cout << '\n';}
@@ -217,17 +225,28 @@ void Board::setSpace(unsigned char row, unsigned char col, Piece* piece){
     board[row][col] = piece;
 }
 
-bool Board::playerHasLegalMove(bool white){
+bool Board::playerHasLegalMoveByDeletion(bool white){
     //loop thru white pieces
     for(int i = 0; i < 8; i ++)
         {
             for(int j = 0; j < 8; j++)
                 {
-                    if (getBoard())
+                    Piece* piece = getBoard(i, j);
+
+                    //make sure piece is correct color and make sure it has a legal move around it
+                    if (piece == nullptr || piece->getIsWhite() != white || !piece->hasOneSpaceLegalMove(this)) {continue;}
+                    
+                    Piece* pieceCopy = piece->clone();
+
+                    setSpace(i, j, nullptr);
+                    if (kingInCheck(white)) {setSpace(i, j, pieceCopy); continue;}
+
+                    setSpace(i, j, pieceCopy); 
+                    return 1;   
                 }
         }
+        return 0;
 }
-git commit -m "Implementing playerHasLegalMove in Board.cc class. using this for stalemate/checkmate checking."
 
 
 
