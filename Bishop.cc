@@ -94,6 +94,66 @@ bool Bishop::hasOneSpaceLegalMove(const Board* b) const{
     return false;
 }
 
+bool Bishop::hasVerifiedMove(Board* b, bool checkOneSpaceMoves) {
+    int currentRow = row;
+    int currentCol = col;
+
+    //check which direction are blocked
+    bool upRight = endSpotLegal(row + 1, col + 1, *b);
+    bool upLeft = endSpotLegal(row + 1, col - 1, *b);
+    bool downRight = endSpotLegal(row - 1, col + 1, *b);
+    bool downLeft = endSpotLegal(row - 1, col - 1, *b);
+
+    //check one space moves
+    if (checkOneSpaceMoves) 
+        {
+            if (upRight)
+                {
+                    Piece* pieceCopy = this->clone();
+
+                    b->setSpace(row, col, nullptr);
+                    pieceCopy->setRow(row + 1);
+                    pieceCopy->setCol(col + 1);
+                    b->setSpace(row + 1, col + 1, pieceCopy);
+
+                    if (!b->kingInCheck(pieceCopy->getIsWhite())) 
+                        {
+                            pieceCopy->setRow(currentRow);
+                            pieceCopy->setCol(currentCol);
+
+                            b->setSpace(currentRow, currentCol, pieceCopy);
+
+                            return true;
+                        }
+                }
+        }
+}
+
+bool Bishop::moveIsverified(Board* b, int toRow, int toCol){
+    int currentRow = row;
+    int currentCol = col;
+
+    Piece* pieceCopy = this->clone();
+
+    b->setSpace(row, col, nullptr);
+    
+    pieceCopy->setRow(toRow);
+    pieceCopy->setCol(toCol);
+    b->setSpace(toRow, toCol, pieceCopy);
+
+    if (!b->kingInCheck(pieceCopy->getIsWhite())) 
+        {
+            pieceCopy->setRow(currentRow);
+            pieceCopy->setCol(currentCol);
+
+             b->setSpace(currentRow, currentCol, pieceCopy);
+
+            return true;
+        }
+}
+
+
+
 
 
 

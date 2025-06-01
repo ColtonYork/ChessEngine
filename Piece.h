@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Board;
 
@@ -124,6 +125,14 @@ class Piece {
         b: the board being asessed
     */
     virtual bool hasOneSpaceLegalMove(const Board* b) const = 0;
+
+    /*
+        Breif: determines if a piece has a fully legal and verified move possible on the baord
+
+        b: the board being asessed
+        checkOneSpaceMoves: True when needeing to check one space moves. These moves are already checked in hasLegalMoveByDeletion so it may not be needed
+    */
+    virtual bool hasVerifiedMove(Board* b, bool checkOneSpaceMoves) = 0;
 
 
 

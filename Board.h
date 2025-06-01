@@ -91,6 +91,20 @@ class Board {
     */
     bool playerHasLegalMoveByDeletion(bool white);
 
+    /*
+        Brief: The function above, playerHasLegalMovebyDeletion, is only an optimization to find any legal moves. This function will check the rest of the possible moves if checking by deletion does not find a legal move.
+
+        white: TRUE when checking if white has a legal move
+    */
+    bool playerHasLegalMoveAfterDeletion(bool white);
+
+
+    /*
+        Brief: Returns TRUE if the specified player has a legal move available.
+
+        white: the player being checked for a possible legal move.
+    */
+    bool PlayerHasLegalMove(bool white);
     
 
 

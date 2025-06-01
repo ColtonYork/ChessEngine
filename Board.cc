@@ -247,6 +247,13 @@ bool Board::playerHasLegalMoveByDeletion(bool white){
         return 0;
 }
 
+bool Board::playerHasLegalMoveAfterDeletion(bool white){
+    
+}
+
+
+
+
 
 
 
