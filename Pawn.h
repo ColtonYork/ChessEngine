@@ -86,7 +86,7 @@ class Pawn: public Piece{
 
     /*
         Purely Virtual override from Piece class
-        brief: Checks if the pawn has a legal move
+        brief: Checks if the pawn has a legal move (function name is misleading here)
 
         b: The board being asessed
     */

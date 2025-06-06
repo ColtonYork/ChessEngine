@@ -132,7 +132,7 @@ class Piece {
         b: the board being asessed
         checkOneSpaceMoves: True when needeing to check one space moves. These moves are already checked in hasLegalMoveByDeletion so it may not be needed
     */
-    virtual bool hasVerifiedMove(Board* b, bool checkOneSpaceMoves) = 0;
+    virtual bool hasVerifiedMove(Board* b) = 0;
 
 
 

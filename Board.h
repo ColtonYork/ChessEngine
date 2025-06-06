@@ -105,6 +105,19 @@ class Board {
         white: the player being checked for a possible legal move.
     */
     bool PlayerHasLegalMove(bool white);
+
+
+    /*
+        Brief: Simulates a move on the board ot determine if it causes self check
+
+        fromRow: The row that the piece is at
+        fromCol: The col that the piece is at
+        toRow: The row the piece is moving to
+        toCol; The column that the pece is moving to
+    */
+    bool moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol);
+
+
     
 
 

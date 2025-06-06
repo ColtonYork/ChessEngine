@@ -72,13 +72,11 @@ class Bishop: public Piece{
         Breif: determines if bishop has a fully legal and verified move possible on the baord
 
         b: the board being asessed
-        checkOneSpaceMoves: True when needeing to check one space moves. These moves are already checked in hasLegalMoveByDeletion so it may not be needed
     */
-    bool hasVerifiedMove(Board* b, bool checkOneSpaceMoves);
+    bool hasVerifiedMove(Board* b);
 
 
 
-    bool moveIsverified(Board* b, int toRow, int toCol);
 
 
 

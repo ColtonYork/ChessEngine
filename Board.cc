@@ -225,7 +225,7 @@ void Board::setSpace(unsigned char row, unsigned char col, Piece* piece){
 }
 
 bool Board::playerHasLegalMoveByDeletion(bool white){
-    //loop thru white pieces
+    //loop thru pieces
     for(int i = 0; i < 8; i ++)
         {
             for(int j = 0; j < 8; j++)
@@ -246,6 +246,49 @@ bool Board::playerHasLegalMoveByDeletion(bool white){
         }
         return 0;
 }
+
+bool Board::moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol){
+    bool causesSelfCheck = 0;
+
+    Piece* piece = board[fromRow][fromCol];
+
+    piece->setRow(toRow);
+    piece->setCol(toCol);
+
+   board[fromRow][fromCol] = nullptr;
+    
+    //clone the take piece if the move is taking an opponents peice
+    if (board[toRow][toCol] != nullptr)
+        {
+            Piece* takePiece = board[toRow][toCol];
+            board[toRow][toCol] = piece;
+
+            if (kingInCheck(piece->getIsWhite())) {causesSelfCheck = 1;}
+
+            //revert board to original position
+            piece->setRow(fromRow);
+            piece->setCol(fromCol);
+            board[fromRow][fromCol] = piece;
+            board[toRow][toCol] = takePiece;            
+            return causesSelfCheck;
+        }
+    //if toRow, toCol is an empty space
+    else{ 
+        
+            board[toRow][toCol] = piece;
+
+            if (kingInCheck(piece->getIsWhite())) {causesSelfCheck = 1;}
+
+            piece->setRow(fromRow);
+            piece->setCol(fromCol);
+            board[fromRow][fromCol] = piece;
+            board[toRow][toCol] = nullptr;
+
+            return causesSelfCheck;
+        }
+
+}
+
 
 bool Board::playerHasLegalMoveAfterDeletion(bool white){
     
