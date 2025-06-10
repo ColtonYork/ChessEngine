@@ -1,4 +1,4 @@
-# AI-Powered Chess Signing Interface
+# AI-Powered Chess Engine Interface
 
 A C++ application designed to interpret and sign chess moves, making the game more accessible for the deaf and hard-of-hearing community. This project combines core principles of software engineering with future plans to implement AI-driven decision-making and gesture interpretation.
 
