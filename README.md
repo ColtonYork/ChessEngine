@@ -1,4 +1,4 @@
-# Chess Engine from Scratch
+# Chess Engine
 
 A modular chess engine written in C++ with a focus on clean architecture, object-oriented design, and efficient move generation. Built from the ground up to support future integration of AI-based decision-making using Minimax with alpha-beta pruning and a neural network evaluation function trained on real-world game data.
 
