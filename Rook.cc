@@ -1,5 +1,6 @@
 #include "Rook.h"
 #include "Board.h"
+#include <iostream>
 
 Rook::Rook(unsigned char r, unsigned char c, bool isW)
     : Piece(r, c, isW)
@@ -106,6 +107,66 @@ bool Rook::hasOneSpaceLegalMove(const Board* b) const{
     if (endSpotLegal(row+1, col, *b) || endSpotLegal(row-1, col, *b) || endSpotLegal(row, col-1, *b) || endSpotLegal(row, col+1, *b)) {return true;}
     return false;
 }
+
+bool Rook::hasVerifiedMove(Board* b) {
+    bool up = endSpotLegal(row + 1, col, *b);
+    bool down = endSpotLegal(row - 1, col, *b);
+    bool left = endSpotLegal(row, col - 1, *b);
+    bool right = endSpotLegal(row, col + 1, *b);
+
+
+    if (up)
+        {
+        for (int i = row + 1; i < 8; i++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
+            }
+        }
+
+    if (down)
+        {
+        for (int i = row - 1; i >= 0; i--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
+            }
+        }
+
+    if (left)
+        {
+        for (int i = col - 1; i >= 0; i--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
+            }
+        }
+        
+    if (right)
+        {
+        for (int i = col + 1; i < 8; i++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
+            }
+        }
+
+        return false;
+
+}
+
+
+
+
+
 
 
 

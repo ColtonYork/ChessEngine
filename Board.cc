@@ -290,8 +290,20 @@ bool Board::moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol){
 }
 
 
-bool Board::playerHasLegalMoveAfterDeletion(bool white){
-    
+bool Board::playerHasLegalMoveByPiece(bool white){
+    for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                if (board[i][j]->getIsWhite() == white && board[i][j]->hasVerifiedMove(this)) {return true;}
+            }
+        }
+        return false;
+}
+
+bool Board::playerHasLegalMoveOptimized(bool white){
+        if (playerHasLegalMoveByPiece(white)) {return true;}
+        return false;
 }
 
 

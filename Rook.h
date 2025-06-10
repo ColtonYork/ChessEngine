@@ -77,6 +77,16 @@ class Rook: public Piece{
     bool hasOneSpaceLegalMove(const Board* b) const;
 
 
+    /*
+        Virtual Override from piece class
+        Breif: determines if Rook has a fully legal and verified move possible on the baord
+
+        b: the board being asessed
+    */
+    bool hasVerifiedMove(Board* b);
+
+
+
 
 
 

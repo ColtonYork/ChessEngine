@@ -1,6 +1,7 @@
 #include "Queen.h"
 #include "Board.h"
 #include <cmath>
+#include <iostream>
 
 Queen::Queen(unsigned char r, unsigned char c, bool isW)
     : Piece(r, c, isW){}
@@ -166,6 +167,114 @@ bool Queen::hasOneSpaceLegalMove(const Board* b) const{
     
     return false;
 }
+
+bool Queen::hasVerifiedMove(Board* b){
+    //check which Bishop directions are blocked
+    bool upRight = endSpotLegal(row + 1, col + 1, *b);
+    bool upLeft = endSpotLegal(row + 1, col - 1, *b);
+    bool downRight = endSpotLegal(row - 1, col + 1, *b);
+    bool downLeft = endSpotLegal(row - 1, col - 1, *b);
+
+    if (upRight)
+        {
+        for (int i = row + 1, j = col + 1; i < 8 && j < 8; i++, j++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+            }
+        }
+
+    if (upLeft)
+        {
+        for (int i = row + 1, j = col - 1; i < 8 && j >= 0; i++, j--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+            }
+        }
+
+    if (downRight)
+        {
+        for (int i = row - 1, j = col + 1; i >= 0 && j < 8; i--, j++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+            }
+        }
+
+    if (downLeft)
+        {
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+            }
+        }
+
+    //Check which Rook directions are blocked
+    bool up = endSpotLegal(row + 1, col, *b);
+    bool down = endSpotLegal(row - 1, col, *b);
+    bool left = endSpotLegal(row, col - 1, *b);
+    bool right = endSpotLegal(row, col + 1, *b);
+
+    if (up)
+        {
+        for (int i = row + 1; i < 8; i++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
+            }
+        }
+
+    if (down)
+        {
+        for (int i = row - 1; i >= 0; i--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
+            }
+        }
+
+    if (left)
+        {
+        for (int i = col - 1; i >= 0; i--)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
+            }
+        }
+        
+    if (right)
+        {
+        for (int i = col + 1; i < 8; i++)
+            {
+                //break when path gets cut off by own piece
+                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+
+                if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
+            }
+        }
+
+        return false;
+
+
+
+}
+
 
 
 

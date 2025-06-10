@@ -106,7 +106,7 @@ bool Bishop::hasVerifiedMove(Board* b) {
   
     if (upRight)
         {
-        for (int i = row + 1, j = col + 1; i < 8; i++, j++)
+        for (int i = row + 1, j = col + 1; i < 8 && j < 8; i++, j++)
             {
                 //break when path gets cut off by own piece
                 if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
@@ -117,7 +117,7 @@ bool Bishop::hasVerifiedMove(Board* b) {
 
     if (upLeft)
         {
-        for (int i = row + 1, j = col - 1; i < 8; i++, j--)
+        for (int i = row + 1, j = col - 1; i < 8 && j >= 0; i++, j--)
             {
                 //break when path gets cut off by own piece
                 if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
@@ -128,7 +128,7 @@ bool Bishop::hasVerifiedMove(Board* b) {
 
     if (downRight)
         {
-        for (int i = row - 1, j = col + 1; i < 8; i--, j++)
+        for (int i = row - 1, j = col + 1; i >= 0 && j < 8; i--, j++)
             {
                 //break when path gets cut off by own piece
                 if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
@@ -139,7 +139,7 @@ bool Bishop::hasVerifiedMove(Board* b) {
 
     if (downLeft)
         {
-        for (int i = row - 1, j = col - 1; i < 8; i--, j--)
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
             {
                 //break when path gets cut off by own piece
                 if (getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}

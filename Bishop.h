@@ -69,6 +69,7 @@ class Bishop: public Piece{
 
 
     /*
+        Virtual Override from piece class
         Breif: determines if bishop has a fully legal and verified move possible on the baord
 
         b: the board being asessed

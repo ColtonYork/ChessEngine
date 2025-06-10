@@ -96,7 +96,7 @@ class Board {
 
         white: TRUE when checking if white has a legal move
     */
-    bool playerHasLegalMoveAfterDeletion(bool white);
+    bool playerHasLegalMoveByPiece(bool white);
 
 
     /*
@@ -116,6 +116,16 @@ class Board {
         toCol; The column that the pece is moving to
     */
     bool moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol);
+
+
+    /*
+        Brief: The fastets way for this program to determine if a player has a legal move or not. It first tries the optimization of plaerHasLegalMoveByDeletion, 
+        then calls a piece specific function on each piec eto see if it has any possible moves
+
+        white: The player looking to see if they have any possible moves
+    */
+    bool playerHasLegalMoveOptimized(bool white);
+
 
 
     

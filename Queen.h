@@ -97,6 +97,17 @@ class Queen: public Piece{
 
 
 
+    /*
+        Virtual Override from piece class
+        Breif: determines if bishop has a fully legal and verified move possible on the baord
+        ~This function is just the methods for the bishop and rook hasVerifiedMove function copy and pasted
+
+        b: the board being asessed
+    */
+    bool hasVerifiedMove(Board* b);
+
+
+
     private:
 
 
