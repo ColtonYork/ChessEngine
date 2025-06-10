@@ -1,21 +1,23 @@
-# AI-Powered Chess Engine Interface
+# Chess Engine from Scratch
 
-A C++ application designed to interpret and sign chess moves, making the game more accessible for the deaf and hard-of-hearing community. This project combines core principles of software engineering with future plans to implement AI-driven decision-making and gesture interpretation.
+A modular chess engine written in C++ with a focus on clean architecture, object-oriented design, and efficient move generation. Built from the ground up to support future integration of AI-based decision-making using Minimax with alpha-beta pruning and a neural network evaluation function trained on real-world game data.
 
 ## Features
 
--  Object-Oriented Design: Modular class architecture using encapsulation, inheritance, and polymorphism to ensure extensibility and code clarity.
--  Clean Code & Efficiency: Prioritizes readable structure and efficient board representation for low-latency performance.
-- AI Roadmap:  
-  - Planned integration of a **Minimax algorithm with alpha-beta pruning** for strategic move selection.
-  - Future addition of a **neural network trained on Lichess.org data** to model player behavior and improve gameplay.
-- Accessibility Focus: Designed to eventually output signed gestures corresponding to chess notation, expanding usability to non-verbal or hearing-impaired users.
+- **Object-Oriented Architecture**  
+  Built using encapsulation, inheritance, and polymorphism to promote modularity, scalability, and code clarity.
 
-## Technical Overview
+- **Efficient Core Engine**  
+  Focused on clean formatting and optimized data structures to support fast, legal move generation and position evaluation.
 
-- **Language:** C++  
-- **Development Tools:** Visual Studio Code, Git  
-- **Version Control:** GitHub (active repository)  
-- **AI Models (Planned):** PyTorch / TensorFlow for neural network training (to be integrated into backend logic)
+  **AI Integration (Planned)**  
+  - Minimax algorithm with alpha-beta pruning for game-tree exploration  
+  - Neural network evaluator trained on the Lichess database to replace traditional evaluation functions and improve move selection.
 
-## Project Structure (planned)
+- **Future Enhancements**  
+  - Opening book support  
+  - FEN parsing  
+  - Move history tracking and undo/redo  
+  - UCI protocol for GUI integration
+
+## Project Structure
