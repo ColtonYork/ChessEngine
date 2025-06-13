@@ -103,6 +103,23 @@ bool King::hasOneSpaceLegalMove(const Board* b) const{
     return false;
 }
 
+bool King::hasVerifiedMove(Board* b){
+    //up down left right
+    if (isLegalMove(row + 1, col, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col)) {return true;}
+    if (isLegalMove(row - 1, col, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col)) {return true;}
+    if (isLegalMove(row, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row, col - 1)) {return true;}
+    if (isLegalMove(row, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row, col + 1)) {return true;}
+
+    //upleft upright downleft downright
+    if (isLegalMove(row + 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 1)) {return true;}
+    if (isLegalMove(row + 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 1)) {return true;}
+    if (isLegalMove(row - 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 1)) {return true;}
+    if (isLegalMove(row - 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 1)) {return true;}
+
+    return false;
+}
+
+
 
 
 

@@ -104,7 +104,7 @@ class Board {
 
         white: the player being checked for a possible legal move.
     */
-    bool PlayerHasLegalMove(bool white);
+    bool playerHasLegalMove(bool white);
 
 
     /*
@@ -117,14 +117,13 @@ class Board {
     */
     bool moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol);
 
-
     /*
-        Brief: The fastets way for this program to determine if a player has a legal move or not. It first tries the optimization of plaerHasLegalMoveByDeletion, 
-        then calls a piece specific function on each piec eto see if it has any possible moves
+        Brief: determines if a set of board coordinates are inbounds
 
-        white: The player looking to see if they have any possible moves
+        row: row coordinate
+        col: column coordinate
     */
-    bool playerHasLegalMoveOptimized(bool white);
+    bool coordsAreInbounds(int row, int col) const;
 
 
 

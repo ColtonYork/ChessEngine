@@ -90,6 +90,34 @@ bool Pawn::hasOneSpaceLegalMove(const Board* b) const{
     return false;
 }
 
+bool Pawn::hasVerifiedMove(Board* b){
+        if (isWhite)
+        {
+            if (isLegalMove(row + 2, col, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col)) {return true;}
+            if (isLegalMove(row + 1, col, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col)) {return true;}
+            if (isLegalMove(row + 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 1)) {return true;}
+            if (isLegalMove(row + 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 1)) {return true;}
+
+            return false;
+        }
+    else
+        {
+            if (isLegalMove(row - 2, col, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col)) {return true;}
+            if (isLegalMove(row - 1, col, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col)) {return true;}
+            if (isLegalMove(row - 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 1)) {return true;}
+            if (isLegalMove(row -1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 1)) {return true;}
+
+            return false;
+        }
+
+
+}
+
+
+
+
+
+
 
 
 

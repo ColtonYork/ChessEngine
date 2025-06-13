@@ -56,6 +56,15 @@ class Knight: public Piece{
     */
     bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
 
+    
+    /*
+        Virtual Override from piece class
+        Breif: determines if a knight has a fully legal and verified move possible on the baord
+
+        b: the board being asessed
+    */
+    bool hasVerifiedMove(Board* b);
+
 
 
     private:

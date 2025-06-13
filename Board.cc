@@ -248,7 +248,9 @@ bool Board::playerHasLegalMoveByDeletion(bool white){
 }
 
 bool Board::moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol){
-    bool causesSelfCheck = 0;
+    if (!coordsAreInbounds(fromRow, fromCol) || !coordsAreInbounds(toRow, toCol)) {return false;}
+
+    bool causesSelfCheck = false;
 
     Piece* piece = board[fromRow][fromCol];
 
@@ -301,10 +303,18 @@ bool Board::playerHasLegalMoveByPiece(bool white){
         return false;
 }
 
-bool Board::playerHasLegalMoveOptimized(bool white){
+bool Board::playerHasLegalMove(bool white){
         if (playerHasLegalMoveByPiece(white)) {return true;}
         return false;
 }
+
+bool Board::coordsAreInbounds(int row, int col) const{
+    if (row > 7 || row < 0 || col > 7 || col < 0) {return false;}   
+    
+    return true;
+
+}
+
 
 
 

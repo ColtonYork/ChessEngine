@@ -50,4 +50,18 @@ bool Knight::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, con
 
 
 
+bool Knight::hasVerifiedMove(Board* b){
+    if (isLegalMove(row + 2, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col + 1)) {return true;}
+    if (isLegalMove(row + 2, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col - 1)) {return true;}
+    if (isLegalMove(row - 2, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col + 1)) {return true;}
+    if (isLegalMove(row - 2, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col - 1)) {return true;}
+    if (isLegalMove(row + 1, col + 2, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 2)) {return true;}
+    if (isLegalMove(row + 1, col - 2, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 2)) {return true;}
+    if (isLegalMove(row - 1, col + 2, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 2)) {return true;}
+    if (isLegalMove(row - 1, col - 2, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 2)) {return true;}
+
+    return false;
+}
+
+
 

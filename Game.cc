@@ -31,13 +31,14 @@ void Game::playGame(){
     
     board->displayBoard();        
     //while !isGameOver needs implemented
-    while(true)
+    while(!isGameOver())
         {
             std::string move = getUserMove();
             if (!makeMove(move)) {std:: cout << "Illegal move" << '\n'; continue;}
 
             board->displayBoard();
         }
+        board->displayBoard();
 
 
          
@@ -234,9 +235,14 @@ Board* Game::verifyPromotionMove(Piece* pawn) const{
 }
 
 bool Game::isGameOver() const{
-    //check for stalemate
-    return 1;
-    //check for checkamte
+    //check if player has a legal move
+    if (board->playerHasLegalMove(whiteTurn)) {return 0;}
+
+    //Player has no legal moves at this point, check if the game is checkmate or stalemate
+    if (board->kingInCheck(whiteTurn)) {std::cout << "Player, " << !whiteTurn << " Won by checkmate!" << '\n'; return 1;}
+    else {std::cout << "Position is stalemate, Draw!" << '\n'; return 1;}
+
+    
 }
 
 
