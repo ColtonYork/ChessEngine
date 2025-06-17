@@ -120,7 +120,7 @@ bool Rook::hasVerifiedMove(Board* b) {
         for (int i = row + 1; i < 8; i++)
             {
                 //break when path gets cut off by own piece
-                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                if (b->getBoard(i, col) != nullptr && getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
 
                 if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
             }
@@ -131,7 +131,7 @@ bool Rook::hasVerifiedMove(Board* b) {
         for (int i = row - 1; i >= 0; i--)
             {
                 //break when path gets cut off by own piece
-                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                if (b->getBoard(i, col) != nullptr && getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
 
                 if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) {std::cout << "Rook can move to: " << i << ", " << col << '\n'; return true;}
             }
@@ -142,7 +142,7 @@ bool Rook::hasVerifiedMove(Board* b) {
         for (int i = col - 1; i >= 0; i--)
             {
                 //break when path gets cut off by own piece
-                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                if (b->getBoard(row, i) != nullptr && getIsWhite() == (b->getBoard(row, i)->getIsWhite())) {break;}
 
                 if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
             }
@@ -153,7 +153,7 @@ bool Rook::hasVerifiedMove(Board* b) {
         for (int i = col + 1; i < 8; i++)
             {
                 //break when path gets cut off by own piece
-                if (getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                if (b->getBoard(row, i) != nullptr && getIsWhite() == (b->getBoard(row, i)->getIsWhite())) {break;}
 
                 if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) {std::cout << "Rook can move to: " << row << ", " << i << '\n'; return true;}
             }

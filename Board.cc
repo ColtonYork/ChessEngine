@@ -297,9 +297,16 @@ bool Board::playerHasLegalMoveByPiece(bool white){
         {
             for(int j = 0; j < 8; j++)
             {
-                if (board[i][j]->getIsWhite() == white && board[i][j]->hasVerifiedMove(this)) {return true;}
-            }
+                if (board[i][j] == nullptr || board[i][j]->getIsWhite() != white) {continue;}
+
+                std::cout << "Checking piece at " << i << "," << j << '\n';
+                if (board[i][j]->hasVerifiedMove(this)) {
+                    std::cout << "Found legal move for piece at " << i << "," << j << '\n';
+                    return true;
+                }
         }
+        }
+        std::cout << "No legal moves found" << '\n';
         return false;
 }
 
@@ -314,6 +321,8 @@ bool Board::coordsAreInbounds(int row, int col) const{
     return true;
 
 }
+
+// pe2e3 pe7e6 qd1f3 pa7a6 bf1c4 pe6e5 qf3f7
 
 
 
