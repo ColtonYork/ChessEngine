@@ -7,6 +7,7 @@
 #include "Pawn.h"
 #include "Bishop.h"
 #include <iostream>
+#include <queue>
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
 #define RESET "\033[0m"
 #define DARK_GRAY "\033[90m"
@@ -322,7 +323,11 @@ bool Board::coordsAreInbounds(int row, int col) const{
 
 }
 
-// pe2e3 pe7e6 qd1f3 pa7a6 bf1c4 pe6e5 qf3f7
+std::priority_queue<Board*> Board::generateLegalMoves(bool white){
+
+}
+
+
 
 
 
