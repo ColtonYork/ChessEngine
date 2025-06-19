@@ -1,53 +1,54 @@
 #pragma once
 #include "Piece.h"
 
-class Rook: public Piece{
+class King: public Piece{
     public:
-    /*
-        Rook constructor
+     /*
+        King constructor
         Brief: Calls the Piece class' constructor for row, column, and isWhite;
 
         r: The row to set the Rook to
         c: the column to set the Rook to
-        isW: true if Rook IS white
+        isW: true if King IS white
 
         Personal Member hasMoved: set to false
+        personal Member inCheck: set to false
+
     */
-    Rook(unsigned char r, unsigned char c, bool isW);
+    King(unsigned char r, unsigned char c, bool isW);
 
 
     /*
-        Brief: Purely Virtual Overridereturns piece type ROOK
+        Brief: Purely Virtual Override returns piece type KING
     */
     pieceType getPieceType() const;
 
 
     /*
         Purely Virtual override from Piece Class
-        Brief: Returns a cloned Rook
+        Brief: Returns a cloned King
     */
     Piece* clone() const;
 
 
     /*
-        Purely Virtual override from Piece Class
-        Brief: Returns TRUE if a specified Rook move is legal
+        Purely Virtual override from Piece class
+        brief: Checks if a particular King move is legal
 
-        toRow: The row that the Rook want to move to
-        toCol: The column that the Rook wants to move to
+        castle: runs the isLegalCastleMove function if move is a castle move
+        toRow: The row that the King wants to move to
+        toCol: The column that the King wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
-
+    
     /*
-        Brief: Checks the spaces between current position and end position. Returns TRUE if all spaces in between are nullptr
+        Brief: checks if a castle move is valid
 
-        rowMove: True is the current move is only changing rows
-        from: the row/col that the Rook starts at
-        to: the row/col that the Rook ends at
-        Board: current board to check, passed by reference
+        kingSide: TRUE if the castle attmept is to the kings side 0-0 
+        b: The board being asessed
     */
-    bool isLegalBetween(bool rowMove, unsigned char from, unsigned char to, const Board& b) const;
+    bool isLegalCastleMove(bool kingSide, const Board& b) const;
 
 
     /*
@@ -57,9 +58,10 @@ class Rook: public Piece{
     bool getHasMoved() const;
 
 
-    /*
+    /*        
         Purely virtual overide from piece class
         Brief: determines if the final square of the move is legal. returns TRUE if legal
+        THIS FUNCTION DOES NOT CHECK IF A MOVE PUTS THE PLAYER IN CHECK. IT JUST CHECKS IF THE ENDING SQUARE OF A MOVE IS AVAILABLE
 
         checkRow: the row of the square to be checked
         checkCol: the Column of the square to be checked
@@ -70,7 +72,7 @@ class Rook: public Piece{
 
     /*
         Purely Virtual override from Piece class
-        brief: Checks if the Rook has a legal one-space move
+        brief: this function returns false for king becuase you cannmot delete the king piece to check for checks
 
         b: The board being asessed
     */
@@ -79,11 +81,19 @@ class Rook: public Piece{
 
     /*
         Virtual Override from piece class
-        Breif: determines if Rook has a fully legal and verified move possible on the baord
+        Breif: determines if Kibg has a fully legal and verified move possible on the baord
 
         b: the board being asessed
     */
     bool hasVerifiedMove(Board* b);
+
+
+    /*
+        Purely Virtual Override fork piece class
+        Brief: returns the value of a King (1000) 
+    */
+    int getPieceValue() const;
+
 
 
 
@@ -92,6 +102,7 @@ class Rook: public Piece{
 
     private:
     bool hasMoved;
+    bool inCheck;
 
 
 

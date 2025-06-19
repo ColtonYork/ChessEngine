@@ -125,6 +125,7 @@ class Board {
     */
     bool coordsAreInbounds(int row, int col) const;
 
+
     /*
         Brief: generates all possible Moves of a current board and returns an array of Board pointers that point to every possbile position. 
 

@@ -113,6 +113,13 @@ class Pawn: public Piece{
     bool hasVerifiedMove(Board* b);
 
 
+    /*
+        Purely Virtual Override fork piece class
+        Brief: returns the value of a Pawn (1) 
+    */
+    int getPieceValue() const;
+
+
 
 
     private:

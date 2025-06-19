@@ -119,6 +119,10 @@ bool King::hasVerifiedMove(Board* b){
     return false;
 }
 
+int King::getPieceValue() const{
+    return 1000;
+}
+
 
 
 

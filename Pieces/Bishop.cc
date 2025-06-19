@@ -103,55 +103,88 @@ bool Bishop::hasVerifiedMove(Board* b) {
     bool downRight = endSpotLegal(row - 1, col + 1, *b);
     bool downLeft = endSpotLegal(row - 1, col - 1, *b);
 
-  
-    if (upRight)
+    return existsPossibleMove(b, upRight, upLeft, downRight, downLeft);
+
+
+}
+
+
+int Bishop::getPieceValue() const{
+    return 3;
+}
+
+bool Bishop::existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft){
+
+    if (upright)
         {
         for (int i = row + 1, j = col + 1; i < 8 && j < 8; i++, j++)
             {
+                bool takePiece = false;
+
                 //break when path gets cut off by own piece
                 if (b->getBoard(i, j) != nullptr && getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+                if (b->getBoard(i, j) != nullptr && getIsWhite() != (b->getBoard(i, j)->getIsWhite())) {takePiece = true;}
+
 
                 if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+
+                if (takePiece) {break;}
             }
         }
 
-    if (upLeft)
+    if (upleft)
         {
         for (int i = row + 1, j = col - 1; i < 8 && j >= 0; i++, j--)
             {
+                bool takePiece = false;
+
                 //break when path gets cut off by own piece
                 if (b->getBoard(i, j) != nullptr && getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+                if (b->getBoard(i, j) != nullptr && getIsWhite() != (b->getBoard(i, j)->getIsWhite())) {takePiece = true;}
+
 
                 if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+
+                if (takePiece) {break;}
             }
         }
 
-    if (downRight)
+    if (downright)
         {
         for (int i = row - 1, j = col + 1; i >= 0 && j < 8; i--, j++)
             {
+                bool takePiece = false;
                 //break when path gets cut off by own piece
                 if (b->getBoard(i, j) != nullptr && getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+                if (b->getBoard(i, j) != nullptr && getIsWhite() != (b->getBoard(i, j)->getIsWhite())) {takePiece = true;}
+
 
                 if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+
+                if (takePiece) {break;}
             }
         }
 
-    if (downLeft)
+    if (downleft)
         {
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
             {
+                bool takePiece = false;
                 //break when path gets cut off by own piece
-                
                 if (b->getBoard(i, j) != nullptr && getIsWhite() == (b->getBoard(i, j)->getIsWhite())) {break;}
+                if (b->getBoard(i, j) != nullptr && getIsWhite() != (b->getBoard(i, j)->getIsWhite())) {takePiece = true;}
+
 
                 if (isLegalMove(i, j, *b) && !b->moveCausesSelfCheck(row, col, i, j)) {std::cout << "Bishop can move to: " << i << ", " << j << '\n'; return true;}
+
+                if (takePiece) {break;}
             }
         }
 
-        return false;
+    return false;
 
 }
+
 
 
 

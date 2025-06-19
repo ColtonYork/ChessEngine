@@ -113,6 +113,10 @@ bool Pawn::hasVerifiedMove(Board* b){
 
 }
 
+int Pawn::getPieceValue() const{
+    return 1;
+}
+
 
 
 

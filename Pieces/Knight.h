@@ -1,56 +1,45 @@
 #pragma once
 #include "Piece.h"
 
-class Bishop: public Piece{
+class Knight: public Piece{
     public:
      /*
-        Bishop constructor
+        Knight constructor
         Brief: Calls the Piece class' constructor for row, column, and isWhite;
 
         r: The row to set the Rook to
         c: the column to set the Rook to
-        isW: true if Bishop IS white
+        isW: true if Knight IS white    
     */
-    Bishop(unsigned char r, unsigned char c, bool isW);
+    Knight(unsigned char r, unsigned char c, bool isW);
 
 
     /*
-        Brief: Purely Virtual Override returns piece type BISHOP
+        Brief: Purely Virtual Override returns piece type KNIGHT
     */
     pieceType getPieceType() const;
 
 
     /*
-        Purely Virtual override from Piece class
-        Brief: Returns a cloned bishop
+        Purely Virtual override from Piece Class
+        Brief: Returns a cloned Knight
     */
     Piece* clone() const;
 
 
     /*
         Purely Virtual override from Piece class
-        brief: Checks if a particular Bishop move is legal
+        brief: Checks if a particular Knight move is legal
 
-        toRow: The row that the Bishhop wants to move to
-        toCol: The column that the Bishop wnats to move to
+        toRow: The row that the Knight wants to move to
+        toCol: The column that the Knight wnats to move to
     */
     bool isLegalMove(unsigned char toRow, unsigned char toCol, const Board& b) const;
 
 
     /*
-        Brief: checks if spaces between a specified bishop move are empty
-
-        Booleans: gets the direction of the bishop move
-        toRow: The row that the bishop is moving to 
-        toCol: The column the bishop is moving to
-        b: Current board to asess
-    */
-    bool isLegalBetween(bool upleft, bool upright, bool downleft, bool downright, unsigned char toRow, unsigned char toCol, const Board& b) const;
-
-
-    /*
         Purely Virtual override from Piece class
-        brief: Checks if the bishop has any legal moves on the board by deletion
+        brief: Checks if the knight has any legal moves on the board by deletion
 
         b: The board being asessed
     */
@@ -67,22 +56,21 @@ class Bishop: public Piece{
     */
     bool endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const Board& b) const;
 
-
+    
     /*
         Virtual Override from piece class
-        Breif: determines if bishop has a fully legal and verified move possible on the baord
+        Breif: determines if a knight has a fully legal and verified move possible on the baord
 
         b: the board being asessed
     */
     bool hasVerifiedMove(Board* b);
 
 
-
-
-
-
-
-
+    /*
+        Purely Virtual Override fork piece class
+        Brief: returns the value of a Knight (3) 
+    */
+    int getPieceValue() const;
 
 
 

@@ -1,4 +1,6 @@
 #pragma once
+#include "moveResult.h"
+#include <vector>
 #include <string>
 
 class Board;
@@ -133,6 +135,25 @@ class Piece {
         checkOneSpaceMoves: True when needeing to check one space moves. These moves are already checked in hasLegalMoveByDeletion so it may not be needed
     */
     virtual bool hasVerifiedMove(Board* b) = 0;
+
+
+    /*
+        Brief: Returns board copies of all possible moves for a piece as an array
+
+        board: The current board being asessed
+    */
+    virtual std::vector<moveResult> computePossibleMoves(Board* Board) = 0;
+
+    /*
+        Brief: Returns the integer value of a piece
+        King = 1000
+        Queen = 9
+        Rook = 5
+        Bishop = 3
+        Knight = 3
+        Pawn = 1
+    */
+    virtual int getPieceValue() const = 0;
 
 
 

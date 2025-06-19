@@ -107,6 +107,39 @@ class Queen: public Piece{
     bool hasVerifiedMove(Board* b);
 
 
+    /*
+        Purely Virtual Override fork piece class
+        Brief: returns the value of a Queen (9) 
+    */
+    int getPieceValue() const;
+
+
+    /*  
+        Brief: determines if there is a possible Bishop move for this Queen to make given the sides to check for
+
+        b: the board being assesed
+    */
+    bool existsPossibleMoveBishopMovement(Board* b, bool upright, bool upleft, bool downright, bool downleft);
+
+
+    /*  
+        Brief: determines if there is a possible Rook move for this Queen to make given the sides to check for
+
+        b: the board being assesed
+    */
+    bool Queen::existsPossibleMoveRookMovement(Board* b, bool up, bool down, bool left, bool right);
+
+
+    /*  
+        Brief: determines if there is a possible move for this Queen to make given the sides to check for
+
+        b: the board being assesed
+    */
+    bool Queen::existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft, bool up, bool down, bool left, bool right);
+
+
+
+
 
     private:
 

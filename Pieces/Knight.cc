@@ -63,5 +63,9 @@ bool Knight::hasVerifiedMove(Board* b){
     return false;
 }
 
+int Knight::getPieceValue() const{
+    return 3;
+}
+
 
 
