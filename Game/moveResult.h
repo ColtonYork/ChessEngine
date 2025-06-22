@@ -1,9 +1,5 @@
 #include "Board.h"
-#include "Piece.h"
-
-
-
-
+class Piece;
 
 struct moveResult{
     Board* board = nullptr;

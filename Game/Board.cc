@@ -1,11 +1,11 @@
 #include "Board.h"
-#include "Piece.h"
-#include "Rook.h"
-#include "King.h"
-#include "Knight.h"
-#include "Queen.h"
-#include "Pawn.h"
-#include "Bishop.h"
+#include "../Pieces/Piece.h"
+#include "../Pieces/Rook.h"
+#include "../Pieces/King.h"
+#include "../Pieces/Knight.h"
+#include "../Pieces/Queen.h"
+#include "../Pieces/Pawn.h"
+#include "../Pieces/Bishop.h"
 #include <iostream>
 #include <queue>
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
@@ -131,7 +131,7 @@ void Board::displayBoard() const{
             
             //checks for black pieces
             else{
-                if (p->getPieceType() == PAWN){std::cout << DARK_GRAY << "p " << RESET;}
+                if (p->getPieceType() == PAWN){std::cout << DARK_GRAY << "P " << RESET;}
                 else if (p->getPieceType() == BISHOP){std::cout << DARK_GRAY << "B " << RESET;}
                 else if (p->getPieceType() == KNIGHT){std::cout << DARK_GRAY << "N " << RESET;}
                 else if (p->getPieceType() == ROOK){std::cout << DARK_GRAY << "R " << RESET;}
@@ -323,9 +323,127 @@ bool Board::coordsAreInbounds(int row, int col) const{
 
 }
 
-std::priority_queue<Board*> Board::generateLegalMoves(bool white){
 
+Board::Board(const std::string& fen){
+    initializeBoard();
+
+    int row = 7;
+    int col = 0;
+    for (int i = 0; i < fen.length(); i++)
+        {
+            char character = fen.at(i);
+
+            //empty spaces
+            if (isdigit(character))
+                {
+                    col += character - '0';
+                    continue;
+                }
+            else if (character == ' ') {break;}
+                
+
+            switch (character)
+                {
+                    case '/':  
+                        row--;
+                        col = 0;
+                        break;
+
+                    //black pieces
+                    case 'p':
+                        board[row][col] = new Pawn(row, col, false);
+                        col++;
+                        break;
+
+                    case 'r':
+                        board[row][col] = new Rook(row, col, false);
+                        col++;
+                        break;
+
+                    case 'n':
+                        board[row][col] = new Knight(row, col, false);
+                        col++;
+                        break; 
+
+                    case 'b':
+                        board[row][col] = new Bishop(row, col, false);
+                        col++;
+                        break;
+
+                    case 'q':
+                        board[row][col] = new Queen(row, col, false);
+                        col++;
+                        break;
+
+                    case 'k':
+                        board[row][col] = new King(row, col, false);
+                        col++;
+                        break;
+                    
+                    //white pieces
+                    case 'P':
+                        board[row][col] = new Pawn(row, col, true);
+                        col++;
+                        break;
+
+                    case 'R':
+                        board[row][col] = new Rook(row, col, true);
+                        col++;
+                        break;
+
+                    case 'N':
+                        board[row][col] = new Knight(row, col, true);
+                        col++;
+                        break; 
+
+                    case 'B':
+                        board[row][col] = new Bishop(row, col, true);
+                        col++;
+                        break;
+
+                    case 'Q':
+                        board[row][col] = new Queen(row, col, true);
+                        col++;                        
+                        break;
+                        
+                    case 'K':
+                        board[row][col] = new King(row, col, true);
+                        col++;
+                        break;
+
+                    default:
+                        std::cout << "Invalid character in FEN string: " << character << '\n';
+                        break;
+                }
+            
+        }
 }
+
+void Board::clearBoard(){
+    for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+                {
+                    delete board[i][j];
+                    board[i][j] = nullptr;
+                }
+        }
+}
+
+void Board::initializeBoard(){
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+                {
+                    board[i][j] = nullptr;
+                }
+        }
+}
+
+
+
+
+
 
 
 

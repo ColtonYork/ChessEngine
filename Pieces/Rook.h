@@ -89,7 +89,7 @@ class Rook: public Piece{
     /*
     
     */
-    virtual std::vector<moveResult> computePossibleMoves(Board* Board);
+    //virtual std::vector<moveResult> computePossibleMoves(Board* Board);
 
 
     /*

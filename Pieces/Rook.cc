@@ -1,5 +1,5 @@
 #include "Rook.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <iostream>
 
 Rook::Rook(unsigned char r, unsigned char c, bool isW)

@@ -127,7 +127,7 @@ class Queen: public Piece{
 
         b: the board being assesed
     */
-    bool Queen::existsPossibleMoveRookMovement(Board* b, bool up, bool down, bool left, bool right);
+    bool existsPossibleMoveRookMovement(Board* b, bool up, bool down, bool left, bool right);
 
 
     /*  
@@ -135,7 +135,7 @@ class Queen: public Piece{
 
         b: the board being assesed
     */
-    bool Queen::existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft, bool up, bool down, bool left, bool right);
+    bool existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft, bool up, bool down, bool left, bool right);
 
 
 

@@ -1,7 +1,8 @@
 #pragma once
-#include "moveResult.h"
+#include "../Game/moveResult.h"
 #include <vector>
 #include <string>
+#include <queue>
 
 class Board;
 
@@ -142,7 +143,7 @@ class Piece {
 
         board: The current board being asessed
     */
-    virtual std::vector<moveResult> computePossibleMoves(Board* Board) = 0;
+    //virtual std::priority_queue<moveResult> computePossibleMoves(Board* Board) = 0;
 
     /*
         Brief: Returns the integer value of a piece
@@ -154,6 +155,8 @@ class Piece {
         Pawn = 1
     */
     virtual int getPieceValue() const = 0;
+
+
 
 
 

@@ -1,5 +1,5 @@
 #include "King.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <cmath>
 
 King::King(unsigned char r, unsigned char c, bool isW)

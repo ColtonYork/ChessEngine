@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Piece;
 
@@ -131,7 +132,26 @@ class Board {
 
         white: The player we are checking moves for
     */
-    std::priority_queue<Board*> Board::generateLegalMoves(bool white);
+    //std::priority_queue<Board*> Board::generateLegalMoves(bool white);
+
+
+    /*
+        Brief: Takes a FEN string and loads a specified coard
+
+        FEN: The FEN string that will be put ot the baord
+    */
+    Board(const std::string& fen);
+
+
+    /*
+        Brief: deletes every space on the board AND sets all spaces to nullptr
+    */
+    void clearBoard();
+
+    /*
+        Brief: Sets all spaces on the board to nullptr. DOES NOT delete all prior board spaces
+    */
+    void initializeBoard();
 
 
 

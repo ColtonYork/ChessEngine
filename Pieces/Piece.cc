@@ -1,5 +1,5 @@
 #include "Piece.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <iostream>
 
 Piece::Piece(unsigned char r, unsigned char c, bool isW){

@@ -1,7 +1,7 @@
 #include "Game.h"
-#include "Piece.h"
+#include "../Pieces/Piece.h"
 #include "Board.h"
-#include "Queen.h"
+#include "../Pieces/Queen.h"
 #include <string>
 #include <iostream>
 

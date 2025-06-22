@@ -1,5 +1,5 @@
 #include "Bishop.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <cmath>
 #include <iostream>
 

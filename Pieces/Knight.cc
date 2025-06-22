@@ -1,5 +1,5 @@
 #include "Knight.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <cmath>
 Knight::Knight(unsigned char r, unsigned char c, bool isW)
     : Piece(r, c, isW){}

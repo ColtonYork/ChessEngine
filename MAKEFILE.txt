@@ -1,4 +1,3 @@
 COMPILER
-g++ -Wall -o program *.cc
-
+g++ -Wall -o program *.cc Game/*.cc Pieces/*.cc
 

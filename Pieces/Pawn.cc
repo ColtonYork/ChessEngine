@@ -1,5 +1,5 @@
 #include "Pawn.h"
-#include "Board.h"
+#include "../Game/Board.h"
 #include <cmath>
 
 
