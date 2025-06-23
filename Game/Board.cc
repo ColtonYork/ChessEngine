@@ -329,7 +329,7 @@ Board::Board(const std::string& fen){
 
     int row = 7;
     int col = 0;
-    for (int i = 0; i < fen.length(); i++)
+    for (size_t i = 0; i < fen.length(); i++)
         {
             char character = fen.at(i);
 
@@ -439,6 +439,116 @@ void Board::initializeBoard(){
                 }
         }
 }
+
+void Board::restartBoard(){
+    clearBoard();
+    
+    std::string startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
+    generateBoardFromFENString(startFEN);
+
+    
+}
+
+void Board::generateBoardFromFENString(const std::string& fen){
+    clearBoard();
+
+    int row = 7;
+    int col = 0;
+    for (size_t i = 0; i < fen.length(); i++)
+        {
+            char character = fen.at(i);
+
+            //empty spaces
+            if (isdigit(character))
+                {
+                    col += character - '0';
+                    continue;
+                }
+            else if (character == ' ') {break;}
+                
+
+            switch (character)
+                {
+                    case '/':  
+                        row--;
+                        col = 0;
+                        break;
+
+                    //black pieces
+                    case 'p':
+                        board[row][col] = new Pawn(row, col, false);
+                        col++;
+                        break;
+
+                    case 'r':
+                        board[row][col] = new Rook(row, col, false);
+                        col++;
+                        break;
+
+                    case 'n':
+                        board[row][col] = new Knight(row, col, false);
+                        col++;
+                        break; 
+
+                    case 'b':
+                        board[row][col] = new Bishop(row, col, false);
+                        col++;
+                        break;
+
+                    case 'q':
+                        board[row][col] = new Queen(row, col, false);
+                        col++;
+                        break;
+
+                    case 'k':
+                        board[row][col] = new King(row, col, false);
+                        col++;
+                        break;
+                    
+                    //white pieces
+                    case 'P':
+                        board[row][col] = new Pawn(row, col, true);
+                        col++;
+                        break;
+
+                    case 'R':
+                        board[row][col] = new Rook(row, col, true);
+                        col++;
+                        break;
+
+                    case 'N':
+                        board[row][col] = new Knight(row, col, true);
+                        col++;
+                        break; 
+
+                    case 'B':
+                        board[row][col] = new Bishop(row, col, true);
+                        col++;
+                        break;
+
+                    case 'Q':
+                        board[row][col] = new Queen(row, col, true);
+                        col++;                        
+                        break;
+                        
+                    case 'K':
+                        board[row][col] = new King(row, col, true);
+                        col++;
+                        break;
+
+                    default:
+                        std::cout << "Invalid character in FEN string: " << character << '\n';
+                        break;
+                }
+            
+        }
+
+}
+
+
+
+
 
 
 

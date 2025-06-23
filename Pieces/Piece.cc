@@ -51,5 +51,15 @@ bool Piece::isLegalCastleMove(bool kingSide, const Board& b) const{
     return false;
 }
 
+std::string Piece::arrayIndexToString(const int& row, const int& col) const{
+    std::string returnString = "";
+    
+    returnString += ('a' + row);
+    returnString += ('1' + col);
+
+    return returnString;
+}
+
+
 
 

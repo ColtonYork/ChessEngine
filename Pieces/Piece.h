@@ -143,7 +143,7 @@ class Piece {
 
         board: The current board being asessed
     */
-    //virtual std::priority_queue<moveResult> computePossibleMoves(Board* Board) = 0;
+    virtual std::vector<moveResult> computePossibleMoves(Board* b) = 0;
 
     /*
         Brief: Returns the integer value of a piece
@@ -155,6 +155,16 @@ class Piece {
         Pawn = 1
     */
     virtual int getPieceValue() const = 0;
+
+
+    /*
+        Brief: Takes in a row and col and return the board string representation. EX: 01 = A2
+
+        row: The Row to be converted
+        col: The Col to be converted
+    */
+   std::string arrayIndexToString(const int& row, const int& col) const;
+
 
 
 

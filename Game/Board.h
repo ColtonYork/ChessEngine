@@ -148,10 +148,25 @@ class Board {
     */
     void clearBoard();
 
+
     /*
         Brief: Sets all spaces on the board to nullptr. DOES NOT delete all prior board spaces
     */
     void initializeBoard();
+
+    /*
+        Brief: Sets the board back to the starting positon
+    */
+    void restartBoard();
+
+
+    /*
+        allows any board to be cleared and then set to a different position
+
+        fen: The fen string being used
+    */
+    void generateBoardFromFENString(const std::string& fen);
+
 
 
 

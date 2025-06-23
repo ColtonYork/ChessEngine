@@ -111,6 +111,14 @@ class Game{
     bool isGameOver() const;
 
 
+    /*
+        Brief: Used for training AI by playing games against itself.
+
+        num: the number of games to play
+    */
+    void trainAISelfPlay(int numGames);
+
+
 
     private:
     Board* board;

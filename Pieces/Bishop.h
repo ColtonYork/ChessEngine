@@ -92,6 +92,17 @@ class Bishop: public Piece{
     bool existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft);
 
 
+    /*
+        Brief: Returns board copies of all possible moves for a piece as an array
+
+        board: The current board being asessed
+    */
+    std::vector<moveResult> computePossibleMoves(Board* b);
+
+    
+
+
+
 
 
 

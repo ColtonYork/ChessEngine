@@ -244,6 +244,10 @@ bool Game::isGameOver() const{
     else {std::cout << "Position is stalemate, Draw!" << '\n'; return true;}
 }
 
+void trainAISelfPlay(int numGames){
+    
+}
+
 
 
 
