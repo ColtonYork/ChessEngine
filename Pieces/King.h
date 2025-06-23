@@ -95,6 +95,14 @@ class King: public Piece{
     int getPieceValue() const;
 
 
+    /*
+        sets the private variable hasmoved boolean
+
+        hm: The value that hasMoved is being set to;
+    */
+    void setHasMoved(bool hm);
+
+
 
 
 

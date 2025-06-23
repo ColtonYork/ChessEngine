@@ -123,6 +123,11 @@ int King::getPieceValue() const{
     return 1000;
 }
 
+void King::setHasMoved(bool hm){
+    hasMoved = hm;
+}
+
+
 
 
 
