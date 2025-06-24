@@ -117,6 +117,11 @@ int Pawn::getPieceValue() const{
     return 1;
 }
 
+void Pawn::setHasMoved(bool hm){
+    hasMoved = hm;
+}
+
+
 
 
 

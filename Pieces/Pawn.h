@@ -120,6 +120,15 @@ class Pawn: public Piece{
     int getPieceValue() const;
 
 
+    /*
+        Brief: Sets the hasMoved private variable
+
+        hm: The value for hasMoved to be set to
+    */
+    void setHasMoved(bool hm);
+
+
+
 
 
     private:

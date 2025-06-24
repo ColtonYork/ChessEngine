@@ -71,7 +71,7 @@ void Move::makeCastleMove(Board* b, std::string move){
     else if (move == "0-0-0")    
         {
             Piece* piece = board->findKing(whiteTurn);
-            if (!piece->isLegalCastleMove(false, *board)) {std::cout << "Illegal caslt move" << '\n'; return nullptr;}
+            if (!piece->isLegalCastleMove(false, *board)) {std::cout << "Illegal castle move" << '\n'; return nullptr;}
 
             //make board copy and piece copy
             Board* copy = new Board(*board);
@@ -89,8 +89,87 @@ void Move::makeCastleMove(Board* b, std::string move){
 }
 
 void Move::undoCastleMove(Board* b){
-    //undo kingside castle
-    if (b->getBoard())
+    //white kingside
+    Piece* king = b->getBoard(0, 2);
+    if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 1)
+        {
+            Piece* rook = b->getBoard(0, 3);
+            b->setSpaceWithoutDeleting(0, 3, nullptr);
+            b->setSpaceWithoutDeleting(0, 0, rook);
+            b->setSpaceWithoutDeleting(0, 2, nullptr);
+            b->setSpaceWithoutDeleting(0, 4, king);
+
+            rook->setRow(0);
+            rook->setCol(0);
+            king->setRow(0);
+            king->setCol(4);
+
+            king->setHasMoved(0);
+
+            return;
+        }
+
+    //white queenside
+    king = b->getBoard(0, 6);
+    if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 1)
+        {
+            Piece* rook = b->getBoard(0, 5);
+            b->setSpaceWithoutDeleting(0, 5, nullptr);
+            b->setSpaceWithoutDeleting(0, 7, rook);
+            b->setSpaceWithoutDeleting(0, 6, nullptr);
+            b->setSpaceWithoutDeleting(0, 4, king);
+
+            rook->setRow(0);
+            rook->setCol(7);
+            king->setRow(0);
+            king->setCol(4);
+
+            king->setHasMoved(0);
+
+            return;
+        }
+    //black kingside
+    king = b->getBoard(7, 2);
+    if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 0)
+        {
+            Piece* rook = b->getBoard(7, 3);
+            b->setSpaceWithoutDeleting(7, 3, nullptr);
+            b->setSpaceWithoutDeleting(7, 0, rook);
+            b->setSpaceWithoutDeleting(7, 2, nullptr);
+            b->setSpaceWithoutDeleting(7, 4, king);
+
+            rook->setRow(7);
+            rook->setCol(0);
+            king->setRow(7);
+            king->setCol(4);
+
+            king->setHasMoved(0);
+            
+            return;
+        }
+    //black queenside
+    king = b->getBoard(7, 6);
+    if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 0)
+        {
+            Piece* rook = b->getBoard(7, 5);
+            b->setSpaceWithoutDeleting(7, 5, nullptr);
+            b->setSpaceWithoutDeleting(7, 7, rook);
+            b->setSpaceWithoutDeleting(7, 6, nullptr);
+            b->setSpaceWithoutDeleting(7, 4, king);
+
+            rook->setRow(7);
+            rook->setCol(7);
+            king->setRow(7);
+            king->setCol(4);
+
+            king->setHasMoved(0);
+
+            return;
+        }
+
+    std::cout << "[DEBUG] King not found in undoCastleMove Function\n"; 
+    return; 
+
 }
 
 

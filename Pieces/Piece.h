@@ -166,6 +166,14 @@ class Piece {
    std::string arrayIndexToString(const int& row, const int& col) const;
 
 
+    /*
+        Brief: Used to set hasMoved functions in certain piece classes. Notably for King class and maybe Pawn
+
+        hm: the value to set hasMoved to
+    */
+   virtual void setHasMoved(bool hm) = 0;
+
+
 
 
 

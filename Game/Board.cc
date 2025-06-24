@@ -547,6 +547,11 @@ void Board::generateBoardFromFENString(const std::string& fen){
 }
 
 
+void Board::setSpaceWithoutDeleting(const int& row, const int& col, Piece* piece){
+    board[row][col] = piece;
+ }
+
+
 
 
 

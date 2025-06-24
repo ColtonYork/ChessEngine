@@ -60,6 +60,11 @@ std::string Piece::arrayIndexToString(const int& row, const int& col) const{
     return returnString;
 }
 
+void Piece::setHasMoved(bool hm){
+    return;
+}
+
+
 
 
 

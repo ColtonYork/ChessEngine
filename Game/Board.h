@@ -167,6 +167,16 @@ class Board {
     */
     void generateBoardFromFENString(const std::string& fen);
 
+    
+    /*
+        Brief: sets a space on the board without deleting the piece that was their prior
+
+        row: The row of the space
+        col: The column of the space
+        piece: The piece to be placed on this space
+    */
+    void setSpaceWithoutDeleting(const int& row, const int& col, Piece* piece);
+
 
 
 
