@@ -4,7 +4,7 @@
 #include "Board.h"
 #include "undoMoveInfo.h"
 
-class Move{
+class MoveMaker{
     public:
 
     /*
@@ -12,7 +12,7 @@ class Move{
 
         whiteToPlay: Determines who's turn it is. sets the whiteTurn private variable;
     */
-    Move(bool whiteToPlay);
+    MoveMaker(bool whiteToPlay);
 
 
     /*
@@ -53,17 +53,46 @@ class Move{
         move: The specified castle move being played
     */
     void makeCastleMove(Board* b, std::string move);
+    void makeCaptureMove(Board* b, std::string move);
+    void makeRegularMove(Board* b, std::string move);
+    void makePromotionMove(Board* b, std::string move);
+
+
 
     /*
         Brief: Undoes the specifed move type on the board without creating copies
 
         b: The board being asessed
     */
-    void undoCastleMove(Board* b);
-    void undoCaptureMove(Board* b);
-    void undoRegularMove(Board* b);
-    void undoPromotionMove(Board* b);
-    void undoDoublePawnPushMove(Board* b);
+    void undoCastleMove(Board* b, undoMoveInfo& info);
+    void undoCaptureMove(Board* b, undoMoveInfo& info);
+    void undoRegularMove(Board* b, undoMoveInfo& info);
+    void undoPromotionMove(Board* b, undoMoveInfo& info);
+
+
+    /*
+        Brief: Returns the move piece from a move string and returns the piece at that position
+
+        move: The move string being parsed
+    */
+    Piece* getPieceFromMoveString(const Board* b, const std::string& move) const;
+   
+   
+    /*
+        Brief: Returns the integer array-index value of a board number
+
+        number: the number to be converted
+    */
+    int numberToArrayIndex(char number) const;
+
+
+    /*
+        Brief: Returns the integer array-index value of a board letter
+
+        letter: the letter to be converted
+    */
+    int letterToArrayIndex(char letter) const;
+
 
 
 

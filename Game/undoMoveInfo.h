@@ -2,19 +2,21 @@
 
 
 struct undoMoveInfo {
-    bool kingsideCastlemove;
-    bool queensideCastleMove;
-    bool captureMove;
-    bool regularMove;
-    bool promotionMove;
-    bool doublePawnPushMove;
+    ~undoMoveInfo() {
+        delete capturedPiece;
+    }
+
+    bool whiteMove;
+
+    bool kingsideCastleMove = 0;
+    bool queensideCastleMove = 0;
+    bool captureMove = 0;
+    bool regularMove = 0;
+    bool promotionMove = 0;
 
     int fromrow, fromcol, torow, tocol;
-    Piece* movedPiece;
-    Piece* capturedPiece;
+    Piece* movedPiece = nullptr;
+    Piece* capturedPiece = nullptr;
 
-    bool whiteCanCastleKingSide;
-    bool whiteCanCastleQueenSide;
-    bool blackCanCastleKingSide;
-    bool blackCanCastleQueenSide;
+
 };

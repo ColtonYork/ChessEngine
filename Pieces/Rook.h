@@ -106,6 +106,15 @@ class Rook: public Piece{
     bool existsPossibleMove(Board* b, bool up, bool down, bool left, bool right);
 
 
+    /*
+        Brief: Sets the hasMoved private variable
+
+        hm: The value to set hasMoved to
+    */
+    void setHasMoved(bool hm);
+
+
+
 
 
 

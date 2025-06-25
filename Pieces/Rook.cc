@@ -191,6 +191,11 @@ bool Rook::existsPossibleMove(Board* b, bool up, bool down, bool left, bool righ
     return false;
 }
 
+void Rook::setHasMoved(bool hm){
+    hasMoved = hm;
+}
+
+
 
 
 
