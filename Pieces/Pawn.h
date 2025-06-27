@@ -131,6 +131,9 @@ class Pawn: public Piece{
 
 
 
+
+
+
     private:
     bool hasMoved;
 

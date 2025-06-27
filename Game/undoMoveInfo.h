@@ -8,11 +8,13 @@ struct undoMoveInfo {
 
     bool whiteMove;
 
-    bool kingsideCastleMove = 0;
-    bool queensideCastleMove = 0;
-    bool captureMove = 0;
-    bool regularMove = 0;
-    bool promotionMove = 0;
+    bool kingsideCastleMove = false;
+    bool queensideCastleMove = false;
+    bool captureMove = false;
+    bool regularMove = false;
+    bool promotionMove = false;
+
+    bool hasMoved = false;
 
     int fromrow, fromcol, torow, tocol;
     Piece* movedPiece = nullptr;

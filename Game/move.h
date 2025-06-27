@@ -19,9 +19,8 @@ class MoveMaker{
         Brief: Makes a move on the board without creating a new board
 
         move: The move being made
-        b: The board to be assesed
     */
-    void makeMove(Board* b, const std::string& move);
+    bool makeMove(const std::string& move);
 
 
     /*
@@ -49,25 +48,23 @@ class MoveMaker{
     /*
         brief: Handles the logic for making a castle move. 0-0 for kingside 0-0-0 for queenside
 
-        b: The board being asessed
         move: The specified castle move being played
     */
-    void makeCastleMove(Board* b, std::string move);
-    void makeCaptureMove(Board* b, std::string move);
-    void makeRegularMove(Board* b, std::string move);
-    void makePromotionMove(Board* b, std::string move);
+    bool makeCastleMove(std::string move);
+    bool makeCaptureMove( std::string move);
+    bool makeRegularMove(std::string move);
+    bool makePromotionMove(std::string move);
 
 
 
     /*
         Brief: Undoes the specifed move type on the board without creating copies
 
-        b: The board being asessed
     */
-    void undoCastleMove(Board* b, undoMoveInfo& info);
-    void undoCaptureMove(Board* b, undoMoveInfo& info);
-    void undoRegularMove(Board* b, undoMoveInfo& info);
-    void undoPromotionMove(Board* b, undoMoveInfo& info);
+    void undoCastleMove(undoMoveInfo& info);
+    void undoCaptureMove(undoMoveInfo& info);
+    void undoRegularMove(undoMoveInfo& info);
+    void undoPromotionMove(undoMoveInfo& info);
 
 
     /*
@@ -75,7 +72,7 @@ class MoveMaker{
 
         move: The move string being parsed
     */
-    Piece* getPieceFromMoveString(const Board* b, const std::string& move) const;
+    Piece* getPieceFromMoveString(const std::string& move) const;
    
    
     /*
@@ -99,6 +96,7 @@ class MoveMaker{
     private:
     std::stack<undoMoveInfo> previousPositions;
     bool whiteTurn;
+    Board* board;
 
 
 
