@@ -16,7 +16,7 @@
 
 int main(){
     Game game;
-    game.playGame();
+    game.playGameSFML();
 
 
 

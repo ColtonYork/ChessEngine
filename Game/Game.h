@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "moveMaker.h"
+#include <SFML/Graphics.hpp>
 #include <string>
 
 
@@ -118,6 +119,12 @@ class Game{
         num: the number of games to play
     */
     void trainAISelfPlay(int numGames);
+
+
+    /*
+        brief: allows the user to play the game in a window
+    */
+    void playGameSFML();
 
     
 

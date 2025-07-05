@@ -259,10 +259,9 @@ void MoveMaker::undoRegularMove(undoMoveInfo& info){
 }
 
 void MoveMaker::undoPromotionMove(undoMoveInfo& info){
-    Piece* replacementPawn = new Pawn(info.fromrow, info.fromcol, info.whiteMove);
     //this deletes the promoted piece and puts the captured piece back in the correct position
     board->setSpace(info.torow, info.tocol, info.capturedPiece);
-    board->setSpaceWithoutDeleting(info.fromrow, info.fromcol, replacementPawn);
+    board->setSpaceWithoutDeleting(info.fromrow, info.fromcol, info.promotedPawn);
     info.capturedPiece = nullptr;
 
 }
@@ -389,7 +388,6 @@ bool MoveMaker::makePromotionMove(std::string move){
 
         
     Piece* promotedQueen = new Queen(torow, tocol, movePiece->getIsWhite());
-    delete movePiece;
 
     board->setSpaceWithoutDeleting(fromrow, fromcol, nullptr);
     board->setSpaceWithoutDeleting(torow, tocol, promotedQueen);
@@ -398,6 +396,7 @@ bool MoveMaker::makePromotionMove(std::string move){
     info->promotionMove = 1;
     info->capturedPiece = takePiece;
     info->whiteMove = promotedQueen->getIsWhite();
+    info->promotedPawn = movePiece;
 
     info->fromrow = fromrow;
     info->fromcol = fromcol;
@@ -455,7 +454,8 @@ bool MoveMaker::makeMove(const std::string& move){
 }
 
 void MoveMaker::unmakeMove(){
-    
+    std::cout << "Entering unmakeMove()" << std::endl;
+
     
     if (previousPositions.empty())
         {
@@ -463,9 +463,15 @@ void MoveMaker::unmakeMove(){
             return;
         }
 
+        std::cout << "Stack is not empty, about to access top()" << std::endl;
+
+
 
 
     undoMoveInfo* currentInfo = previousPositions.top();
+
+    std::cout << "Successfully got currentInfo pointer" << std::endl;
+
     if (currentInfo->regularMove == 1)
         {
             undoRegularMove(*currentInfo);

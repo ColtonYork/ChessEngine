@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <SFML/Graphics.hpp>
 
 class Piece;
 
@@ -182,6 +183,9 @@ class Board {
         brief: Loops thru all board spaces and makes sure all pieces internal row and col match the baords representation
     */
     bool pieceCoordsAreAccurate() const;
+
+
+    void displaySFML();
 
 
 

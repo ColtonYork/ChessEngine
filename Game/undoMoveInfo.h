@@ -7,6 +7,11 @@ struct undoMoveInfo {
             {
                 delete capturedPiece;
             }
+        if (promotedPawn != nullptr) 
+            {
+                delete promotedPawn;
+            }
+            
     }
 
     bool whiteMove;
@@ -22,6 +27,7 @@ struct undoMoveInfo {
     int fromrow, fromcol, torow, tocol;
     Piece* movedPiece = nullptr;
     Piece* capturedPiece = nullptr;
+    Piece* promotedPawn = nullptr;
 
 
 };
