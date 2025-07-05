@@ -153,6 +153,7 @@ bool MoveMaker::makeCastleMove(std::string move){
 
 void MoveMaker::undoCastleMove(undoMoveInfo& info){
     //white kingside
+    if (info.whiteMove){
     Piece* king = board->getBoard(0, 2);
     if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 1)
         {
@@ -193,8 +194,9 @@ void MoveMaker::undoCastleMove(undoMoveInfo& info){
 
             return;
         }
+    }
     //black kingside
-    king = board->getBoard(7, 2);
+    Piece* king = board->getBoard(7, 2);
     if (king != nullptr && king->getPieceType() == KING && king->getIsWhite() == 0)
         {
             Piece* rook = board->getBoard(7, 3);
