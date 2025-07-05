@@ -1,4 +1,4 @@
-#include "move.h"
+#include "moveMaker.h"
 #include "../Pieces/Pawn.h"
 #include "../Pieces/Queen.h"
 #include "../Pieces/Piece.h"
@@ -8,10 +8,6 @@
 
 MoveMaker::MoveMaker(bool whiteToPlay){
     whiteTurn = whiteToPlay;
-}
-
-void MoveMaker::makeMove(const std::string& move){
-    if (!correctMoveFormat(move)) {std::cout << "Incorect Move Format\n"; return;}
 }
 
 bool MoveMaker::correctMoveFormat(const std::string& move) const{
@@ -63,6 +59,7 @@ bool MoveMaker::makeCastleMove(std::string move){
 
                     Piece* rook = board->getBoard(0, 7);
                     board->setSpaceWithoutDeleting(0, 7, nullptr);
+                    board->setSpaceWithoutDeleting(0, 4, nullptr);
                     board->setSpaceWithoutDeleting(0, 6, king);
                     board->setSpaceWithoutDeleting(0, 5, rook);
                     rook->setCol(5);
@@ -70,9 +67,9 @@ bool MoveMaker::makeCastleMove(std::string move){
                     rook->setHasMoved(true);
                     king->setHasMoved(true);
 
-                    undoMoveInfo info;
-                    info.whiteMove = 1;
-                    info.kingsideCastleMove = 1;
+                    undoMoveInfo* info = new undoMoveInfo();
+                    info->whiteMove = 1;
+                    info->kingsideCastleMove = 1;
 
                     previousPositions.push(info);
                     return true;
@@ -84,6 +81,7 @@ bool MoveMaker::makeCastleMove(std::string move){
 
                     Piece* rook = board->getBoard(0, 0);
                     board->setSpaceWithoutDeleting(0, 0, nullptr);
+                    board->setSpaceWithoutDeleting(0, 4, nullptr);
                     board->setSpaceWithoutDeleting(0, 2, king);
                     board->setSpaceWithoutDeleting(0, 3, rook);
                     rook->setCol(3);
@@ -91,9 +89,9 @@ bool MoveMaker::makeCastleMove(std::string move){
                     rook->setHasMoved(true);
                     king->setHasMoved(true);
 
-                    undoMoveInfo info;
-                    info.whiteMove = 1;
-                    info.queensideCastleMove = 1;
+                    undoMoveInfo* info = new undoMoveInfo();
+                    info->whiteMove = 1;
+                    info->queensideCastleMove = 1;
 
                     previousPositions.push(info);
                     return true;
@@ -113,6 +111,7 @@ bool MoveMaker::makeCastleMove(std::string move){
 
                     Piece* rook = board->getBoard(7, 7);
                     board->setSpaceWithoutDeleting(7, 7, nullptr);
+                    board->setSpaceWithoutDeleting(7, 4, nullptr);
                     board->setSpaceWithoutDeleting(7, 6, king);
                     board->setSpaceWithoutDeleting(7, 5, rook);
                     rook->setCol(5);
@@ -120,9 +119,9 @@ bool MoveMaker::makeCastleMove(std::string move){
                     rook->setHasMoved(true);
                     king->setHasMoved(true);
 
-                    undoMoveInfo info;
-                    info.whiteMove = 0;
-                    info.kingsideCastleMove = 1;
+                    undoMoveInfo* info = new undoMoveInfo();
+                    info->whiteMove = 0;
+                    info->kingsideCastleMove = 1;
 
                     previousPositions.push(info);
                     return true;
@@ -134,6 +133,7 @@ bool MoveMaker::makeCastleMove(std::string move){
 
                     Piece* rook = board->getBoard(7, 0);
                     board->setSpaceWithoutDeleting(7, 0, nullptr);
+                    board->setSpaceWithoutDeleting(7, 4, nullptr);
                     board->setSpaceWithoutDeleting(7, 2, king);
                     board->setSpaceWithoutDeleting(7, 3, rook);
                     rook->setCol(3);
@@ -141,9 +141,9 @@ bool MoveMaker::makeCastleMove(std::string move){
                     rook->setHasMoved(true);
                     king->setHasMoved(true);
 
-                    undoMoveInfo info;
-                    info.whiteMove = 0;
-                    info.queensideCastleMove = 1;
+                    undoMoveInfo* info = new undoMoveInfo();
+                    info->whiteMove = 0;
+                    info->queensideCastleMove = 1;
 
                     previousPositions.push(info);
                     return true;
@@ -271,10 +271,10 @@ bool MoveMaker::makeCaptureMove(std::string move){
     if (!correctMoveFormat(move)) {std::cout << "[0][DEBUG][MoveMaker::makeCaptureMove]\n"; return false;}
 
     int fromrow, fromcol, torow, tocol;
-    fromrow = letterToArrayIndex(move.at(1));
-    torow = letterToArrayIndex(move.at(3));
-    fromcol = numberToArrayIndex(move.at(2));
-    tocol = numberToArrayIndex(move.at(4));
+    fromcol = letterToArrayIndex(move.at(1));
+    tocol = letterToArrayIndex(move.at(3));
+    fromrow = numberToArrayIndex(move.at(2));
+    torow = numberToArrayIndex(move.at(4));
 
     Piece* movePiece = board->getBoard(fromrow, fromcol);
 
@@ -293,17 +293,17 @@ bool MoveMaker::makeCaptureMove(std::string move){
     movePiece->setCol(tocol);
 
     //und0move information
-    undoMoveInfo info;
-    info.capturedPiece = capturePiece;
-    info.movedPiece = movePiece;
-    info.captureMove = true;
-    info.whiteMove = movePiece->getIsWhite();
-    info.hasMoved = hasMoved;
+    undoMoveInfo* info = new undoMoveInfo();
+    info->capturedPiece = capturePiece;
+    info->movedPiece = movePiece;
+    info->captureMove = true;
+    info->whiteMove = movePiece->getIsWhite();
+    info->hasMoved = hasMoved;
     
-    info.fromrow = fromrow;
-    info.fromcol = fromcol;
-    info.torow = torow;
-    info.tocol = tocol;
+    info->fromrow = fromrow;
+    info->fromcol = fromcol;
+    info->torow = torow;
+    info->tocol = tocol;
 
     previousPositions.push(info);
     return true;
@@ -336,10 +336,10 @@ bool MoveMaker::makeRegularMove(std::string move){
     if (!correctMoveFormat(move)) {std::cout << "[0][DEBUG][MoveMaker::makeRegularMove]\n"; return false;}
 
     int fromrow, fromcol, torow, tocol;
-    fromrow = letterToArrayIndex(move.at(1));
-    torow = letterToArrayIndex(move.at(3));
-    fromcol = numberToArrayIndex(move.at(2));
-    tocol = numberToArrayIndex(move.at(4));
+    fromcol = letterToArrayIndex(move.at(1));
+    tocol = letterToArrayIndex(move.at(3));
+    fromrow = numberToArrayIndex(move.at(2));
+    torow = numberToArrayIndex(move.at(4));
 
     Piece* movePiece = board->getBoard(fromrow, fromcol);
 
@@ -354,16 +354,16 @@ bool MoveMaker::makeRegularMove(std::string move){
     board->setSpaceWithoutDeleting(fromrow, fromcol, nullptr);
     board->setSpaceWithoutDeleting(torow, tocol, movePiece);
 
-    undoMoveInfo info;
-    info.movedPiece = movePiece;
-    info.regularMove = true;
-    info.hasMoved = hasMoved;
-    info.whiteMove = movePiece->getIsWhite();
+    undoMoveInfo* info = new undoMoveInfo();
+    info->movedPiece = movePiece;
+    info->regularMove = true;
+    info->hasMoved = hasMoved;
+    info->whiteMove = movePiece->getIsWhite();
 
-    info.fromrow = fromrow;
-    info.fromcol = fromcol;
-    info.torow = torow;
-    info.tocol = tocol;
+    info->fromrow = fromrow;
+    info->fromcol = fromcol;
+    info->torow = torow;
+    info->tocol = tocol;
 
     previousPositions.push(info);
 
@@ -374,10 +374,10 @@ bool MoveMaker::makePromotionMove(std::string move){
     if (!correctMoveFormat(move)) {std::cout << "[0][DEBUG][MoveMaker::makePromotionMove]\n"; return false;}
 
     int fromrow, fromcol, torow, tocol;
-    fromrow = letterToArrayIndex(move.at(1));
-    torow = letterToArrayIndex(move.at(3));
-    fromcol = numberToArrayIndex(move.at(2));
-    tocol = numberToArrayIndex(move.at(4));
+    fromcol = letterToArrayIndex(move.at(1));
+    tocol = letterToArrayIndex(move.at(3));
+    fromrow = numberToArrayIndex(move.at(2));
+    torow = numberToArrayIndex(move.at(4));
 
     Piece* movePiece = board->getBoard(fromrow, fromcol);
     if (movePiece != nullptr && movePiece->getPieceType() != PAWN) {std::cout << "[1][DEBUG][MoveMaker::makePromotionMove]\n"; return false;}
@@ -394,21 +394,25 @@ bool MoveMaker::makePromotionMove(std::string move){
     board->setSpaceWithoutDeleting(fromrow, fromcol, nullptr);
     board->setSpaceWithoutDeleting(torow, tocol, promotedQueen);
 
-    undoMoveInfo info;
-    info.promotionMove = 1;
-    info.capturedPiece = takePiece;
-    info.whiteMove = promotedQueen->getIsWhite();
+    undoMoveInfo* info = new undoMoveInfo();
+    info->promotionMove = 1;
+    info->capturedPiece = takePiece;
+    info->whiteMove = promotedQueen->getIsWhite();
 
-    info.fromrow = fromrow;
-    info.fromcol = fromcol;
-    info.torow = torow;
-    info.tocol = tocol;
+    info->fromrow = fromrow;
+    info->fromcol = fromcol;
+    info->torow = torow;
+    info->tocol = tocol;
 
     previousPositions.push(info);
+
+    return true;
         
 }
 
 bool MoveMaker::makeMove(const std::string& move){
+
+    if (move == "u"){unmakeMove(); return 1;}
     if (!correctMoveFormat(move)) {std::cout << "Incorrect Move Format"; return false;}
 
     if (move == "0-0" || move == "0-0-0") 
@@ -418,10 +422,10 @@ bool MoveMaker::makeMove(const std::string& move){
         }
 
     int fromrow, fromcol, torow, tocol;
-    fromrow = letterToArrayIndex(move.at(1));
-    torow = letterToArrayIndex(move.at(3));
-    fromcol = numberToArrayIndex(move.at(2));
-    tocol = numberToArrayIndex(move.at(4));
+    fromcol = letterToArrayIndex(move.at(1));
+    tocol = letterToArrayIndex(move.at(3));
+    fromrow = numberToArrayIndex(move.at(2));
+    torow = numberToArrayIndex(move.at(4));
 
     Piece* movePiece = board->getBoard(fromrow, fromcol);
     Piece* endPiece = board->getBoard(torow, tocol);
@@ -448,6 +452,55 @@ bool MoveMaker::makeMove(const std::string& move){
 
     std::cout << "[0][DEBUG][MoveMaker::makeMove]";
     return false;
+}
+
+void MoveMaker::unmakeMove(){
+    
+    
+    if (previousPositions.empty())
+        {
+            std::cout << "No Moves To Unmake\n";
+            return;
+        }
+
+
+
+    undoMoveInfo* currentInfo = previousPositions.top();
+    if (currentInfo->regularMove == 1)
+        {
+            undoRegularMove(*currentInfo);
+            previousPositions.pop();
+            whiteTurn = !whiteTurn;
+            return;
+        }
+    else if (currentInfo->promotionMove == 1)
+        {
+            undoPromotionMove(*currentInfo);
+            previousPositions.pop();
+            whiteTurn = !whiteTurn;
+            return;
+        }
+    else if (currentInfo->captureMove == 1)
+        {
+            undoCaptureMove(*currentInfo);
+            previousPositions.pop();
+            whiteTurn = !whiteTurn;
+            return;
+        }
+    else if (currentInfo->kingsideCastleMove || currentInfo->queensideCastleMove)
+        {
+            undoCastleMove(*currentInfo);
+            previousPositions.pop();
+            whiteTurn = !whiteTurn;
+            return;
+        }
+    
+    std::cout << "[0][DEBUG][MoveMaker::unamkeMove]\n";
+    return;
+}
+
+void MoveMaker::setBoard(Board* b){
+    board = b;
 }
 
 

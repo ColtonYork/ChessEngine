@@ -3,7 +3,10 @@
 
 struct undoMoveInfo {
     ~undoMoveInfo() {
-        delete capturedPiece;
+        if (capturedPiece != nullptr) 
+            {
+                delete capturedPiece;
+            }
     }
 
     bool whiteMove;

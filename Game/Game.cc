@@ -7,10 +7,9 @@
 
 
 
-Game::Game(){
-    movesPlayed = 0;
-    whiteTurn = true;
-    board = new Board();
+Game::Game()
+    : board(new Board()), movesPlayed(0), whiteTurn(true), moveMaker(whiteTurn) {
+    moveMaker.setBoard(board);
 }
 
 bool Game::makeMove(std::string move){
@@ -34,15 +33,14 @@ void Game::playGame(){
     while(!isGameOver())
         {
             std::string move = getUserMove();
-            if (!makeMove(move)) {std:: cout << "Illegal move" << '\n'; continue;}
+            if (!moveMaker.makeMove(move)) {std::cout << "Invalid move\n"; continue;}
 
+
+            whiteTurn = !whiteTurn;
             board->displayBoard();
-            std::cout << "HERE" << '\n';
+
         }
-        board->displayBoard();
-
-
-         
+        board->displayBoard();      
 }
 
 int Game::letterToArrayIndex(char letter) const{
@@ -77,7 +75,7 @@ std::string Game::getUserMove() const{
 }
 
 bool Game::correctUserMoveFormat(std::string move) const{
-    if (move == "0-0" || move == "0-0-0") {return true;}
+    if (move == "0-0" || move == "0-0-0" || move == "u") {return true;}
     if (move.length() != 5) {return false;}
 
     std::string checkMove = lowerToUpperString(move);

@@ -185,19 +185,19 @@ bool Bishop::existsPossibleMove(Board* b, bool upright, bool upleft, bool downri
 
 }
 
-std::vector<moveResult> Bishop::computePossibleMoves(Board* b){
-    std::vector<moveResult> possibleMoves;
+// std::vector<moveResult> Bishop::computePossibleMoves(Board* b){
+//     std::vector<moveResult> possibleMoves;
 
-    std::string startString = "b" + arrayIndexToString(row, col); 
-    std::string possibleMove = startString;
+//     std::string startString = "b" + arrayIndexToString(row, col); 
+//     std::string possibleMove = startString;
 
-    bool upRight = endSpotLegal(row + 1, col + 1, *b);
-    bool upLeft = endSpotLegal(row + 1, col - 1, *b);
-    bool downRight = endSpotLegal(row - 1, col + 1, *b);
-    bool downLeft = endSpotLegal(row - 1, col - 1, *b);
+//     bool upRight = endSpotLegal(row + 1, col + 1, *b);
+//     bool upLeft = endSpotLegal(row + 1, col - 1, *b);
+//     bool downRight = endSpotLegal(row - 1, col + 1, *b);
+//     bool downLeft = endSpotLegal(row - 1, col - 1, *b);
 
 
-}
+// }
 
 
 

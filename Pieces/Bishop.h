@@ -97,7 +97,7 @@ class Bishop: public Piece{
 
         board: The current board being asessed
     */
-    std::vector<moveResult> computePossibleMoves(Board* b);
+    //std::vector<moveResult> computePossibleMoves(Board* b);
 
     
 

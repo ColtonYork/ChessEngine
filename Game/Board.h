@@ -178,6 +178,13 @@ class Board {
     void setSpaceWithoutDeleting(const int& row, const int& col, Piece* piece);
 
 
+    /*
+        brief: Loops thru all board spaces and makes sure all pieces internal row and col match the baords representation
+    */
+    bool pieceCoordsAreAccurate() const;
+
+
+
 
 
 

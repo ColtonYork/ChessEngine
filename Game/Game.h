@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "moveMaker.h"
 #include <string>
 
 
@@ -118,10 +119,13 @@ class Game{
     */
     void trainAISelfPlay(int numGames);
 
+    
+
 
 
     private:
     Board* board;
     int movesPlayed;
     bool whiteTurn;
+    MoveMaker moveMaker;
 };

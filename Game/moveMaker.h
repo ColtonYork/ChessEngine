@@ -91,10 +91,18 @@ class MoveMaker{
     int letterToArrayIndex(char letter) const;
 
 
+    /*
+        Brief: Sets the board that the move maker object will track moves and make moves from
+
+        b: The baord 
+    */
+    void setBoard(Board* b);
+
+
 
 
     private:
-    std::stack<undoMoveInfo> previousPositions;
+    std::stack<undoMoveInfo*> previousPositions;
     bool whiteTurn;
     Board* board;
 

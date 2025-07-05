@@ -143,7 +143,7 @@ class Piece {
 
         board: The current board being asessed
     */
-    virtual std::vector<moveResult> computePossibleMoves(Board* b) = 0;
+    //virtual std::vector<moveResult> computePossibleMoves(Board* b) = 0;
 
     /*
         Brief: Returns the integer value of a piece
@@ -171,7 +171,7 @@ class Piece {
 
         hm: the value to set hasMoved to
     */
-   virtual void setHasMoved(bool hm) = 0;
+   virtual void setHasMoved(bool hm);
 
 
 

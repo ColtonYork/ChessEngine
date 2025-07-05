@@ -551,6 +551,24 @@ void Board::setSpaceWithoutDeleting(const int& row, const int& col, Piece* piece
     board[row][col] = piece;
  }
 
+bool Board::pieceCoordsAreAccurate() const{
+    for (int i = 0; i < 8; i ++)
+        {
+            for( int j = 0; j < 8; j++)
+                {
+                    Piece* currentPiece = getBoard(i, j);
+                    if (currentPiece == nullptr) {continue;}
+
+                    if (currentPiece->getRow() != i || currentPiece->getCol() != j)
+                        {
+                            std::cout << "[0][DEBUG][Board::pieceCoordsAreAccurate]\n";
+                            return false;
+                        }
+                }
+        }
+        return true;
+}
+
 
 
 
