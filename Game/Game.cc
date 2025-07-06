@@ -258,22 +258,27 @@ void Game::playGameSFML() {
 
     // Load font
     sf::Font font;
-    if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
-        std::cout << "Font not found\n";
-    }
+    if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) 
+        {
+            std::cout << "Font not found\n";
+        }
 
     // Load piece textures
     std::map<std::string, sf::Texture> pieceTextures;
-    std::vector<std::string> names = {
-        "wP", "wN", "wB", "wR", "wQ", "wK",
-        "bP", "bN", "bB", "bR", "bQ", "bK"
-    };
-    for (const auto& name : names) {
-        pieceTextures[name] = sf::Texture();
-        if (!pieceTextures[name].loadFromFile("Game/SFMLassets/" + name + ".png")) {
-            std::cout << "Failed to load Game/SFMLassets/" << name << ".png" << std::endl;
+    std::vector<std::string> names = 
+        {
+            "wP", "wN", "wB", "wR", "wQ", "wK",
+            "bP", "bN", "bB", "bR", "bQ", "bK"
+        };
+
+    for (const auto& name : names) 
+        {
+            pieceTextures[name] = sf::Texture();
+            if (!pieceTextures[name].loadFromFile("Game/SFMLassets/" + name + ".png")) 
+                {
+                    std::cout << "Failed to load Game/SFMLassets/" << name << ".png" << std::endl;
+                }
         }
-    }
 
     // Button setup
     sf::RectangleShape kingsideButton(sf::Vector2f(100, 30));
@@ -305,161 +310,198 @@ void Game::playGameSFML() {
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-            if (event.type == sf::Event::MouseButtonPressed) {
-                int mouseX = event.mouseButton.x;
-                int mouseY = event.mouseButton.y;
-
-                // Check for button clicks
-                if (mouseX >= BOARD_SIZE + 10 && mouseX <= BOARD_SIZE + 110) {
-                    if (mouseY >= 40 && mouseY <= 70) {
-                        // Kingside castle
-                        if (moveMaker.makeMove("0-0")) {
-                            whiteTurn = !whiteTurn;
-                        }
-                        firstClick = true;
-                        // Check for game over after move
-                        if (isGameOver()) {
-                            window.close();
-                        }
-                        continue;
+        while (window.pollEvent(event)) 
+            {
+                if (event.type == sf::Event::Closed) 
+                    {
+                        window.close();
                     }
-                    if (mouseY >= 80 && mouseY <= 110) {
-                        // Queenside castle
-                        if (moveMaker.makeMove("0-0-0")) {
-                            whiteTurn = !whiteTurn;
-                        }
-                        firstClick = true;
-                        // Check for game over after move
-                        if (isGameOver()) {
-                            window.close();
-                        }
-                        continue;
-                    }
-                    if (mouseY >= 120 && mouseY <= 150) {
-                        // Undo move
-                        if (moveMaker.makeMove("u")) {
-                            whiteTurn = !whiteTurn;
-                        }
-                        firstClick = true;
-                        // Check for game over after move
-                        if (isGameOver()) {
-                            window.close();
-                        }
-                        continue;
-                    }
-                }
+                if (event.type == sf::Event::MouseButtonPressed) 
+                    {
+                        int mouseX = event.mouseButton.x;
+                        int mouseY = event.mouseButton.y;
 
-                // Check for board clicks
-                if (mouseX < BOARD_SIZE && mouseY < BOARD_SIZE) {
-                    int col = mouseX / SQUARE_SIZE;
-                    int row = 7 - (mouseY / SQUARE_SIZE);
-
-                    if (firstClick) {
-                        Piece* piece = board->getBoard(row, col);
-                        if (piece != nullptr && piece->getIsWhite() == whiteTurn) {
-                            fromRow = row;
-                            fromCol = col;
-                            firstClick = false;
-                        }
-                    } else {
-                        toRow = row;
-                        toCol = col;
-                        // Generate move string
-                        Piece* piece = board->getBoard(fromRow, fromCol);
-                        char pieceChar = 'P';
-                        if (piece != nullptr) {
-                            pieceType type = piece->getPieceType();
-                            switch (type) {
-                                case PAWN: pieceChar = 'P'; break;
-                                case ROOK: pieceChar = 'R'; break;
-                                case KNIGHT: pieceChar = 'N'; break;
-                                case BISHOP: pieceChar = 'B'; break;
-                                case QUEEN: pieceChar = 'Q'; break;
-                                case KING: pieceChar = 'K'; break;
-                                default: pieceChar = 'P'; break;
-                            }
-                        }
-                        char fromColChar = 'A' + fromCol;
-                        char fromRowChar = '1' + fromRow;
-                        char toColChar = 'A' + toCol;
-                        char toRowChar = '1' + toRow;
-                        std::string move = "";
-                        move += pieceChar;
-                        move += fromColChar;
-                        move += fromRowChar;
-                        move += toColChar;
-                        move += toRowChar;
-
-                        if (moveMaker.makeMove(move)) {
-                            whiteTurn = !whiteTurn;
-
-                        if (!board->pieceCoordsAreAccurate())
+                        // Check for button clicks
+                        if (mouseX >= BOARD_SIZE + 10 && mouseX <= BOARD_SIZE + 110) 
                             {
-                                std::cout << "[DEBUG][BOARD AND INTERNAL COORDINATES DO NOT MATCH]" << RED << '\n';
+                                if (mouseY >= 40 && mouseY <= 70) 
+                                    {
+                                        // Kingside castle
+                                        if (moveMaker.makeMove("0-0")) 
+                                            {
+                                                whiteTurn = !whiteTurn;
+                                            }
+                                        firstClick = true;
+                                        // Check for game over after move
+                                        if (isGameOver()) 
+                                            {
+                                                window.close();
+                                            }
+                                        continue;
+                                    }
+
+                                if (mouseY >= 80 && mouseY <= 110) 
+                                    {
+                                        // Queenside castle
+                                        if (moveMaker.makeMove("0-0-0")) 
+                                            {
+                                                whiteTurn = !whiteTurn;
+                                            }   
+                                        firstClick = true;
+                                        // Check for game over after move
+                                        if (isGameOver()) 
+                                            {
+                                                window.close();
+                                            }
+                                        continue;
+                                    }
+                                if (mouseY >= 120 && mouseY <= 150) 
+                                    {
+                                        // Undo move
+                                        if (moveMaker.makeMove("u")) 
+                                            {
+                                                whiteTurn = !whiteTurn;
+                                            }
+                                        firstClick = true;
+                                        // Check for game over after move
+                                        if (isGameOver()) 
+                                            {
+                                                window.close();
+                                            }
+                                        continue;
+                                    }
                             }
-                            // Check for game over after move
-                            if (isGameOver()) {
-                                window.close();
+
+                        // Check for board clicks
+                        if (mouseX < BOARD_SIZE && mouseY < BOARD_SIZE) 
+                            {
+                                int col = mouseX / SQUARE_SIZE;
+                                int row = 7 - (mouseY / SQUARE_SIZE);
+
+                            if (firstClick) 
+                                {
+                                    Piece* piece = board->getBoard(row, col);
+                                    if (piece != nullptr && piece->getIsWhite() == whiteTurn) 
+                                        {
+                                            fromRow = row;
+                                            fromCol = col;
+                                            firstClick = false;
+                                        }
+                                } 
+                                
+                            else 
+                                {
+                                    toRow = row;
+                                    toCol = col;
+                                    // Generate move string
+                                    Piece* piece = board->getBoard(fromRow, fromCol);
+                                    char pieceChar = 'P';
+                                    if (piece != nullptr) 
+                                        {
+                                            pieceType type = piece->getPieceType();
+                                            switch (type) 
+                                                {
+                                                    case PAWN: pieceChar = 'P'; break;
+                                                    case ROOK: pieceChar = 'R'; break;
+                                                    case KNIGHT: pieceChar = 'N'; break;
+                                                    case BISHOP: pieceChar = 'B'; break;
+                                                    case QUEEN: pieceChar = 'Q'; break;
+                                                    case KING: pieceChar = 'K'; break;
+                                                    default: pieceChar = 'P'; break;
+                                                }
+                                        }
+
+                                    char fromColChar = 'A' + fromCol;
+                                    char fromRowChar = '1' + fromRow;
+                                    char toColChar = 'A' + toCol;
+                                    char toRowChar = '1' + toRow;
+                                    std::string move = "";
+                                    move += pieceChar;
+                                    move += fromColChar;
+                                    move += fromRowChar;
+                                    move += toColChar;
+                                    move += toRowChar;
+
+                                    if (moveMaker.makeMove(move)) 
+                                        {
+                                            whiteTurn = !whiteTurn;
+
+                                            if (!board->pieceCoordsAreAccurate())
+                                                {
+                                                    std::cout << "[DEBUG][BOARD AND INTERNAL COORDINATES DO NOT MATCH]" << RED << '\n';
+                                                }
+                                            // Check for game over after move
+                                            if (isGameOver()) 
+                                                {
+                                                    window.close();
+                                                }
+                                        }
+                                    // Reset for next move
+                                    firstClick = true;
+                                    fromRow = fromCol = toRow = toCol = -1;
+                                }
                             }
-                        }
-                        // Reset for next move
-                        firstClick = true;
-                        fromRow = fromCol = toRow = toCol = -1;
                     }
-                }
-            }
         }
 
         // Draw everything
         window.clear(sf::Color::White);
 
         // Draw board and pieces
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                sf::RectangleShape square;
-                square.setSize(sf::Vector2f(SQUARE_SIZE, SQUARE_SIZE));
-                square.setPosition(col * SQUARE_SIZE, (7 - row) * SQUARE_SIZE);
+        for (int row = 0; row < 8; row++) 
+            {
+                for (int col = 0; col < 8; col++) 
+                    {
+                        sf::RectangleShape square;
+                        square.setSize(sf::Vector2f(SQUARE_SIZE, SQUARE_SIZE));
+                        square.setPosition(col * SQUARE_SIZE, (7 - row) * SQUARE_SIZE);
 
-                // Highlight selected square
-                if (!firstClick && fromRow == row && fromCol == col) {
-                    square.setFillColor(sf::Color::Yellow);
-                } else if ((row + col) % 2 == 0) {
-                    square.setFillColor(sf::Color(240, 217, 181));
-                } else {
-                    square.setFillColor(sf::Color(181, 136, 99));
-                }
-                window.draw(square);
+                        // Highlight selected square
+                        if (!firstClick && fromRow == row && fromCol == col) 
+                            {
+                                square.setFillColor(sf::Color::Yellow);
+                            } 
+                        else if ((row + col) % 2 == 0) 
+                            {
+                                square.setFillColor(sf::Color(240, 217, 181));
+                            } 
+                        else 
+                            {
+                                square.setFillColor(sf::Color(181, 136, 99));
+                            }
+                        window.draw(square);
 
-                // Draw piece as image
-                Piece* piece = board->getBoard(row, col);
-                if (piece != nullptr) {
-                    std::string key = (piece->getIsWhite() ? "w" : "b");
-                    switch (piece->getPieceType()) {
-                        case PAWN:   key += "P"; break;
-                        case KNIGHT: key += "N"; break;
-                        case BISHOP: key += "B"; break;
-                        case ROOK:   key += "R"; break;
-                        case QUEEN:  key += "Q"; break;
-                        case KING:   key += "K"; break;
-                        default: break;
+                        // Draw piece as image
+                        Piece* piece = board->getBoard(row, col);
+                        if (piece != nullptr) 
+                            {
+                                std::string key = (piece->getIsWhite() ? "w" : "b");
+                                switch (piece->getPieceType()) 
+                                    {
+                                        case PAWN:   key += "P"; break;
+                                        case KNIGHT: key += "N"; break;
+                                        case BISHOP: key += "B"; break;
+                                        case ROOK:   key += "R"; break;
+                                        case QUEEN:  key += "Q"; break;
+                                        case KING:   key += "K"; break;
+                                        default: break;
+                                    }
+                                if (pieceTextures.count(key)) 
+                                    {
+                                        sf::Sprite sprite;
+                                        sprite.setTexture(pieceTextures[key]);
+                                        sprite.setPosition(col * SQUARE_SIZE, (7 - row) * SQUARE_SIZE);
+
+                                        sprite.setScale 
+                                            (
+                                                float(SQUARE_SIZE) / sprite.getTexture()->getSize().x,
+                                                float(SQUARE_SIZE) / sprite.getTexture()->getSize().y
+                                            );
+                                        window.draw(sprite);
+                                    }
+                            }
                     }
-                    if (pieceTextures.count(key)) {
-                        sf::Sprite sprite;
-                        sprite.setTexture(pieceTextures[key]);
-                        sprite.setPosition(col * SQUARE_SIZE, (7 - row) * SQUARE_SIZE);
-                        sprite.setScale(
-                            float(SQUARE_SIZE) / sprite.getTexture()->getSize().x,
-                            float(SQUARE_SIZE) / sprite.getTexture()->getSize().y
-                        );
-                        window.draw(sprite);
-                    }
-                }
             }
-        }
 
         // Draw buttons
         window.draw(kingsideButton);
