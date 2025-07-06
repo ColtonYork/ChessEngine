@@ -123,6 +123,8 @@ class Game{
 
     /*
         brief: allows the user to play the game in a window
+
+        note: This function was made mostly from ai help. Needed a GUI to be able to test things much easier.
     */
     void playGameSFML();
 

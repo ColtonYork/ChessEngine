@@ -4,6 +4,8 @@
 #include "../Pieces/Queen.h"
 #include <string>
 #include <iostream>
+#define RED "\033[31m"
+#define RESET "\033[0m"
 
 
 
@@ -394,6 +396,11 @@ void Game::playGameSFML() {
 
                         if (moveMaker.makeMove(move)) {
                             whiteTurn = !whiteTurn;
+
+                        if (!board->pieceCoordsAreAccurate())
+                            {
+                                std::cout << "[DEBUG][BOARD AND INTERNAL COORDINATES DO NOT MATCH]" << RED << '\n';
+                            }
                             // Check for game over after move
                             if (isGameOver()) {
                                 window.close();
