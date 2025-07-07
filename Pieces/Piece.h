@@ -1,5 +1,5 @@
 #pragma once
-#include "../Game/moveResult.h"
+#include "../Game/moveStringAndScore.h"
 #include <vector>
 #include <string>
 #include <queue>
@@ -139,11 +139,12 @@ class Piece {
 
 
     /*
-        Brief: Returns board copies of all possible moves for a piece as an array
+        Brief: inputs a specific pieces' possible moves along with ordering the moves by quickvalue (piece value - captured piece value)
 
         board: The current board being asessed
     */
-    //virtual std::vector<moveResult> computePossibleMoves(Board* b) = 0;
+    virtual void computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q) = 0;
+
 
     /*
         Brief: Returns the integer value of a piece
@@ -172,6 +173,21 @@ class Piece {
         hm: the value to set hasMoved to
     */
    virtual void setHasMoved(bool hm);
+
+
+   /*   
+        Brief: returns the first part of a pieces move string 
+   */ 
+   std::string getFirstSquareOfMoveString();
+
+
+   /*   
+        Brief: returns the last part of the move string given the coordinates
+
+        col: col
+        row: row
+   */
+   std::string getLastPartOfMoveString(const int& col, const int& row);
 
 
 

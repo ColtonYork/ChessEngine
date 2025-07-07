@@ -323,7 +323,6 @@ bool Board::coordsAreInbounds(int row, int col) const{
 
 }
 
-
 Board::Board(const std::string& fen){
     initializeBoard();
 
@@ -567,6 +566,12 @@ bool Board::pieceCoordsAreAccurate() const{
                 }
         }
         return true;
+}
+
+std::priority_queue<moveStringAndScore> Board::computePossibleMoves(bool white){
+    std::priority_queue<moveStringAndScore> returnQueue;
+
+    
 }
 
 

@@ -185,7 +185,17 @@ class Board {
     bool pieceCoordsAreAccurate() const;
 
 
-    void displaySFML();
+    /*
+        Brief: computes all possible pieces for the specified player and returns in order of quickvalue (piece value - captured piece value)
+
+        white: The player to compute moves for
+    */
+    std::priority_queue<moveStringAndScore> computePossibleMoves(bool white);
+
+
+
+
+
 
 
 

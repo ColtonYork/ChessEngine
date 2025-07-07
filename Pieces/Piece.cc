@@ -64,6 +64,15 @@ void Piece::setHasMoved(bool hm){
     return;
 }
 
+std::string Piece::getFirstSquareOfMoveString(){
+    return std::string(1, 'a' + col) + std::string(1, '8' - row);
+}
+
+std::string Piece::getLastPartOfMoveString(const int& col, const int& row){
+    return std::string(1, 'a' + col) + std::string(1, '8' - row);
+}
+
+
 
 
 

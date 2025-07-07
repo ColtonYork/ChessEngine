@@ -1,14 +1,13 @@
 #include "Board.h"
 class Piece;
 
-struct moveResult{
+struct moveStringAndScore{
         
-    Board* board = nullptr;
     std::string move = "";
     int moveQuickScore = 0;
 
 
-    bool operator<(const moveResult &other) const{
+    bool operator<(const moveStringAndScore &other) const{
         return moveQuickScore < other.moveQuickScore;
     }
 };

@@ -14,20 +14,6 @@ Game::Game()
     moveMaker.setBoard(board);
 }
 
-bool Game::makeMove(std::string move){
-    Board* copy = verifyMove(move);
-
-    //check if move is valid
-    if(copy == nullptr) {return false;}
-
-    delete board;
-    whiteTurn = !whiteTurn;
-    movesPlayed++;
-    board = copy;
-    return 1;
-    
-}
-
 void Game::playGame(){
     
     board->displayBoard();        
@@ -43,19 +29,6 @@ void Game::playGame(){
 
         }
         board->displayBoard();      
-}
-
-int Game::letterToArrayIndex(char letter) const{
-    char l = toupper(letter);
-    if (l < 'A' || l > 'H') {return -1;}
-
-    return l - 'A';
-}
- 
-int Game::numberToArrayIndex(char number) const{
-    if (number > '8' || number < '1') {return -1;};
-
-    return number - '1';
 }
 
 std::string Game::getUserMove() const{
@@ -107,134 +80,6 @@ std::string Game::lowerToUpperString(std::string s) const{
     return returnString;
 }
 
-Piece* Game::getPieceFromMoveString(std::string move) const{
-    int fromRow, fromCol;
-
-    //get from 
-    fromCol = letterToArrayIndex(move.at(1));
-    fromRow = numberToArrayIndex(move.at(2));
-
-    return board->getBoard(fromRow, fromCol);
-}
-
-bool Game::isMoversPiece(Piece* piece) const{
-    if (piece == nullptr) {return false;}
-    if (piece->getIsWhite() != whiteTurn) { std::cout << "This is not your piece" << '\n'; return false;}
-    return true;
-}
-
-Board* Game::verifyMove(std::string move) const{
-    //check for castle moves
-    if(move == "0-0" || move == "0-0-0") {return verifyCastleMove(move);}
-
-    //validate move format
-    if (!correctUserMoveFormat(move)) {std::cout << "Incorrect Move Format" << '\n'; return nullptr;}
-
-    //get piece on current board and determine if the mover owns it
-    Piece* originalPiece = getPieceFromMoveString(move);
-    if (!isMoversPiece(originalPiece)) {return nullptr;}
-
-    int fromRow, fromCol, toRow, toCol;
-    fromRow = originalPiece->getRow();
-    fromCol = originalPiece->getCol();
-    toCol = letterToArrayIndex(move.at(3));
-    toRow = numberToArrayIndex(move.at(4));
-
-    if (!originalPiece->isLegalMove(toRow, toCol, *board)) {std::cout << "isLegalMove Fail" << '\n'; return nullptr;}
-    if (originalPiece->getPieceType() == PAWN && (toRow == 7 || toRow == 0)) {return verifyPromotionMove(originalPiece);}
-
-    //make board copy and piece copy if the move is legal so far
-    Board* copy = new Board(*board);
-    Piece* copyPiece = originalPiece->clone();
-
-    //make move on copy board
-    copy->setSpace(fromRow, fromCol, nullptr);
-    copyPiece->setCol(toCol);
-    copyPiece->setRow(toRow);
-    copy->setSpace(toRow, toCol, copyPiece);
-
-
-    //check if the move puts yourself in check
-    if(copy->kingInCheck(whiteTurn)) {delete copy; std::cout << "Self Check Illegal" << '\n'; return nullptr;}
-
-    std::cout << "Piece move from: " << static_cast<int>(originalPiece->getRow()) <<" " << static_cast<int>(originalPiece->getCol()) << " TO: " << static_cast<int>(copyPiece->getRow()) << " " << static_cast<int>(copyPiece->getCol()) << '\n';
- 
-    return copy;
-}
-
-Board* Game::verifyCastleMove(std::string move) const{
-    //check king side castle
-    if (move == "0-0")  
-        {
-            Piece* piece = board->findKing(whiteTurn);
-            if (!piece->isLegalCastleMove(true, *board)) {std::cout << "Illegal caslt move" << '\n'; return nullptr;}
-            
-            //make board copy and piece copy
-            Board* copy = new Board(*board);
-            Piece* rook = board->getBoard(piece->getRow(), piece->getCol() + 3)->clone();
-            Piece* king = piece->clone();
-
-            copy->setSpace(piece->getRow(), 4, nullptr);
-            copy->setSpace(piece->getRow(), 7, nullptr);
-            copy->setSpace(piece->getRow(), 5, king);
-            copy->setSpace(piece->getRow(), 6, rook);
-
-            return copy;
-
-
-
-        }
-    //check queen side castle
-    else if (move == "0-0-0")    
-        {
-            Piece* piece = board->findKing(whiteTurn);
-            if (!piece->isLegalCastleMove(false, *board)) {std::cout << "Illegal caslt move" << '\n'; return nullptr;}
-
-            //make board copy and piece copy
-            Board* copy = new Board(*board);
-            Piece* rook = board->getBoard(piece->getRow(), piece->getCol() - 4)->clone();
-            Piece* king = piece->clone();
-
-            copy->setSpace(piece->getRow(), 4, nullptr);
-            copy->setSpace(piece->getRow(), 0, nullptr);
-            copy->setSpace(piece->getRow(), 3, king);
-            copy->setSpace(piece->getRow(), 2, rook);
-
-            return copy;
-        }
-        return nullptr;
-}
-
-Board* Game::verifyPromotionMove(Piece* pawn) const{
-    if (pawn->getPieceType() != PAWN) {return nullptr;}
-
-    //make copy of board and pawn
-    Board* copy = new Board(*board);
-    Piece* copyPawn = pawn->clone();
-
-    //white promoting
-    if (copyPawn->getRow() == 6)    
-        {
-            Piece* promotedQueen = new Queen(7, copyPawn->getCol(), copyPawn->getIsWhite());
-
-            copy->setSpace(7, copyPawn->getCol(), promotedQueen);      
-            copy->setSpace(6, copyPawn->getCol(), nullptr);      
-        }
-    //black promoting
-    else if (copyPawn->getRow() == 1)   
-        {
-            Piece* promotedQueen = new Queen(0, copyPawn->getCol(), copyPawn->getIsWhite());
-            
-            copy->setSpace(0, copyPawn->getCol(), promotedQueen);      
-            copy->setSpace(1, copyPawn->getCol(), nullptr);
-        }
-
-        if (copy->kingInCheck(whiteTurn)) {{delete copy; std::cout << "Self Check Illegal" << '\n'; return nullptr;}}
-
-        std::cout << "Pawn promoted!" << '\n';
-        return copy;
-}
-
 bool Game::isGameOver() const{
     //check if player has a legal move
     if (board->playerHasLegalMove(whiteTurn)) {return false;}
@@ -274,6 +119,7 @@ void Game::playGameSFML() {
     for (const auto& name : names) 
         {
             pieceTextures[name] = sf::Texture();
+
             if (!pieceTextures[name].loadFromFile("Game/SFMLassets/" + name + ".png")) 
                 {
                     std::cout << "Failed to load Game/SFMLassets/" << name << ".png" << std::endl;
@@ -308,7 +154,8 @@ void Game::playGameSFML() {
     int toRow = -1, toCol = -1;
 
     // Main game loop
-    while (window.isOpen()) {
+    while (window.isOpen()) 
+    {
         sf::Event event;
         while (window.pollEvent(event)) 
             {
