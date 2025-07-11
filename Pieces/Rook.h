@@ -87,12 +87,6 @@ class Rook: public Piece{
 
     
     /*
-    
-    */
-    //virtual std::vector<moveResult> computePossibleMoves(Board* Board);
-
-
-    /*
         Purely Virtual Override fork piece class
         Brief: returns the value of a Rook (5) 
     */
@@ -112,6 +106,15 @@ class Rook: public Piece{
         hm: The value to set hasMoved to
     */
     void setHasMoved(bool hm);
+
+
+    /*
+        Brief: computes all possible moves for a Rook and adds them to a priority queue
+
+        board: The current board being asessed
+        q: The priority queue to add the moves to
+    */
+   void computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q);
 
 
 

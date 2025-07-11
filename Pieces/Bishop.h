@@ -93,9 +93,10 @@ class Bishop: public Piece{
 
 
     /*
-        Brief: Returns board copies of all possible moves for a piece as an array
+        Brief: computes all possible moves for a bishop and adds them to a priority queue
 
         board: The current board being asessed
+        q: The priority queue to add the moves to
     */
    void computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q);
 

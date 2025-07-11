@@ -138,6 +138,17 @@ class Queen: public Piece{
     bool existsPossibleMove(Board* b, bool upright, bool upleft, bool downright, bool downleft, bool up, bool down, bool left, bool right);
 
 
+    /*
+        Brief: computes all possible moves for a Queen and adds them to a priority queue. Reuses rook and bishop logic from their own computePossibleMove methods
+
+        board: The current board being asessed
+        q: The priority queue to add the moves to
+    */
+   void computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q);
+
+   
+
+
 
 
 

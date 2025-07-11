@@ -195,6 +195,141 @@ void Rook::setHasMoved(bool hm){
     hasMoved = hm;
 }
 
+void Rook::computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q){
+    //get possible starting directions
+    bool up = endSpotLegal(row + 1, col, *b);
+    bool down = endSpotLegal(row - 1, col, *b);
+    bool left = endSpotLegal(row, col - 1, *b);
+    bool right = endSpotLegal(row, col + 1, *b);
+
+    std::string startingMove = "r" + getFirstSquareOfMoveString();
+    std::string fullMove = startingMove;
+
+    if (up)
+        {
+            for (int i = row + 1; i < 8; i++)
+                {
+                    bool takesPiece = false;
+                    //break when path gets cut off by own piece
+                    if (b->getBoard(i, col) != nullptr && getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                    if (b->getBoard(i, col) != nullptr && getIsWhite() != (b->getBoard(i, col)->getIsWhite())) {takesPiece = true;}
+
+
+                    if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) 
+                        {
+                            moveStringAndScore moveResult;
+
+                            moveResult.move = fullMove + getLastPartOfMoveString(i, col);
+
+                            if (takesPiece)
+                                {
+                                    int quickScore = b->getBoard(i, col)->getPieceValue() - 5;
+                                    moveResult.moveQuickScore = quickScore;
+                                }
+
+                            q.push(moveResult);
+
+                        }
+
+                    if (takesPiece) {break;}
+                }
+        }
+
+    if (down)
+        {
+            for (int i = row - 1; i >= 0; i--)
+                {
+                    bool takesPiece = false;
+                    //break when path gets cut off by own piece
+                    if (b->getBoard(i, col) != nullptr && getIsWhite() == (b->getBoard(i, col)->getIsWhite())) {break;}
+                    if (b->getBoard(i, col) != nullptr && getIsWhite() != (b->getBoard(i, col)->getIsWhite())) {takesPiece = true;}
+
+
+                    if (isLegalMove(i, col, *b) && !b->moveCausesSelfCheck(row, col, i, col)) 
+                        {
+                            moveStringAndScore moveResult;
+
+                            moveResult.move = fullMove + getLastPartOfMoveString(i, col);
+
+                            if (takesPiece)
+                                {
+                                    int quickScore = b->getBoard(i, col)->getPieceValue() - 5;
+                                    moveResult.moveQuickScore = quickScore;
+                                }
+
+                            q.push(moveResult);
+
+                        }
+
+                    if (takesPiece) {break;}
+                }
+        }
+
+    if (left)
+        {
+            for (int i = col - 1; i >= 0; i--)
+                {
+                    bool takesPiece = false;
+
+                    //break when path gets cut off by own piece
+                    if (b->getBoard(row, i) != nullptr && getIsWhite() == (b->getBoard(row, i)->getIsWhite())) {break;}
+                    if (b->getBoard(row, i) != nullptr && getIsWhite() != (b->getBoard(row, i)->getIsWhite())) {takesPiece = true;}
+
+
+                    if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) 
+                        {
+                            moveStringAndScore moveResult;
+
+                            moveResult.move = fullMove + getLastPartOfMoveString(row, i);
+
+                            if (takesPiece)
+                                {
+                                    int quickScore = b->getBoard(row, i)->getPieceValue() - 5;
+                                    moveResult.moveQuickScore = quickScore;
+                                }
+
+                            q.push(moveResult);
+
+                        }
+
+                    if (takesPiece) {break;}
+                }
+        }
+
+    if (right)
+        {
+            for (int i = col + 1; i < 8; i++)
+                {
+                    bool takesPiece = false;
+
+                    //break when path gets cut off by own piece
+                    if (b->getBoard(row, i) != nullptr && getIsWhite() == (b->getBoard(row, i)->getIsWhite())) {break;}
+                    if (b->getBoard(row, i) != nullptr && getIsWhite() != (b->getBoard(row, i)->getIsWhite())) {takesPiece = true;}
+
+
+                    if (isLegalMove(row, i, *b) && !b->moveCausesSelfCheck(row, col, row, i)) 
+                        {
+                            moveStringAndScore moveResult;
+
+                            moveResult.move = fullMove + getLastPartOfMoveString(row, i);
+
+                            if (takesPiece)
+                                {
+                                    int quickScore = b->getBoard(row, i)->getPieceValue() - 5;
+                                    moveResult.moveQuickScore = quickScore;
+                                }
+
+                            q.push(moveResult);
+
+                        }
+
+                    if (takesPiece) {break;}
+                }
+        }
+
+}
+
+
 
 
 

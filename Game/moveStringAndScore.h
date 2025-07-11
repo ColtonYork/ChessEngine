@@ -1,5 +1,7 @@
-#include "Board.h"
+#pragma once
+#include <string>
 class Piece;
+class Board;
 
 struct moveStringAndScore{
         

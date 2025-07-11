@@ -101,6 +101,16 @@ class King: public Piece{
         hm: The value that hasMoved is being set to;
     */
     void setHasMoved(bool hm);
+    
+    
+    /*
+        Brief: computes all possible moves for a King and adds them to a priority queue
+
+        board: The current board being asessed
+        q: The priority queue to add the moves to
+    */
+    void computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q);
+
 
 
 

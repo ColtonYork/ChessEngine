@@ -77,7 +77,6 @@ bool Pawn::endSpotLegal(unsigned char checkRow, unsigned char checkColumn, const
     return true;
 }
 
-
 bool Pawn::hasOneSpaceLegalMove(const Board* b) const{
     if (isWhite)
         {
@@ -91,7 +90,7 @@ bool Pawn::hasOneSpaceLegalMove(const Board* b) const{
 }
 
 bool Pawn::hasVerifiedMove(Board* b){
-        if (isWhite)
+    if (isWhite)
         {
             if (isLegalMove(row + 2, col, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col)) {return true;}
             if (isLegalMove(row + 1, col, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col)) {return true;}
@@ -119,6 +118,99 @@ int Pawn::getPieceValue() const{
 
 void Pawn::setHasMoved(bool hm){
     hasMoved = hm;
+}
+
+void Pawn::computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q){
+    std::string startingMove = "p" + getFirstSquareOfMoveString();
+    std::string fullMove = startingMove;
+
+    if (isWhite)
+        {
+            if (isLegalMove(row + 2, col, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col)) 
+                {
+                    moveStringAndScore moveResult;
+                    moveResult.move = fullMove + getLastPartOfMoveString(row + 2, col);
+                    q.push(moveResult);
+                }
+            
+            if (isLegalMove(row + 1, col, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col)) 
+                {
+                    moveStringAndScore moveResult;
+                    moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col);
+                    q.push(moveResult); 
+                }
+            
+            if (isLegalMove(row + 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 1)) 
+                {
+                    Piece* takePiece = b->getBoard(row + 1, col - 1);
+
+                    moveStringAndScore moveResult;
+
+                    moveResult.moveQuickScore = takePiece->getPieceValue() - 1;
+
+                    moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col - 1);
+
+                    q.push(moveResult);
+                }
+
+            if (isLegalMove(row + 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 1)) 
+                {
+                    Piece* takePiece = b->getBoard(row + 1, col + 1);
+
+                    moveStringAndScore moveResult;
+
+                    moveResult.moveQuickScore = takePiece->getPieceValue() - 1;
+
+                    moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col + 1);
+
+                    q.push(moveResult);
+                }
+        }
+
+    else 
+        {
+            if (isLegalMove(row - 2, col, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col))                
+                {
+                    moveStringAndScore moveResult;
+                    moveResult.move = fullMove + getLastPartOfMoveString(row - 2, col);
+                    q.push(moveResult);
+                }
+        
+            if (isLegalMove(row - 1, col, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col)) 
+                {
+                    moveStringAndScore moveResult;
+                    moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col);
+                    q.push(moveResult); 
+                }
+        
+            if (isLegalMove(row - 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 1)) 
+                {
+                    Piece* takePiece = b->getBoard(row - 1, col - 1);
+
+                    moveStringAndScore moveResult;
+
+                    moveResult.moveQuickScore = takePiece->getPieceValue() - 1;
+
+                    moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col - 1);
+
+                    q.push(moveResult);
+                }
+
+            if (isLegalMove(row - 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 1)) 
+                {
+                    Piece* takePiece = b->getBoard(row - 1, col + 1);
+
+                    moveStringAndScore moveResult;
+
+                    moveResult.moveQuickScore = takePiece->getPieceValue() - 1;
+
+                    moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col + 1);
+
+                    q.push(moveResult);
+                }
+        }
+
+
 }
 
 

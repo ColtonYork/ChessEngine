@@ -10,7 +10,7 @@
 
 
 Game::Game()
-    : board(new Board()), movesPlayed(0), whiteTurn(true), moveMaker(whiteTurn) {
+    : board(new Board()), movesPlayed(0), whiteTurn(true), moveMaker(true) {
     moveMaker.setBoard(board);
 }
 
@@ -153,7 +153,10 @@ void Game::playGameSFML() {
     int fromRow = -1, fromCol = -1;
     int toRow = -1, toCol = -1;
 
+
+
     // Main game loop
+
     while (window.isOpen()) 
     {
         sf::Event event;
@@ -219,6 +222,8 @@ void Game::playGameSFML() {
                                     }
                             }
 
+
+
                         // Check for board clicks
                         if (mouseX < BOARD_SIZE && mouseY < BOARD_SIZE) 
                             {
@@ -269,6 +274,8 @@ void Game::playGameSFML() {
                                     move += toColChar;
                                     move += toRowChar;
 
+
+                                            
                                     if (moveMaker.makeMove(move)) 
                                         {
                                             whiteTurn = !whiteTurn;
@@ -277,6 +284,8 @@ void Game::playGameSFML() {
                                                 {
                                                     std::cout << "[DEBUG][BOARD AND INTERNAL COORDINATES DO NOT MATCH]" << RED << '\n';
                                                 }
+
+
                                             // Check for game over after move
                                             if (isGameOver()) 
                                                 {

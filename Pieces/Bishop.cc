@@ -210,13 +210,15 @@ void Bishop::computePossibleMoves(Board* b, std::priority_queue<moveStringAndSco
                             {
                                 moveStringAndScore moveResult;
                                 moveResult.move = fullMove + getLastPartOfMoveString(i, j);
-
-                                int quickScoreValue = b->getBoard(i, j)->getPieceValue() - getPieceValue();
-                                if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                
+                                if (takePiece)
+                                    {
+                                        int quickScoreValue = b->getBoard(i, j)->getPieceValue() - 3;
+                                        if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                    }
 
                                 q.push(moveResult);
 
-                                fullMove = startingMove;
                             }
 
                         if (takePiece) {break;}
@@ -239,12 +241,14 @@ void Bishop::computePossibleMoves(Board* b, std::priority_queue<moveStringAndSco
                                 moveStringAndScore moveResult;
                                 moveResult.move = fullMove + getLastPartOfMoveString(i, j);
 
-                                int quickScoreValue = b->getBoard(i, j)->getPieceValue() - getPieceValue();
-                                if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                if (takePiece)
+                                    {
+                                        int quickScoreValue = b->getBoard(i, j)->getPieceValue() - 3;
+                                        if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                    }
 
                                 q.push(moveResult);
 
-                                fullMove = startingMove;
                             }
 
                         if (takePiece) {break;}
@@ -267,12 +271,14 @@ void Bishop::computePossibleMoves(Board* b, std::priority_queue<moveStringAndSco
                                 moveStringAndScore moveResult;
                                 moveResult.move = fullMove + getLastPartOfMoveString(i, j);
 
-                                int quickScoreValue = b->getBoard(i, j)->getPieceValue() - getPieceValue();
-                                if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                if (takePiece)
+                                    {
+                                        int quickScoreValue = b->getBoard(i, j)->getPieceValue() - 3;
+                                        if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                    }
 
                                 q.push(moveResult);
 
-                                fullMove = startingMove;
                             }
 
                         if (takePiece) {break;}
@@ -294,13 +300,15 @@ void Bishop::computePossibleMoves(Board* b, std::priority_queue<moveStringAndSco
                             {
                                 moveStringAndScore moveResult;
                                 moveResult.move = fullMove + getLastPartOfMoveString(i, j);
-
-                                int quickScoreValue = b->getBoard(i, j)->getPieceValue() - getPieceValue();
-                                if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                
+                                if (takePiece)
+                                    {
+                                        int quickScoreValue = b->getBoard(i, j)->getPieceValue() - 3;
+                                        if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                                    }
 
                                 q.push(moveResult);
 
-                                fullMove = startingMove;
                             }
 
                         if (takePiece) {break;}

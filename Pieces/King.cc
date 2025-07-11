@@ -127,6 +127,73 @@ void King::setHasMoved(bool hm){
     hasMoved = hm;
 }
 
+void King::computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q){
+    std::string startingMove = "k" + getFirstSquareOfMoveString();
+    std::string fullMove = startingMove;
+
+        //up down left right
+        if (isLegalMove(row + 1, col, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col);
+                q.push(moveResult);
+            }
+
+        if (isLegalMove(row - 1, col, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col);
+                q.push(moveResult);
+            }
+        
+        if (isLegalMove(row, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row, col - 1)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row, col - 1);
+                q.push(moveResult);
+            }
+        
+        if (isLegalMove(row, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row, col + 1)) 
+                {
+                    moveStringAndScore moveResult;
+                    moveResult.move = fullMove + getLastPartOfMoveString(row, col + 1);
+                    q.push(moveResult);
+                }
+    
+
+
+        //upleft upright downleft downright
+        if (isLegalMove(row + 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 1)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col - 1);
+                q.push(moveResult);
+            }
+        
+        if (isLegalMove(row + 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 1)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col + 1);
+                q.push(moveResult);
+            }
+        
+        if (isLegalMove(row - 1, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 1)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col - 1);
+                q.push(moveResult);
+            }
+        
+        if (isLegalMove(row - 1, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 1)) 
+            {
+                moveStringAndScore moveResult;
+                moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col + 1);
+                q.push(moveResult);
+            }
+    
+}
+
+
 
 
 

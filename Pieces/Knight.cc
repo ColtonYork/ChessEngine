@@ -67,5 +67,133 @@ int Knight::getPieceValue() const{
     return 3;
 }
 
+void Knight::computePossibleMoves(Board* b, std::priority_queue<moveStringAndScore>& q){
+    std::string startingMove = "n" + getFirstSquareOfMoveString();
+    std::string fullMove = startingMove;
+    Piece* takePiece;
+
+    if (isLegalMove(row + 2, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col + 1)) 
+        {
+            takePiece = b->getBoard(row + 2, col + 1);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row + 2, col + 1);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row + 2, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row + 2, col - 1)) 
+        {
+            takePiece = b->getBoard(row + 2, col - 1);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row + 2, col - 1);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row - 2, col + 1, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col + 1)) 
+        {
+            takePiece = b->getBoard(row - 2, col + 1);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row - 2, col + 1);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row - 2, col - 1, *b) && !b->moveCausesSelfCheck(row, col, row - 2, col - 1)) 
+        {
+            takePiece = b->getBoard(row - 2, col - 1);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row - 2, col - 1);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+
+    if (isLegalMove(row + 1, col + 2, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col + 2)) 
+        {
+            takePiece = b->getBoard(row + 1, col + 2);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col + 2);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row + 1, col - 2, *b) && !b->moveCausesSelfCheck(row, col, row + 1, col - 2)) 
+        {
+            takePiece = b->getBoard(row + 1, col - 2);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row + 1, col - 2);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row - 1, col + 2, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col + 2)) 
+        {
+            takePiece = b->getBoard(row - 1, col + 2);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col + 2);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+    
+    if (isLegalMove(row - 1, col - 2, *b) && !b->moveCausesSelfCheck(row, col, row - 1, col - 2)) 
+        {
+            takePiece = b->getBoard(row - 1, col - 2);
+            moveStringAndScore moveResult;
+            moveResult.move = fullMove + getLastPartOfMoveString(row - 1, col - 2);
+            
+            if (takePiece != nullptr)
+                {
+                    int quickScoreValue = takePiece->getPieceValue() - 3;
+                    if (quickScoreValue > 0) {moveResult.moveQuickScore = quickScoreValue;}
+                }
+
+            q.push(moveResult);
+        }
+
+}
+
+
 
 

@@ -292,7 +292,6 @@ bool Board::moveCausesSelfCheck(int fromRow, int fromCol, int toRow, int toCol){
 
 }
 
-
 bool Board::playerHasLegalMoveByPiece(bool white){
     for(int i = 0; i < 8; i++)
         {
@@ -545,7 +544,6 @@ void Board::generateBoardFromFENString(const std::string& fen){
 
 }
 
-
 void Board::setSpaceWithoutDeleting(const int& row, const int& col, Piece* piece){
     board[row][col] = piece;
  }
@@ -570,6 +568,18 @@ bool Board::pieceCoordsAreAccurate() const{
 
 std::priority_queue<moveStringAndScore> Board::computePossibleMoves(bool white){
     std::priority_queue<moveStringAndScore> returnQueue;
+
+    for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j ++)    
+                {
+                    Piece* piece = board[i][j];
+
+                    if (piece != nullptr && piece->getIsWhite() == white) {piece->computePossibleMoves(this, returnQueue);}
+                }
+        }
+
+        return returnQueue;
 
     
 }

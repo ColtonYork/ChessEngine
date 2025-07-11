@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <queue>
+#include "moveStringAndScore.h"
 
 class Piece;
 
