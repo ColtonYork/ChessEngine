@@ -20,6 +20,15 @@ void Game::playGame(){
     //while !isGameOver needs implemented
     while(!isGameOver())
         {
+            std::cout << whiteTurn;
+            std::priority_queue<moveStringAndScore> moves = board->computePossibleMoves(whiteTurn);
+            while (!moves.empty())
+                {
+                    std::cout << moves.top().move << '\n';
+                    std::cout << moves.top().moveQuickScore << '\n';
+                    std::cout << '\n';
+                    moves.pop();
+                }
             std::string move = getUserMove();
             if (!moveMaker.makeMove(move)) {std::cout << "Invalid move\n"; continue;}
 

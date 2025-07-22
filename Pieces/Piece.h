@@ -6,7 +6,7 @@
 
 class Board;
 
-enum pieceType {PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING, NONE};
+enum pieceType {PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING};
 class Piece {
 
     public:

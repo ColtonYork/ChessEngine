@@ -8,4 +8,11 @@ class NNEvaluator : public Evaluator{
     NNEvaluator();
 
 
+    
+
+
+
+
+
+
 };

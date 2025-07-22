@@ -6,6 +6,7 @@
 #include "../Pieces/Queen.h"
 #include "../Pieces/Pawn.h"
 #include "../Pieces/Bishop.h"
+#include "../EVALUATORS/InputTensor.h"
 #include <iostream>
 #include <queue>
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
@@ -583,6 +584,31 @@ std::priority_queue<moveStringAndScore> Board::computePossibleMoves(bool white){
 
     
 }
+
+InputTensor Board::currentBoardToInputTensor() const{
+    InputTensor inputTensor;
+
+    // First 2 for loops are for the baord
+    for (int i = 0; i < 8; i++) 
+        {
+            for (int j = 0; j < 8; j++)
+                {
+                    Piece* piece = board[i][j];
+                    if (piece == nullptr) continue;
+    
+                    //nice algo for third dimension of array
+                    int typeIndex = static_cast<int>(piece->getPieceType()); // 0-5
+                    int colorOffset = piece->getIsWhite() ? 0 : 1;           // 0 for white, 1 for black
+                    int tensorIndex = typeIndex * 2 + colorOffset;           // 0-11
+    
+                    inputTensor.inputTensor[i][j][tensorIndex] = 1.0f;
+                }
+        }
+
+    return inputTensor;
+}
+
+          
 
 
 
