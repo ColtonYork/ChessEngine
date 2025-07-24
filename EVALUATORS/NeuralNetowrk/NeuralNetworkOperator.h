@@ -1,15 +1,16 @@
 #include <string>
+#include <vector>
 #include "InputTensor.h"
 
 
 namespace NeuralNetworkOperator{
 
     /*
-        Brief: Taked in a 768 neuron input tensor and forward passes thru a 512, 256, 128, 64 hidden layer then to a single output between 0 and 1. Closer to 1 means that white is winning
+        Brief: initializes the 768, 512, 256, 128, 64, 1 Neural network using the correct init methods
 
-        input: The input board tensor that will be evaluated
+        THIS FUNCTION CAN OVERWRITE WEIGHTS
     */
-    float forwardPass(const InputTensor& input);
+   void initializeNeuralNetwork();
 
 
     /*
@@ -26,6 +27,7 @@ namespace NeuralNetworkOperator{
     */
    void initializeWeightsRelu(const std::string& fileName, size_t inputNeurons, size_t outputNeurons);
 
+   
     /*
         Brief: initiliaizes weights in a specified file using Xavier initilization. Weights will be mostly initialized from +-0.304
        
@@ -33,6 +35,24 @@ namespace NeuralNetworkOperator{
         numWeights: The numbers of weights that need to be initialized
     */
     void initializeWeightsSigmoid(const std::string& fileName, size_t inputNeurons,  size_t outputNeurons);
+
+
+    /*
+        Brief: takes in a number and converts it to its relu activation value
+
+        value: the number being converted
+    */
+    float reluActivator(float value);
+
+
+    /*
+        Brief: takes in a number and converts it to its relu activation value
+
+        value: the number being converted
+    */
+    float sigmoidActivator(float value);
+
+
 
     
 

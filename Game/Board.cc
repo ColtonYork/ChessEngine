@@ -6,7 +6,7 @@
 #include "../Pieces/Queen.h"
 #include "../Pieces/Pawn.h"
 #include "../Pieces/Bishop.h"
-#include "../EVALUATORS/InputTensor.h"
+#include "../EVALUATORS/NeuralNetowrk/InputTensor.h"
 #include <iostream>
 #include <queue>
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade

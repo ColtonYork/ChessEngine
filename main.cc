@@ -7,6 +7,7 @@
 #include "Pieces/Pawn.h"
 #include "Pieces/Queen.h"
 #include "Game/Game.h"
+#include "EVALUATORS/NeuralNetowrk/NeuralNetworkOperator.h"
 
 
 
@@ -15,8 +16,11 @@
 
 
 int main(){
-    Game game;
-    game.playGame();
+    // Game game;
+    // game.playGame();
+
+    NeuralNetworkOperator::initializeNeuralNetwork();
+
 
 
 

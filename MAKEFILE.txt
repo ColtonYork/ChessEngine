@@ -1,5 +1,4 @@
 COMPILER
 g++ -Wall -o program *.cc Game/*.cc Pieces/*.cc
 
-g++ -Wall -std=c++11 -o program *.cc Game/*.cc Pieces/*.cc -lsfml-graphics -lsfml-window -lsfml-system
-
+g++ -Wall -std=c++11 -o program *.cc Game/*.cc Pieces/*.cc EVALUATORS/NeuralNetowrk/*.cc -lsfml-graphics -lsfml-window -lsfml-system
