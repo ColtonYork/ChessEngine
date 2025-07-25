@@ -19,15 +19,49 @@ class NeuralNetwork{
 
     
     /*
-        brief: computes a relu layer in the netwrok and returns the value of each neruons activation
+        brief: computes a relu layer in the netwrok and returns the value of each neruons activation. LAYER 0-5 ACCEPTED (0 means input tensor)
+
+        forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-   std::vector<float> forwardLayerRelu(size_t outputSize);
+   std::vector<float> forwardLayerRelu(const int& forwardingLayer);
 
 
     /*
-       brief: computes a sigmoid layer in the netwrok and returns the value of each neruons activation
+       brief: computes a sigmoid layer in the netwrok and returns the value of each neruons activation. LAYER 0-5 ACCEPTED. (0 means input tensor)
+
+        forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-  std::vector<float> forwardLayerSigmoid();
+    std::vector<float> forwardLayerSigmoid(const int& forwardingLayer);
+
+
+    /*
+        Brief: loads the weight vectors with weights files
+    */
+    void loadWeightVector(const size_t& layerNum);
+
+
+    /*
+        Brief: Loads all 5 weight vectors with values from the 'weights' directory
+    */
+    void loadWeights();
+
+
+    /*
+        Brief: loads the bias vectors with weights files
+    */
+   void loadBiasVector(const size_t& layerNum);
+
+
+   /*
+        Brief: loads all weights vectors for the network based on the 'weights' files
+   */
+    void loadWeights();
+
+
+    /*
+        Brief: loads all Bias vectors for the network based on the 'weights' files
+   */
+  void loadBiases();
 
 
     private:

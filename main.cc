@@ -16,17 +16,6 @@
 
 
 int main(){
-    // Game game;
-    // game.playGame();
-
-    NeuralNetworkOperator::initializeNeuralNetwork();
-
-
-
-
-
-    
-
 
     return 0;
 }
