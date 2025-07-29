@@ -199,28 +199,12 @@ class Board {
     /*
         BriefL tuens the current board into an input tensor for the neural net. [8][8][12]
 
-        third index values key : (1: WP) (2:BP) (3:WB) (4:BB) (5:WN) (6:BN) (7:WR) (8:BR) (9:WQ) (10:BQ) (11:WK) (12:BK)
-    
+        third index values key : (1: WP) (2:BP) (3:WB) (4:BB) (5:WN) (6:BN) (7:WR) (8:BR) (9:WQ) (10:BQ) (11:WK) (12:BK)    
     */
-    InputTensor currentBoardToInputTensor() const;
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
+    std::vector<float> currentBoardToInputTensor() const;
+ 
     private:
     Piece* board[8][8]; // Row | Column
-
-
 
 
 

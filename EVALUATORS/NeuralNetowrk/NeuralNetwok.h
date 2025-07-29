@@ -23,7 +23,7 @@ class NeuralNetwork{
 
         forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-   std::vector<float> forwardLayerRelu(const int& forwardingLayer);
+   std::vector<float> forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize);
 
 
     /*
@@ -31,7 +31,7 @@ class NeuralNetwork{
 
         forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-    std::vector<float> forwardLayerSigmoid(const int& forwardingLayer);
+    std::vector<float> forwardLayerSigmoid(const std::vector<float>& input);
 
 
     /*

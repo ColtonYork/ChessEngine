@@ -6,7 +6,6 @@
 #include "../Pieces/Queen.h"
 #include "../Pieces/Pawn.h"
 #include "../Pieces/Bishop.h"
-#include "../EVALUATORS/NeuralNetowrk/InputTensor.h"
 #include <iostream>
 #include <queue>
 #define BROWN "\033[33;2m"       // or "\033[33;1m" for a different shade
@@ -14,7 +13,9 @@
 #define DARK_GRAY "\033[90m"
 
 
-Board::Board(){
+Board::Board()
+{
+
     //sets whites pieces
     board[0][0] = new Rook(0, 0, true);
     board[0][1] = new Knight(0, 1, true);
@@ -48,7 +49,7 @@ Board::Board(){
         board[6][i] = new Pawn(6, i, false);
     }
 
-    //set empty spaces to nullptr
+    //set empty squares to nullptr
     for(int i = 2; i < 6; i++){
         for (int j = 0; j < 8; j++){
             board[i][j] = nullptr;
@@ -56,7 +57,8 @@ Board::Board(){
     }
 }
 
-Board::Board(const Board& other){
+Board::Board(const Board& other)
+{
     for (int i = 0; i < 8; i ++){
         for(int j = 0; j < 8; j++){
             if (other.board[i][j] == nullptr)
@@ -585,8 +587,8 @@ std::priority_queue<moveStringAndScore> Board::computePossibleMoves(bool white){
     
 }
 
-InputTensor Board::currentBoardToInputTensor() const{
-    InputTensor inputTensor;
+std::vector<float> Board::currentBoardToInputTensor() const{
+    std::vector<float> inputTensor(768, 0.0f);
 
     // First 2 for loops are for the baord
     for (int i = 0; i < 8; i++) 
@@ -596,12 +598,8 @@ InputTensor Board::currentBoardToInputTensor() const{
                     Piece* piece = board[i][j];
                     if (piece == nullptr) continue;
     
-                    //nice algo for third dimension of array
-                    int typeIndex = static_cast<int>(piece->getPieceType()); // 0-5
-                    int colorOffset = piece->getIsWhite() ? 0 : 1;           // 0 for white, 1 for black
-                    int tensorIndex = typeIndex * 2 + colorOffset;           // 0-11
-    
-                    inputTensor.inputTensor[i][j][tensorIndex] = 1.0f;
+                    int boardSpace = (i* 8 + j) * 12;
+                    inputTensor[boardSpace + piece->getPieceType()*2 + static_cast<int>(piece->getIsWhite())] = 1;
                 }
         }
 

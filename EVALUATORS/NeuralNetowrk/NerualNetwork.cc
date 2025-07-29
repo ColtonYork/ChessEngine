@@ -4,6 +4,7 @@
 
 
 NeuralNetwork::NeuralNetwork(){
+    layer1Weights.resize(393216); // [768][512]
 
     layer1Weights.resize(393216);
     layer2Weights.resize(131072);
@@ -260,14 +261,64 @@ void NeuralNetwork::loadBiases(){
     loadBiasVector(5);
 }
 
-std::vector<float> NeuralNetwork::forwardLayerRelu(const int& forwardingLayer){
-    if (forwardingLayer > 5 || forwardingLayer < 0) {std:: cout << "[0][DEBUG][NeuralNetwork::forwardLayerRelu]\n"; return;}
+std::vector<float> NeuralNetwork::forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize){
+    std::vector<float> returnVec(outputSize);
+    
+    std::vector<float>* weights;
+    std::vector<float>* biases;
 
-    switch (forwardingLayer)
+    switch (layerNum)
         {
-            case 0: 
+            case 1: 
                 {
-                    
+                    weights = &layer1Weights;
+                    biases = &layer1Biases;
+                    break;
+                }
+            case 2: 
+                {
+                    weights = &layer2Weights;
+                    biases = &layer2Biases;
+                    break;
+
+                }
+            case 3: 
+                {
+                    weights = &layer3Weights;
+                    biases = &layer3Biases;
+                    break;
+                }
+            case 4: 
+                {
+                    weights = &layer4Weights;
+                    biases = &layer4Biases;
+                    break;
+                }
+            case 5: 
+                {
+                    weights = &layer5Weights;
+                    biases = &layer5Biases;
+                    break;
                 }
         }
+
+        for(int outputNeuron = 0; outputNeuron < outputSize; outputNeuron++)
+            {
+                int nextNeuronStart = outputNeuron * input.size();
+                float sum = 0.0f;
+                for(int k = 0; k < input.size(); k++)
+                    {
+                        sum += input.at(k) * weights->at(nextNeuronStart + k);
+                    }
+                sum += biases->at(outputNeuron);
+
+                //RELU
+                if (sum < 0) {sum = 0;}
+                returnVec.at(outputNeuron) = sum;
+            }
+        return returnVec;
+}
+
+float NeuralNetwork::forwardPass(const InputTensor& input){
+    
 }
