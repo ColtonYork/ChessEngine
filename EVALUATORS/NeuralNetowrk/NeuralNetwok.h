@@ -1,4 +1,5 @@
 #include "NeuralNetworkOperator.h"
+#include "forwardCache.h"
 #include <vector>
 
 
@@ -15,23 +16,23 @@ class NeuralNetwork{
 
         input: The input board tensor that will be evaluated
     */
-   float forwardPass(const InputTensor& input);
+   float forwardPass(const std::vector<float>& input);
 
     
     /*
-        brief: computes a relu layer in the netwrok and returns the value of each neruons activation. LAYER 0-5 ACCEPTED (0 means input tensor)
+        brief: computes a relu layer in the netwrok and returns the value of each neruons activation. (LAYER 1 means inputting the input tensor)
 
         forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-   std::vector<float> forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize);
+    void forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize, ForwardCache& cache);
 
 
     /*
-       brief: computes a sigmoid layer in the netwrok and returns the value of each neruons activation. LAYER 0-5 ACCEPTED. (0 means input tensor)
+       brief: computes a sigmoid layer in the netwrok and returns the value of each neruons activation. (LAYER 1 means inputting the input tensor)
 
         forwardingLayer: The layer that will be forwarded in the network. input 1 means ~ 1 -> 2
     */
-    std::vector<float> forwardLayerSigmoid(const std::vector<float>& input);
+    void forwardLayerSigmoid(const std::vector<float>& input, ForwardCache& cache);
 
 
     /*
@@ -77,6 +78,14 @@ class NeuralNetwork{
     std::vector<float> layer4Biases;
     std::vector<float> layer5Biases;
 
+    std::vector<float> layer1Output;
+    std::vector<float> layer2Output;
+    std::vector<float> layer3Output;
+    std::vector<float> layer4Output;
+    std::vector<float> layer5Output;
 
 
+    std::vector<ForwardCache> forwardCache;
+
+    float finalOutput;
 };

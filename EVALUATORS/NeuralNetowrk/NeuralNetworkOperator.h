@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include "InputTensor.h"
 
 
 namespace NeuralNetworkOperator{
@@ -51,6 +50,10 @@ namespace NeuralNetworkOperator{
         value: the number being converted
     */
     float sigmoidActivator(float value);
+
+    
+
+
 
 
 

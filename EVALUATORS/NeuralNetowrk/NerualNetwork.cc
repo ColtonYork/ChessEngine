@@ -4,19 +4,25 @@
 
 
 NeuralNetwork::NeuralNetwork(){
-    layer1Weights.resize(393216); // [768][512]
-
-    layer1Weights.resize(393216);
-    layer2Weights.resize(131072);
-    layer3Weights.resize(32768);
-    layer4Weights.resize(8192);
-    layer5Weights.resize(64);
+    layer1Weights.resize(393216);     // 768 * 512
+    layer2Weights.resize(131072);     // 512 * 256
+    layer3Weights.resize(32768);      // 512 * 256
+    layer4Weights.resize(8192);       // 128 * 64
+    layer5Weights.resize(64);         // 64 * 1
 
     layer1Biases.resize(512);
     layer2Biases.resize(256);
     layer3Biases.resize(128);
     layer4Biases.resize(64);
     layer5Biases.resize(1);
+
+    layer1Output.resize(512);
+    layer2Output.resize(256);
+    layer3Output.resize(128);
+    layer4Output.resize(64);
+    layer5Output.resize(1);
+
+    forwardCache.resize(64);
 
     loadWeights();
     loadBiases();
@@ -261,11 +267,11 @@ void NeuralNetwork::loadBiases(){
     loadBiasVector(5);
 }
 
-std::vector<float> NeuralNetwork::forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize){
-    std::vector<float> returnVec(outputSize);
-    
+void NeuralNetwork::forwardLayerRelu(const std::vector<float>& input, const int& layerNum, const int& outputSize, ForwardCache& cache){    
     std::vector<float>* weights;
     std::vector<float>* biases;
+    std::vector<float>* outputVec;
+    std::vector<float>* preActivationVec;
 
     switch (layerNum)
         {
@@ -273,12 +279,17 @@ std::vector<float> NeuralNetwork::forwardLayerRelu(const std::vector<float>& inp
                 {
                     weights = &layer1Weights;
                     biases = &layer1Biases;
+                    outputVec = &layer1Output; 
+                    preActivationVec = &cache.layer1PreActivation;
                     break;
                 }
             case 2: 
                 {
                     weights = &layer2Weights;
                     biases = &layer2Biases;
+                    outputVec = &layer2Output; 
+                    preActivationVec = &cache.layer2PreActivation;
+
                     break;
 
                 }
@@ -286,20 +297,23 @@ std::vector<float> NeuralNetwork::forwardLayerRelu(const std::vector<float>& inp
                 {
                     weights = &layer3Weights;
                     biases = &layer3Biases;
+                    outputVec = &layer3Output;
+                    preActivationVec = &cache.layer3PreActivation;
+ 
                     break;
                 }
             case 4: 
                 {
                     weights = &layer4Weights;
                     biases = &layer4Biases;
+                    outputVec = &layer4Output; 
+                    preActivationVec = &cache.layer4PreActivation;
+
                     break;
                 }
-            case 5: 
-                {
-                    weights = &layer5Weights;
-                    biases = &layer5Biases;
-                    break;
-                }
+            default: std::cout << "[7][DEBUG][NeuralNetwork::forwardLayerRelu]\n"; return;
+
+
         }
 
         for(int outputNeuron = 0; outputNeuron < outputSize; outputNeuron++)
@@ -308,17 +322,68 @@ std::vector<float> NeuralNetwork::forwardLayerRelu(const std::vector<float>& inp
                 float sum = 0.0f;
                 for(int k = 0; k < input.size(); k++)
                     {
-                        sum += input.at(k) * weights->at(nextNeuronStart + k);
+                        sum += input[k] * (*weights)[nextNeuronStart + k];  // ->at(nextNeuronStart + k)
                     }
-                sum += biases->at(outputNeuron);
+                sum += (*biases)[outputNeuron];
+                (*preActivationVec)[outputNeuron] = sum;
 
                 //RELU
                 if (sum < 0) {sum = 0;}
-                returnVec.at(outputNeuron) = sum;
+                (*outputVec)[outputNeuron] = sum;
             }
-        return returnVec;
+        return;
 }
 
-float NeuralNetwork::forwardPass(const InputTensor& input){
-    
+void NeuralNetwork::forwardLayerSigmoid(const std::vector<float>& input, ForwardCache& cache){
+    float sum = 0.0f;
+
+    std::vector<float>* weights = &layer5Weights;
+    std::vector<float>* biases = &layer5Biases;
+    std::vector<float>* outputVec = &layer5Output;
+
+
+
+
+    // forwarding sigmoid only needed for final output neuron AKA layer5weighs/biases
+    for (int i = 0; i < input.size(); i++)
+        {
+            sum += input[i] * (*weights)[i];
+        }
+        sum += (*biases)[0];
+
+        float sigmoid = NeuralNetworkOperator::sigmoidActivator(sum);
+        (*outputVec)[0] = sigmoid;
+        finalOutput = sigmoid;
+        cache.finalOutput = finalOutput;
+        return;
 }
+
+float NeuralNetwork::forwardPass(const std::vector<float>& input){
+    
+    ForwardCache cache;
+    forwardLayerRelu(input, 1, 512, cache);
+    cache.originalInput = input;
+
+    forwardLayerRelu(layer1Output, 2, 256, cache);
+    cache.layer1Output = layer1Output;
+
+    forwardLayerRelu(layer2Output, 3, 128, cache);
+    cache.layer2Output = layer2Output;
+
+    forwardLayerRelu(layer3Output, 4, 64, cache);
+    cache.layer3Output = layer3Output;
+
+    forwardLayerSigmoid(layer4Output, cache);
+    cache.layer4Output = layer4Output;
+
+    cache.finalOutput = finalOutput;
+
+    forwardCache.push_back(cache);
+
+    return finalOutput;
+
+}
+
+
+
+

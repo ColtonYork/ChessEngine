@@ -6,6 +6,7 @@
 
 namespace NeuralNetworkOperator{
     
+
 void initializeBiases(const std::string& fileName, size_t numBiases){
     std::ofstream outputStream;
     outputStream.open(fileName);
@@ -85,6 +86,9 @@ float reluActivator(float value){
 float sigmoidActivator(float value){
     return 1.0f / (1.0f + std::exp(-value));
 }
-
+ 
 }
+
+
+
 
