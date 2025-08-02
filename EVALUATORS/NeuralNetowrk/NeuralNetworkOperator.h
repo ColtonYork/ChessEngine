@@ -52,11 +52,13 @@ namespace NeuralNetworkOperator{
     float sigmoidActivator(float value);
 
     
+    /*
+        Brief: calculates the delta for hte output sigmoid
 
-
-
-
-
-    
+        Predicted: The value that the netwrok predicted
+        Target: the target value for the training run
+    */
+    float calculateSigmoidDelta(float predicted, float target);
 
 }
+

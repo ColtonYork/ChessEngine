@@ -36,6 +36,22 @@ class NeuralNetwork{
 
 
     /*
+        Brief: Adjusts the weights for a Sigmoid layer
+
+        cache: The cache data from the forward pass
+    */
+    void backpropogateSigmoidLayer(ForwardCache& cache);
+
+    
+    /*
+        Brief: Adjusts the weights for a Relu layer
+
+        cache: The cache data from the forward pass
+    */
+   void backpropogateReluLayer(ForwardCache& cache);
+
+   
+    /*
         Brief: loads the weight vectors with weights files
     */
     void loadWeightVector(const size_t& layerNum);
@@ -88,4 +104,5 @@ class NeuralNetwork{
     std::vector<ForwardCache> forwardCache;
 
     float finalOutput;
+    static const float LEARNING_RATE = 0.001;
 };

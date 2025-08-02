@@ -1,4 +1,4 @@
-#include "NeuralNetwok.h"
+#include "NeuralNetwork.h"
 #include <fstream>
 #include <iostream>
 
@@ -325,6 +325,8 @@ void NeuralNetwork::forwardLayerRelu(const std::vector<float>& input, const int&
                         sum += input[k] * (*weights)[nextNeuronStart + k];  // ->at(nextNeuronStart + k)
                     }
                 sum += (*biases)[outputNeuron];
+
+                //set the preactivation vector in the cache
                 (*preActivationVec)[outputNeuron] = sum;
 
                 //RELU
@@ -383,6 +385,25 @@ float NeuralNetwork::forwardPass(const std::vector<float>& input){
     return finalOutput;
 
 }
+
+void NeuralNetwork::backpropogateSigmoidLayer(ForwardCache& cache){
+    float delta = NeuralNetworkOperator::calculateSigmoidDelta(cache.finalOutput, cache.expectedOutput);
+
+    std::vector<float>* weights = &layer5Weights;
+    std::vector<float>* biases = &layer5Biases;
+    std::vector<float>* previousOutput = &cache.layer4Output;
+    
+
+    for (size_t i = 0; i < weights->size(); i++)
+        {
+            (*weights)[i] -= LEARNING_RATE * delta * (*previousOutput)[i];
+        }
+
+        (*biases)[0] -= LEARNING_RATE * delta;
+
+
+}
+
 
 
 

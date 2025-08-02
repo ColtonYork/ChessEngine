@@ -87,6 +87,9 @@ float sigmoidActivator(float value){
     return 1.0f / (1.0f + std::exp(-value));
 }
  
+float calculateSigmoidDelta(float predicted, float target){
+    return 2 * (predicted - target) * predicted * (1 - predicted);
+}
 }
 
 

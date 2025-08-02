@@ -7,13 +7,13 @@ struct ForwardCache {
     std::vector<float> layer2Output;     // 256 values (after ReLU)
     std::vector<float> layer3Output;     // 128 values (after ReLU)
     std::vector<float> layer4Output;     // 64 values (after ReLU)
-    float finalOutput = 0.0f;                  // 1 value (after sigmoid)
 
     std::vector<float> layer1PreActivation;
     std::vector<float> layer2PreActivation;
     std::vector<float> layer3PreActivation;
     std::vector<float> layer4PreActivation;
 
+    float finalOutput = 0.0f;                  // 1 value (after sigmoid)
     float expectedOutput = 0.0f;
 
 
