@@ -60,5 +60,15 @@ namespace NeuralNetworkOperator{
     */
     float calculateSigmoidDelta(float predicted, float target);
 
+    /*
+        Brief: calculates the delta of a hidden layer neuron and returns it
+
+        nextDeltas: The deltas of the nect layer
+        nextWeightsForNeuron: The weights for the next layer in order to calulate delta for the current neuron
+        preActivation: the pre activation value of the current neuron
+    */
+    float calculateReLUDelta(const std::vector<float>& nextDeltas, const std::vector<float>& nextWeightsForNeuron, float preActivation);
+
+
 }
 

@@ -22,6 +22,18 @@ NeuralNetwork::NeuralNetwork(){
     layer4Output.resize(64);
     layer5Output.resize(1);
 
+    layer1WeightGrad.resize(512 * 768);
+    layer2WeightGrad.resize(256 * 512);
+    layer3WeightGrad.resize(128 * 256);
+    layer4WeightGrad.resize(64 * 128);
+    layer5WeightGrad.resize(1 * 64);
+
+    layer1BiasGrad.resize(512);
+    layer2BiasGrad.resize(256);
+    layer3BiasGrad.resize(128);
+    layer4BiasGrad.resize(64);
+    layer5BiasGrad.resize(1);
+
     forwardCache.resize(64);
 
     loadWeights();
@@ -389,19 +401,109 @@ float NeuralNetwork::forwardPass(const std::vector<float>& input){
 void NeuralNetwork::backpropogateSigmoidLayer(ForwardCache& cache){
     float delta = NeuralNetworkOperator::calculateSigmoidDelta(cache.finalOutput, cache.expectedOutput);
 
-    std::vector<float>* weights = &layer5Weights;
-    std::vector<float>* biases = &layer5Biases;
+    std::vector<float>* weightGrad = &layer5WeightGrad;
+    std::vector<float>* biasGrad = &layer5BiasGrad;
     std::vector<float>* previousOutput = &cache.layer4Output;
     
 
-    for (size_t i = 0; i < weights->size(); i++)
+    for (size_t i = 0; i < weightGrad->size(); i++)
         {
-            (*weights)[i] -= LEARNING_RATE * delta * (*previousOutput)[i];
+            (*weightGrad)[i] += delta * (*previousOutput)[i];
         }
 
-        (*biases)[0] -= LEARNING_RATE * delta;
+        (*biasGrad)[0] += delta;
+        cache.layer5Delta[0] = delta;
+}
+
+void NeuralNetwork::backpropogateReluLayer(ForwardCache& cache, const int& layerNum){
+
+    if (layerNum > 4 || layerNum < 1) {std::cout << "[0][DEBUG][NeuralNetwork::backpropogateReluLayer]\n"; return;}
+
+    std::vector<float>* weightGrad = nullptr;
+    std::vector<float>* nextLayerWeights = nullptr;
+    std::vector<float>* biasGrad = nullptr;
+    std::vector<float>* preActivations = nullptr;
+    std::vector<float>* lastOutput = nullptr;
+    std::vector<float>* nextDeltas = nullptr;
+    std::vector<float>* deltas = nullptr;
+
+    switch (layerNum)
+        {
+            case 1: weightGrad = &layer1WeightGrad; biasGrad = &layer1BiasGrad; nextLayerWeights = &layer2Weights; lastOutput = &cache.originalInput; preActivations = &cache.layer1PreActivation; nextDeltas = &cache.layer2Delta; deltas = &cache.layer1Delta; break;
+            case 2: weightGrad = &layer2WeightGrad; biasGrad = &layer2BiasGrad; nextLayerWeights = &layer3Weights; lastOutput = &cache.layer1Output; preActivations = &cache.layer2PreActivation; nextDeltas = &cache.layer3Delta; deltas = &cache.layer2Delta; break;
+            case 3: weightGrad = &layer3WeightGrad; biasGrad = &layer3BiasGrad; nextLayerWeights = &layer4Weights; lastOutput = &cache.layer2Output; preActivations = &cache.layer3PreActivation; nextDeltas = &cache.layer4Delta; deltas = &cache.layer3Delta; break;
+            case 4: weightGrad = &layer4WeightGrad; biasGrad = &layer4BiasGrad; nextLayerWeights = &layer5Weights; lastOutput = &cache.layer3Output; preActivations = &cache.layer4PreActivation; nextDeltas = &cache.layer5Delta; deltas = &cache.layer4Delta; break;
+        }
+
+    
+        for (size_t i = 0; i < biasGrad->size(); i++)
+            {
+
+                //caclulate weights for next layer for the neruon to find delta
+                std::vector<float> weightsForNextNeuron(nextDeltas->size());
+                for (size_t k = 0; k < nextDeltas->size(); k++)
+                    {
+                        weightsForNextNeuron[k] = (*nextLayerWeights)[k * biasGrad->size() + i];
+                    }
 
 
+                float delta = NeuralNetworkOperator::calculateReLUDelta(*nextDeltas, weightsForNextNeuron, (*preActivations)[i] );
+                (*deltas)[i] = delta;
+                for (size_t j = 0; j < lastOutput->size(); j++)
+                    {
+                        unsigned int weightIndex = i * lastOutput->size() + j;
+
+                        (*weightGrad)[weightIndex] += delta * (*lastOutput)[j];
+
+                    }
+                    (*biasGrad)[i] += delta;
+            }
+
+}
+
+void NeuralNetwork::backpropogate(){
+    std::fill(layer1WeightGrad.begin(), layer1WeightGrad.end(), 0.0f);
+    std::fill(layer2WeightGrad.begin(), layer2WeightGrad.end(), 0.0f);
+    std::fill(layer3WeightGrad.begin(), layer3WeightGrad.end(), 0.0f);
+    std::fill(layer4WeightGrad.begin(), layer4WeightGrad.end(), 0.0f);
+    std::fill(layer5WeightGrad.begin(), layer5WeightGrad.end(), 0.0f);
+
+    std::fill(layer1BiasGrad.begin(), layer1BiasGrad.end(), 0.0f);
+    std::fill(layer2BiasGrad.begin(), layer2BiasGrad.end(), 0.0f);
+    std::fill(layer3BiasGrad.begin(), layer3BiasGrad.end(), 0.0f);
+    std::fill(layer4BiasGrad.begin(), layer4BiasGrad.end(), 0.0f);
+    std::fill(layer5BiasGrad.begin(), layer5BiasGrad.end(), 0.0f);
+
+    for(int i = 0; i < forwardCache.size(); i++)
+        {
+            ForwardCache* currentCache = &forwardCache[i];
+
+            backpropogateSigmoidLayer(*currentCache);
+
+            backpropogateReluLayer(*currentCache, 4);
+            backpropogateReluLayer(*currentCache, 3);
+            backpropogateReluLayer(*currentCache, 2);
+            backpropogateReluLayer(*currentCache, 1);
+        }
+
+    updateWeights(forwardCache.size());
+    updateBiases(forwardCache.size());
+}
+
+void NeuralNetwork::updateWeights(size_t batchSize){
+    for (size_t i = 0; i < layer1WeightGrad.size(); i++){layer1Weights[i] -= (LEARNING_RATE / batchSize) * layer1WeightGrad[i];}
+    for (size_t i = 0; i < layer2WeightGrad.size(); i++){layer2Weights[i] -= (LEARNING_RATE / batchSize) * layer2WeightGrad[i];}
+    for (size_t i = 0; i < layer3WeightGrad.size(); i++){layer3Weights[i] -= (LEARNING_RATE / batchSize) * layer3WeightGrad[i];}
+    for (size_t i = 0; i < layer4WeightGrad.size(); i++){layer4Weights[i] -= (LEARNING_RATE / batchSize) * layer4WeightGrad[i];}
+    for (size_t i = 0; i < layer5WeightGrad.size(); i++){layer5Weights[i] -= (LEARNING_RATE / batchSize) * layer5WeightGrad[i];}
+}
+
+void NeuralNetwork::updateBiases(size_t batchSize){
+    for (size_t i = 0; i < layer1BiasGrad.size(); i++){layer1Biases[i] -= (LEARNING_RATE / batchSize) * layer1BiasGrad[i];}
+    for (size_t i = 0; i < layer2BiasGrad.size(); i++){layer2Biases[i] -= (LEARNING_RATE / batchSize) * layer2BiasGrad[i];}
+    for (size_t i = 0; i < layer3BiasGrad.size(); i++){layer3Biases[i] -= (LEARNING_RATE / batchSize) * layer3BiasGrad[i];}
+    for (size_t i = 0; i < layer4BiasGrad.size(); i++){layer4Biases[i] -= (LEARNING_RATE / batchSize) * layer4BiasGrad[i];}
+    for (size_t i = 0; i < layer5BiasGrad.size(); i++){layer5Biases[i] -= (LEARNING_RATE / batchSize) * layer5BiasGrad[i];}
 }
 
 

@@ -48,7 +48,13 @@ class NeuralNetwork{
 
         cache: The cache data from the forward pass
     */
-   void backpropogateReluLayer(ForwardCache& cache);
+   void backpropogateReluLayer(ForwardCache& cache, const int& layerNum);
+
+    /*
+        Brief: backpropogates the network on a batch of forwardCaches to update all weights
+    */
+    void backpropogate();
+
 
    
     /*
@@ -78,7 +84,19 @@ class NeuralNetwork{
     /*
         Brief: loads all Bias vectors for the network based on the 'weights' files
    */
-  void loadBiases();
+    void loadBiases();
+
+
+   /*
+    Brief: updates the weights and biases of the network based on the weight and bias gradients that are cacluated in the backpropogation step
+  */
+  void updateWeights(size_t batchSize);
+
+
+  /*
+    Brief: updates the biases of the network based on the bias gradients that are cacluated in the backpropogation step
+  */
+  void updateBiases(size_t batchSize);
 
 
     private:
@@ -99,6 +117,20 @@ class NeuralNetwork{
     std::vector<float> layer3Output;
     std::vector<float> layer4Output;
     std::vector<float> layer5Output;
+
+    std::vector<float> layer1WeightGrad;
+    std::vector<float> layer2WeightGrad;
+    std::vector<float> layer3WeightGrad;
+    std::vector<float> layer4WeightGrad;
+    std::vector<float> layer5WeightGrad;
+
+    std::vector<float> layer1BiasGrad;
+    std::vector<float> layer2BiasGrad;
+    std::vector<float> layer3BiasGrad;
+    std::vector<float> layer4BiasGrad;
+    std::vector<float> layer5BiasGrad;
+
+
 
 
     std::vector<ForwardCache> forwardCache;

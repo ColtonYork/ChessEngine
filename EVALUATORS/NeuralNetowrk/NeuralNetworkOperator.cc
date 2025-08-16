@@ -90,8 +90,21 @@ float sigmoidActivator(float value){
 float calculateSigmoidDelta(float predicted, float target){
     return 2 * (predicted - target) * predicted * (1 - predicted);
 }
-}
 
+float calculateReLUDelta(const std::vector<float>& nextDeltas, const std::vector<float>& nextWeightsForNeuron, float preActivation){
+    float sum = 0.0f;
+
+    for (size_t k = 0; k < nextDeltas.size(); k++)
+    {
+    sum += nextWeightsForNeuron[k] * nextDeltas[k];
+    }
+
+    // ReLU derivative: 1 if z > 0, else 0
+    float delta = (preActivation > 0.0f ? 1.0f : 0.0f) * sum;
+
+    return delta;
+}
+}
 
 
 
