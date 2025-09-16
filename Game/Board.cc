@@ -198,11 +198,11 @@ bool Board::kingInCheck(bool white) const{
     Piece* king = findKing(white);
     
     if (king == nullptr) {std::cout << "King not found" << '\n'; return false;}
-    std::cout << "King found" << static_cast<int>(king->getRow()) << " " << static_cast<int>(king->getCol()) << '\n';
+    //std::cout << "King found" << static_cast<int>(king->getRow()) << " " << static_cast<int>(king->getCol()) << '\n';
 
     //Whites king's coordinates are found, check if any enenmy pieces can target that square
     if (squareUnderAttack(king->getRow(), king->getCol(), !white)) {std::cout << "King is in check by: " << '\n'; return true;}
-    std::cout << "King is not in check" << '\n';
+    //std::cout << "King is not in check" << '\n';
     return false;   
 }
 
@@ -302,9 +302,9 @@ bool Board::playerHasLegalMoveByPiece(bool white){
             {
                 if (board[i][j] == nullptr || board[i][j]->getIsWhite() != white) {continue;}
 
-                std::cout << "Checking piece at " << i << "," << j << '\n';
+                //std::cout << "Checking piece at " << i << "," << j << '\n';
                 if (board[i][j]->hasVerifiedMove(this)) {
-                    std::cout << "Found legal move for piece at " << i << "," << j << '\n';
+                    //std::cout << "Found legal move for piece at " << i << "," << j << '\n';
                     return true;
                 }
         }

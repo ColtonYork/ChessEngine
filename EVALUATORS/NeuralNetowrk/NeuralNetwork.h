@@ -64,25 +64,19 @@ class NeuralNetwork{
 
 
     /*
-        Brief: Loads all 5 weight vectors with values from the 'weights' directory
-    */
-    void loadWeights();
-
-
-    /*
-        Brief: loads the bias vectors with weights files
+        Brief: loads the bias vectors with biases files
     */
    void loadBiasVector(const size_t& layerNum);
 
 
    /*
-        Brief: loads all weights vectors for the network based on the 'weights' files
+        Brief: loads all weights vectors for the network based on the 'weights' directory
    */
     void loadWeights();
 
 
     /*
-        Brief: loads all Bias vectors for the network based on the 'weights' files
+        Brief: loads all Bias vectors for the network based on the 'biases' directory
    */
     void loadBiases();
 
@@ -136,5 +130,5 @@ class NeuralNetwork{
     std::vector<ForwardCache> forwardCache;
 
     float finalOutput;
-    static const float LEARNING_RATE = 0.001;
+    const float LEARNING_RATE = 0.001;
 };

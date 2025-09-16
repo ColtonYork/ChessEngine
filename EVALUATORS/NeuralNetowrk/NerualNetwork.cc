@@ -53,9 +53,9 @@ void NeuralNetwork::loadWeightVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[1][DEBUG][NeuralNetwork::loadWeightVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer1Weights.size();)
+                    while (inputStream >> loadFloat && i < layer1Weights.size())
                         {
                             layer1Weights[i] = loadFloat;
                             i++;
@@ -73,9 +73,9 @@ void NeuralNetwork::loadWeightVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[2][DEBUG][NeuralNetwork::loadWeightVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer2Weights.size();)
+                    while (inputStream >> loadFloat && i < layer2Weights.size())
                         {
                             layer2Weights[i] = loadFloat;
                             i++;
@@ -93,9 +93,9 @@ void NeuralNetwork::loadWeightVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[3][DEBUG][NeuralNetwork::loadWeightVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer3Weights.size();)
+                    while (inputStream >> loadFloat && i < layer3Weights.size())
                         {
                             layer3Weights[i] = loadFloat;
                             i++;
@@ -113,9 +113,9 @@ void NeuralNetwork::loadWeightVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[4][DEBUG][NeuralNetwork::loadWeightVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer4Weights.size();)
+                    while (inputStream >> loadFloat && i < layer4Weights.size())
                         {
                             layer4Weights[i] = loadFloat;
                             i++;
@@ -133,9 +133,9 @@ void NeuralNetwork::loadWeightVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[5][DEBUG][NeuralNetwork::loadWeightVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer5Weights.size();)
+                    while (inputStream >> loadFloat && i < layer5Weights.size())
                         {
                             layer5Weights[i] = loadFloat;
                             i++;
@@ -164,9 +164,9 @@ void NeuralNetwork::loadBiasVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[1][DEBUG][NerualNetwork::loadBiasVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer1Biases.size();)
+                    while (inputStream >> loadFloat && i < layer1Biases.size())
                         {
                             layer1Biases[i] = loadFloat;
                             i++;
@@ -184,9 +184,9 @@ void NeuralNetwork::loadBiasVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[2][DEBUG][NerualNetwork::loadBiasVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer2Biases.size();)
+                    while (inputStream >> loadFloat && i < layer2Biases.size())
                         {
                             layer2Biases[i] = loadFloat;
                             i++;
@@ -204,9 +204,9 @@ void NeuralNetwork::loadBiasVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[3][DEBUG][NerualNetwork::loadBiasVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer3Biases.size();)
+                    while (inputStream >> loadFloat && i < layer3Biases.size())
                         {
                             layer3Biases[i] = loadFloat;
                             i++;
@@ -224,9 +224,9 @@ void NeuralNetwork::loadBiasVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[4][DEBUG][NerualNetwork::loadBiasVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer4Biases.size();)
+                    while (inputStream >> loadFloat && i < layer4Biases.size())
                         {
                             layer4Biases[i] = loadFloat;
                             i++;
@@ -244,9 +244,9 @@ void NeuralNetwork::loadBiasVector(const size_t& layerNum){
                     if (!inputStream.is_open()) {std::cout << "[5][DEBUG][NerualNetwork::loadBiasVector]\n"; return;}
         
                     float loadFloat;
-                    int i = 0;
+                    size_t i = 0;
         
-                    while (inputStream >> loadFloat && i < layer5Biases.size();)
+                    while (inputStream >> loadFloat && i < layer5Biases.size())
                         {
                             layer5Biases[i] = loadFloat;
                             i++;
@@ -332,7 +332,7 @@ void NeuralNetwork::forwardLayerRelu(const std::vector<float>& input, const int&
             {
                 int nextNeuronStart = outputNeuron * input.size();
                 float sum = 0.0f;
-                for(int k = 0; k < input.size(); k++)
+                for(size_t k = 0; k < input.size(); k++)
                     {
                         sum += input[k] * (*weights)[nextNeuronStart + k];  // ->at(nextNeuronStart + k)
                     }
@@ -359,7 +359,7 @@ void NeuralNetwork::forwardLayerSigmoid(const std::vector<float>& input, Forward
 
 
     // forwarding sigmoid only needed for final output neuron AKA layer5weighs/biases
-    for (int i = 0; i < input.size(); i++)
+    for (size_t i = 0; i < input.size(); i++)
         {
             sum += input[i] * (*weights)[i];
         }
@@ -474,7 +474,7 @@ void NeuralNetwork::backpropogate(){
     std::fill(layer4BiasGrad.begin(), layer4BiasGrad.end(), 0.0f);
     std::fill(layer5BiasGrad.begin(), layer5BiasGrad.end(), 0.0f);
 
-    for(int i = 0; i < forwardCache.size(); i++)
+    for(size_t i = 0; i < forwardCache.size(); i++)
         {
             ForwardCache* currentCache = &forwardCache[i];
 
@@ -491,19 +491,19 @@ void NeuralNetwork::backpropogate(){
 }
 
 void NeuralNetwork::updateWeights(size_t batchSize){
-    for (size_t i = 0; i < layer1WeightGrad.size(); i++){layer1Weights[i] -= (LEARNING_RATE / batchSize) * layer1WeightGrad[i];}
-    for (size_t i = 0; i < layer2WeightGrad.size(); i++){layer2Weights[i] -= (LEARNING_RATE / batchSize) * layer2WeightGrad[i];}
-    for (size_t i = 0; i < layer3WeightGrad.size(); i++){layer3Weights[i] -= (LEARNING_RATE / batchSize) * layer3WeightGrad[i];}
-    for (size_t i = 0; i < layer4WeightGrad.size(); i++){layer4Weights[i] -= (LEARNING_RATE / batchSize) * layer4WeightGrad[i];}
-    for (size_t i = 0; i < layer5WeightGrad.size(); i++){layer5Weights[i] -= (LEARNING_RATE / batchSize) * layer5WeightGrad[i];}
+    for (size_t i = 0; i < layer1WeightGrad.size(); i++)        {layer1Weights[i] -= (LEARNING_RATE / batchSize) * layer1WeightGrad[i];}
+    for (size_t i = 0; i < layer2WeightGrad.size(); i++)        {layer2Weights[i] -= (LEARNING_RATE / batchSize) * layer2WeightGrad[i];}
+    for (size_t i = 0; i < layer3WeightGrad.size(); i++)        {layer3Weights[i] -= (LEARNING_RATE / batchSize) * layer3WeightGrad[i];}
+    for (size_t i = 0; i < layer4WeightGrad.size(); i++)        {layer4Weights[i] -= (LEARNING_RATE / batchSize) * layer4WeightGrad[i];}
+    for (size_t i = 0; i < layer5WeightGrad.size(); i++)        {layer5Weights[i] -= (LEARNING_RATE / batchSize) * layer5WeightGrad[i];}
 }
 
 void NeuralNetwork::updateBiases(size_t batchSize){
-    for (size_t i = 0; i < layer1BiasGrad.size(); i++){layer1Biases[i] -= (LEARNING_RATE / batchSize) * layer1BiasGrad[i];}
-    for (size_t i = 0; i < layer2BiasGrad.size(); i++){layer2Biases[i] -= (LEARNING_RATE / batchSize) * layer2BiasGrad[i];}
-    for (size_t i = 0; i < layer3BiasGrad.size(); i++){layer3Biases[i] -= (LEARNING_RATE / batchSize) * layer3BiasGrad[i];}
-    for (size_t i = 0; i < layer4BiasGrad.size(); i++){layer4Biases[i] -= (LEARNING_RATE / batchSize) * layer4BiasGrad[i];}
-    for (size_t i = 0; i < layer5BiasGrad.size(); i++){layer5Biases[i] -= (LEARNING_RATE / batchSize) * layer5BiasGrad[i];}
+    for (size_t i = 0; i < layer1BiasGrad.size(); i++)          {layer1Biases[i] -= (LEARNING_RATE / batchSize) * layer1BiasGrad[i];}
+    for (size_t i = 0; i < layer2BiasGrad.size(); i++)          {layer2Biases[i] -= (LEARNING_RATE / batchSize) * layer2BiasGrad[i];}
+    for (size_t i = 0; i < layer3BiasGrad.size(); i++)          {layer3Biases[i] -= (LEARNING_RATE / batchSize) * layer3BiasGrad[i];}
+    for (size_t i = 0; i < layer4BiasGrad.size(); i++)          {layer4Biases[i] -= (LEARNING_RATE / batchSize) * layer4BiasGrad[i];}
+    for (size_t i = 0; i < layer5BiasGrad.size(); i++)          {layer5Biases[i] -= (LEARNING_RATE / batchSize) * layer5BiasGrad[i];}
 }
 
 
